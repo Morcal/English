@@ -1,10 +1,14 @@
-package com.tekinarslan.material.sample;
+package com.tekinarslan.material.sample.ui.module.community;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.tekinarslan.material.sample.R;
+import com.tekinarslan.material.sample.weight.FloatingActionButton;
+import com.tekinarslan.material.sample.weight.ProgressBarCircular;
 
 public class SampleFragment extends Fragment {
 

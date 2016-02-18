@@ -1,4 +1,4 @@
-package com.tekinarslan.material.sample;
+package com.tekinarslan.material.sample.weight;
 
 import android.content.Context;
 import android.content.res.Resources;

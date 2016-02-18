@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.tekinarslan.material.sample;
+package com.tekinarslan.material.sample.weight;
 
 import android.R;
 import android.content.Context;
@@ -25,6 +25,8 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import com.tekinarslan.material.sample.weight.SlidingTabLayout;
 
 
 class SlidingTabStrip extends LinearLayout {

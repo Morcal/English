@@ -1,4 +1,4 @@
-package com.tekinarslan.material.sample;
+package com.tekinarslan.material.sample.weight;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -15,6 +15,8 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.tekinarslan.material.sample.R;
 
 public abstract class Button extends RelativeLayout {
 

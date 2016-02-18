@@ -1,17 +1,19 @@
-package com.tekinarslan.material.sample;
+package com.tekinarslan.material.sample.ui.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.tekinarslan.material.sample.ui.module.community.SampleFragment;
+
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 
-    final int PAGE_COUNT =8;
-    private String titles[] ;
+    final int PAGE_COUNT = 6;
+    private String titles[];
 
     public ViewPagerAdapter(FragmentManager fm, String[] titles2) {
         super(fm);
-        titles=titles2;
+        titles = titles2;
     }
 
     @Override
@@ -30,11 +32,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
                 return SampleFragment.newInstance(position);
             case 5:
                 return SampleFragment.newInstance(position);
-            case 6:
-                return SampleFragment.newInstance(position);
-            case 7:
-                return SampleFragment.newInstance(position);
-
         }
         return null;
     }

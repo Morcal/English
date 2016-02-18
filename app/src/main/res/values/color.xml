@@ -16,5 +16,11 @@
     <color name="windowBackgroundColor">#333333</color>
     <color name="black_translucent">#80000000</color>
 
+    <color name="tab_bg">#f7f7f7</color>
+    <color name="tab_text">#607082</color>
+    <color name="tab_text_select">#2f373c</color>
+
+    <color name="driver">#607082</color>
+
 
 </resources>

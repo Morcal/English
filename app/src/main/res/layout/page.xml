@@ -48,7 +48,7 @@
             android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true" />
 
-        <com.tekinarslan.material.sample.FloatingActionButton
+        <com.tekinarslan.material.sample.weight.FloatingActionButton
             android:id="@+id/fabButton"
             android:layout_width="56dp"
             android:layout_height="56dp"
@@ -62,7 +62,7 @@
             android:layout_marginBottom="25dp" />
 
 
-        <com.tekinarslan.material.sample.ProgressBarCircular
+        <com.tekinarslan.material.sample.weight.ProgressBarCircular
             android:id="@+id/progress"
             android:layout_width="36dp"
             android:layout_height="36dp"
