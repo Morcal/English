@@ -1,18 +1,11 @@
 package com.tekinarslan.material.sample.ui.module.community;
 
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import com.tekinarslan.material.sample.R;
 import com.tekinarslan.material.sample.ui.adapter.ViewPagerAdapter;
@@ -22,15 +15,15 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
-public class SampleActivity extends ActionBarActivity {
+public class SampleActivity extends AppCompatActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.viewpager)
     ViewPager pager;
     @Bind(R.id.sliding_tabs)
     SlidingTabLayout slidingTabLayout;
-    private String titles[] = new String[]{"大学英语", "英语四级", "英语六级", "考研英语"
-            , "专业四级", "专业八级"};
+    private String titles[] = new String[]{"每日精选", "词汇", "听力"
+            , "口语", "阅读","写作","语法"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

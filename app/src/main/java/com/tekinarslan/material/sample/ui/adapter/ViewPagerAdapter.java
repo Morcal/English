@@ -8,7 +8,7 @@ import com.tekinarslan.material.sample.ui.module.community.SampleFragment;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 
-    final int PAGE_COUNT = 6;
+    final int PAGE_COUNT = 7;
     private String titles[];
 
     public ViewPagerAdapter(FragmentManager fm, String[] titles2) {
@@ -31,6 +31,8 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
             case 4:
                 return SampleFragment.newInstance(position);
             case 5:
+                return SampleFragment.newInstance(position);
+            case 6:
                 return SampleFragment.newInstance(position);
         }
         return null;
