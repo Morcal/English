@@ -2,12 +2,152 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light">
+    android:background="@color/light"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffff">
+
+        <TextView
+            style="@style/ItemProfileText"
+            android:drawableLeft="@drawable/icon_profile_wrong_test"
+            android:text="错题练习" />
+
+        <ImageView
+            style="@style/ItemProfileBtn"
+            android:src="@drawable/btn_y" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#c9c9c9" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffff">
+
+        <TextView
+            style="@style/ItemProfileText"
+            android:drawableLeft="@drawable/icon_profile_my_test"
+            android:text="练习试卷" />
+
+        <ImageView
+            style="@style/ItemProfileBtn"
+            android:src="@drawable/btn_y" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="#ececec" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffff">
+
+        <TextView
+            style="@style/ItemProfileText"
+            android:drawableLeft="@drawable/icon_profile_my_answer"
+            android:text="回答问题" />
+
+        <ImageView
+            style="@style/ItemProfileBtn"
+            android:src="@drawable/btn_y" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#c9c9c9" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffff">
+
+        <TextView
+            style="@style/ItemProfileText"
+            android:drawableLeft="@drawable/icon_profile_post"
+            android:text="发表帖子" />
+
+        <ImageView
+            style="@style/ItemProfileBtn"
+            android:src="@drawable/btn_y" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="#ececec" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffff">
+
+        <TextView
+            style="@style/ItemProfileText"
+            android:drawableLeft="@drawable/icon_profile_followed_post"
+            android:text="收藏题目" />
+
+        <ImageView
+            style="@style/ItemProfileBtn"
+            android:src="@drawable/btn_y" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#c9c9c9" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffff">
+
+        <TextView
+            style="@style/ItemProfileText"
+            android:drawableLeft="@drawable/icon_profile_followed_question"
+            android:text="收藏帖子" />
+
+        <ImageView
+            style="@style/ItemProfileBtn"
+            android:src="@drawable/btn_y" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="#ececec" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffff">
+
+        <TextView
+            style="@style/ItemProfileText"
+            android:drawableLeft="@drawable/icon_profile_download"
+            android:text="我的下载" />
+
+        <ImageView
+            style="@style/ItemProfileBtn"
+            android:src="@drawable/btn_y" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="#ececec" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="50dp"
         android:gravity="center"
-        android:text="Own"
-        android:textColor="@color/black_translucent" />
+        android:text="设置" />
 </LinearLayout>
