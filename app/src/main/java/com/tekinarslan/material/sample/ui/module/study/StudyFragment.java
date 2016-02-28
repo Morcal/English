@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
@@ -41,7 +42,7 @@ import butterknife.ButterKnife;
 /**
  * Created by lyqdhgo on 2016/2/18.
  */
-public class StudyFragment extends Fragment {
+public class StudyFragment extends Fragment implements AdapterView.OnItemClickListener {
     private static final String TAG = StudyFragment.class.getSimpleName();
     @Bind(R.id.roll_view_pager)
     RollPagerView rollPagerView;
@@ -75,6 +76,7 @@ public class StudyFragment extends Fragment {
                 Log.i(TAG, "viewPager点击了");
             }
         });
+        gridView.setOnItemClickListener(this);
     }
 
     private void initView() {
@@ -116,7 +118,6 @@ public class StudyFragment extends Fragment {
         CombinedData data = new CombinedData(Contast.mMonths);
 
         data.setData(generateLineData());
-//        data.setData(generateBarData());
         mChart.setData(data);
         mChart.invalidate();
     }
@@ -135,8 +136,6 @@ public class StudyFragment extends Fragment {
         set.setLineWidth(2.5f);
         set.setCircleColor(Color.rgb(240, 238, 70));
         set.setCircleRadius(5f);
-//        set.setFillColor(Color.rgb(240, 238, 70));
-//        set.setFillColor(Color.rgb(142, 36, 170));
         set.setDrawCubic(true);
         set.setDrawValues(true);
         set.setValueTextSize(10f);
@@ -147,29 +146,9 @@ public class StudyFragment extends Fragment {
         set.setAxisDependency(YAxis.AxisDependency.LEFT);
 
         d.addDataSet(set);
-
         return d;
     }
 
-    private BarData generateBarData() {
-
-        BarData d = new BarData();
-
-        ArrayList<BarEntry> entries = new ArrayList<BarEntry>();
-
-        for (int index = 0; index < itemcount; index++)
-            entries.add(new BarEntry(getRandom(15, 30), index));
-
-        BarDataSet set = new BarDataSet(entries, "Bar DataSet");
-        set.setColor(Color.rgb(60, 220, 78));
-        set.setValueTextColor(Color.rgb(60, 220, 78));
-        set.setValueTextSize(10f);
-        d.addDataSet(set);
-
-        set.setAxisDependency(YAxis.AxisDependency.LEFT);
-
-        return d;
-    }
 
     private float getRandom(float range, float startsfrom) {
         return (float) (Math.random() * range) + startsfrom;
@@ -190,6 +169,14 @@ public class StudyFragment extends Fragment {
             dataList.add(map);
         }
         return dataList;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        HashMap<String, Object> item = (HashMap<String, Object>) parent.getItemAtPosition(position);
+        //显示所选Item的ItemText
+        String str = (String) item.get("name");
+        Log.i(TAG, "模块：" + str);
     }
 
     // 轮播ViewPager适配器
