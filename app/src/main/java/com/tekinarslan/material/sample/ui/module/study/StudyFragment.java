@@ -1,8 +1,11 @@
 package com.tekinarslan.material.sample.ui.module.study;
 
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,11 +14,21 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 
+import com.github.mikephil.charting.charts.CombinedChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.CombinedData;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.adapter.LoopPagerAdapter;
-import com.jude.rollviewpager.adapter.StaticPagerAdapter;
 import com.jude.rollviewpager.hintview.IconHintView;
 import com.tekinarslan.material.sample.R;
+import com.tekinarslan.material.sample.app.Contast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,8 +47,12 @@ public class StudyFragment extends Fragment {
     RollPagerView rollPagerView;
     @Bind(R.id.gridView)
     GridView gridView;
+    @Bind(R.id.grow_chart)
+    CombinedChart mChart;
     private List<Map<String, Object>> dataList;
     private SimpleAdapter simpleAdapter;
+    private final int itemcount = 12;
+
 
     @Nullable
     @Override
@@ -70,8 +87,93 @@ public class StudyFragment extends Fragment {
         dataList = new ArrayList<Map<String, Object>>();
         simpleAdapter = new SimpleAdapter(getActivity(), getData(), R.layout.item_gridview, new String[]{"pic", "name"}, new int[]{R.id.item_image, R.id.item_text});
         gridView.setAdapter(simpleAdapter);
+
+        setChart();
     }
 
+    private void setChart() {
+        mChart.setDescription("");
+        mChart.setBackgroundColor(Color.WHITE);
+        mChart.setDrawGridBackground(false);
+        mChart.setDrawBarShadow(false);
+        mChart.getAxisRight().setEnabled(false); // 隐藏右边的坐标轴
+        mChart.getXAxis().setGridColor(Color.TRANSPARENT);//去掉网格中竖线的显示
+
+        // draw bars behind lines
+        mChart.setDrawOrder(new CombinedChart.DrawOrder[]{
+                CombinedChart.DrawOrder.BAR, CombinedChart.DrawOrder.BUBBLE, CombinedChart.DrawOrder.CANDLE, CombinedChart.DrawOrder.LINE, CombinedChart.DrawOrder.SCATTER
+        });
+
+        YAxis rightAxis = mChart.getAxisRight();
+        rightAxis.setDrawGridLines(false);
+
+        YAxis leftAxis = mChart.getAxisLeft();
+        leftAxis.setDrawGridLines(false);
+
+        XAxis xAxis = mChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTH_SIDED);
+
+        CombinedData data = new CombinedData(Contast.mMonths);
+
+        data.setData(generateLineData());
+//        data.setData(generateBarData());
+        mChart.setData(data);
+        mChart.invalidate();
+    }
+
+    private LineData generateLineData() {
+
+        LineData d = new LineData();
+
+        ArrayList<Entry> entries = new ArrayList<Entry>();
+
+        for (int index = 0; index < itemcount; index++)
+            entries.add(new Entry(getRandom(15, 10), index));
+
+        LineDataSet set = new LineDataSet(entries, "Line DataSet");
+        set.setColor(Color.rgb(240, 238, 70));
+        set.setLineWidth(2.5f);
+        set.setCircleColor(Color.rgb(240, 238, 70));
+        set.setCircleRadius(5f);
+//        set.setFillColor(Color.rgb(240, 238, 70));
+//        set.setFillColor(Color.rgb(142, 36, 170));
+        set.setDrawCubic(true);
+        set.setDrawValues(true);
+        set.setValueTextSize(10f);
+        set.setValueTextColor(Color.rgb(240, 238, 70));
+        Drawable drawable = ContextCompat.getDrawable(getActivity(), R.drawable.fade_green);
+        set.setFillDrawable(drawable);
+        set.setDrawFilled(true);
+        set.setAxisDependency(YAxis.AxisDependency.LEFT);
+
+        d.addDataSet(set);
+
+        return d;
+    }
+
+    private BarData generateBarData() {
+
+        BarData d = new BarData();
+
+        ArrayList<BarEntry> entries = new ArrayList<BarEntry>();
+
+        for (int index = 0; index < itemcount; index++)
+            entries.add(new BarEntry(getRandom(15, 30), index));
+
+        BarDataSet set = new BarDataSet(entries, "Bar DataSet");
+        set.setColor(Color.rgb(60, 220, 78));
+        set.setValueTextColor(Color.rgb(60, 220, 78));
+        set.setValueTextSize(10f);
+        d.addDataSet(set);
+
+        set.setAxisDependency(YAxis.AxisDependency.LEFT);
+
+        return d;
+    }
+
+    private float getRandom(float range, float startsfrom) {
+        return (float) (Math.random() * range) + startsfrom;
+    }
 
     private List<Map<String, Object>> getData() {
         int[] itemImages = {
@@ -90,7 +192,7 @@ public class StudyFragment extends Fragment {
         return dataList;
     }
 
-
+    // 轮播ViewPager适配器
     private class TestLoopAdapter extends LoopPagerAdapter {
         private int[] imgs = {
                 R.drawable.header_cet4,
