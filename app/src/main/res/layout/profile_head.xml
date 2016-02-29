@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="125dp"
+    android:background="#3a454a"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="13dp"
+        android:layout_marginTop="5dp">
+
+        <com.tekinarslan.material.sample.weight.CircleImageView
+            android:id="@+id/profile_avatar"
+            android:layout_width="61dp"
+            android:layout_height="61dp"
+            android:layout_marginLeft="26dp"
+            android:layout_marginRight="19dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/profile_avatar"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="流哲羽"
+                android:textColor="#00bb96"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/profile_edu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/btn_qh_n"
+                android:drawablePadding="6dp"
+                android:text="集美大学"
+                android:textColor="#ffffff"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/profile_more"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:paddingRight="10dp"
+            android:src="@drawable/btn_y" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/follow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"
+            android:drawableLeft="@drawable/icon_profile_followed"
+            android:drawablePadding="20dp"
+            android:text="关注了 0人" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="21dp"
+            android:layout_centerInParent="true"
+            android:background="#ffffff" />
+
+        <TextView
+            android:id="@+id/follower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="25dp"
+            android:drawableLeft="@drawable/icon_profile_follower"
+            android:drawablePadding="20dp"
+            android:text="关注者 0人" />
+    </RelativeLayout>
+</LinearLayout>
