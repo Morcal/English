@@ -10,11 +10,14 @@
         android:orientation="vertical">
 
         <include layout="@layout/profile_head" />
-        <include layout="@layout/profile_center"/>
+
+        <include layout="@layout/profile_center" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="5dp"
             android:background="#ececec" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -156,6 +159,7 @@
             android:background="#ececec" />
 
         <TextView
+            android:id="@+id/profile_setting"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#ffffff"

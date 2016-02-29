@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initData() {
+        setSupportActionBar(toolbar);
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name) {
             @Override
             public void onDrawerOpened(View drawerView) {
@@ -74,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        setSupportActionBar(toolbar);
         setTitle(getString(R.string.app_name));
         setDefaultFragment();
     }
