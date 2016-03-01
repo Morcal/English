@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="17dp">
+
+    <com.tekinarslan.material.sample.weight.CircleImageView
+        android:id="@+id/civ_avatar"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/default_face_70px" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_author_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxWidth="200dp"
+                android:singleLine="true"
+                android:text="齐德鸿"
+                android:textColor="@color/c1_dark_black"
+                android:textSize="@dimen/text_s28" />
+
+            <TextView
+                android:id="@+id/tv_publish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="2dp"
+                android:gravity="center"
+                android:text="发布"
+                android:textColor="@color/c2_dark_grey"
+                android:textSize="@dimen/text_s24" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_describe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:text="小德鸿"
+            android:textColor="@color/c2_dark_grey"
+            android:textSize="@dimen/s20" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_publish_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="01_04 00:02"
+        android:textColor="@color/c2_dark_grey"
+        android:textSize="@dimen/s20" />
+</LinearLayout>

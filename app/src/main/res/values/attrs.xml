@@ -13,4 +13,9 @@
         <attr name="border_color" format="color" />
         <attr name="border_overlay" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="HWRadioImageView">
+        <attr name="hwRadio" format="float" />
+        <attr name="widthStandard" format="boolean" />
+    </declare-styleable>
 </resources>
