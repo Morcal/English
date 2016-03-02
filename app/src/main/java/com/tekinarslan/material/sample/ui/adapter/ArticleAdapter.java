@@ -1,6 +1,7 @@
 package com.tekinarslan.material.sample.ui.adapter;
 
 import android.content.Context;
+import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,14 @@ public class ArticleAdapter extends BaseAdapter {
             holder.rivImage = (HWRatioImageView) convertView.findViewById(R.id.riv_image);
             holder.title = (TextView) convertView.findViewById(R.id.tv_title);
             holder.authorName = (TextView) convertView.findViewById(R.id.tv_author_name1);
+            TextPaint tpAuthor = holder.authorName.getPaint(); //设置粗体
+            tpAuthor.setFakeBoldText(true);
+            holder.articleType = (TextView) convertView.findViewById(R.id.tv_article_type);
+            TextPaint tpType = holder.articleType.getPaint(); //设置粗体
+            tpType.setFakeBoldText(true);
+            holder.articleRead = (TextView) convertView.findViewById(R.id.tv_article_read);
+            TextPaint tpRead = holder.articleRead.getPaint(); //设置粗体
+            tpRead.setFakeBoldText(true);
             holder.content = (TextView) convertView.findViewById(R.id.tx_content);
             convertView.setTag(holder);
         } else {
@@ -76,7 +85,8 @@ public class ArticleAdapter extends BaseAdapter {
         holder.title.setText(article.getTitle());
         holder.authorName.setText(article.getPublisher().getNickname());
         holder.content.setText(article.getSummary());
-
+        holder.articleType.setText(article.getType());
+        holder.articleRead.setText(article.getReadViews());
         return convertView;
     }
 
@@ -89,6 +99,8 @@ public class ArticleAdapter extends BaseAdapter {
         private HWRatioImageView rivImage;
         private TextView title;
         private TextView authorName;
+        private TextView articleType;
+        private TextView articleRead;
         private TextView content;
     }
 }

@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="20dp">
+            android:paddingBottom="10dp">
 
             <include
                 android:id="@+id/item_author_info"
@@ -38,7 +38,7 @@
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
                     android:src="@drawable/defaut_load"
-                    app:hwRadio="0.54"/>
+                    app:hwRadio="0.54" />
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -61,17 +61,6 @@
                 android:textStyle="normal"
                 tools:text="《艺术很难吗》第九期：梵高，人穷就不该去画画" />
 
-            <TextView
-                android:id="@+id/tv_author_name1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:singleLine="true"
-                android:textColor="@color/c2_dark_grey"
-                android:textSize="12sp"
-                tools:text="作者:齐德鸿" />
 
             <TextView
                 android:id="@+id/tx_content"
@@ -85,7 +74,55 @@
                 android:paddingRight="8dp"
                 android:textColor="@color/c2_dark_grey"
                 android:textSize="12sp"
-                tools:text="dfdr" />
+                tools:text="content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_author_name1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    tools:text="作者:齐德鸿" />
+
+                <TextView
+                    android:id="@+id/tv_article_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    tools:text="分类:双语阅读" />
+
+                <TextView
+                    android:id="@+id/tv_article_read"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    tools:text="阅读：171 views" />
+            </LinearLayout>
+
         </LinearLayout>
 
     </android.support.v7.widget.CardView>

@@ -18,6 +18,10 @@ public class Article {
     private String publishTime;
     // 分享链接
     private String shareUrl;
+    // 分类
+    private String type;
+    // 阅读量
+    private String readViews;
 
     public Article() {
     }
@@ -80,5 +84,21 @@ public class Article {
 
     public void setShareUrl(String shareUrl) {
         this.shareUrl = shareUrl;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getReadViews() {
+        return readViews;
+    }
+
+    public void setReadViews(String readViews) {
+        this.readViews = readViews;
     }
 }

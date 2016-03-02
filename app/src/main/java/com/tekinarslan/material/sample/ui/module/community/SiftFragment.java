@@ -1,5 +1,6 @@
 package com.tekinarslan.material.sample.ui.module.community;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.tekinarslan.material.sample.R;
@@ -16,8 +18,6 @@ import com.tekinarslan.material.sample.bean.Image;
 import com.tekinarslan.material.sample.bean.User;
 import com.tekinarslan.material.sample.ui.adapter.ArticleAdapter;
 import com.tekinarslan.material.sample.utills.ViewUtils;
-import com.tekinarslan.material.sample.weight.FloatingActionButton;
-import com.tekinarslan.material.sample.weight.ProgressBarCircular;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -33,7 +33,7 @@ import butterknife.ButterKnife;
 /**
  * 每日精选
  */
-public class SiftFragment extends Fragment {
+public class SiftFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = SiftFragment.class.getSimpleName();
     private static final String URL = "http://www.yywz123.com/blog/";
     private static final String DEFAULT_AVATAR = "https://cms-assets.tutsplus.com/uploads/users/41/posts/25951/image/material-design-3.jpg";
@@ -43,6 +43,7 @@ public class SiftFragment extends Fragment {
     private Image image;
     private ArticleAdapter adapter;
     private String type;
+    private int pageCount = 1;
     @Bind(R.id.swipe_container)
     SwipeRefreshLayout swipeRefresh;
     @Bind(R.id.list_articl)
@@ -58,8 +59,10 @@ public class SiftFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        swipeRefresh.setOnRefreshListener(this);
         adapter = new ArticleAdapter(getActivity());
         initData(URL);
+        initEvent();
     }
 
     private void initData(String type) {
@@ -82,30 +85,46 @@ public class SiftFragment extends Fragment {
                     adapter.setItems(list);
                     adapter.notifyDataSetChanged();
                     listView.setAdapter(adapter);
+                    swipeRefresh.setRefreshing(false);
                 }
+            }
+        });
+    }
+
+    private void initEvent() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Article article = (Article) parent.getItemAtPosition(position);
+                String shareUrl = article.getShareUrl();
+                String title = article.getTitle();
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+//                intent.putExtra("SHAREURL", shareUrl);
+//                intent.putExtra("TITLE", title);
+                startActivity(intent);
             }
         });
     }
 
     private List<Article> getBodyInfo(Document doc) {
         articles1 = new ArrayList<>();
-        article = new Article();
-        user = new User();
-        image = new Image();
-
-        Elements eleDates = doc.select("div.post_date");
-        for (Element eleDate : eleDates) {
+        Element eleMain = doc.select("div.main").first();
+        Elements elements = eleMain.getElementsByTag("li");
+        for (Element e : elements) {
+            Log.i(TAG, e.toString());
+            article = new Article();
+            user = new User();
+            image = new Image();
+            // 获取时间
+            Element eleDate = e.select("div.post_date").first();
             String year = eleDate.select("span.date_y").text();
             String mouth = eleDate.select("span.date_m").text();
             String day = eleDate.select("span.date_d").text();
             String date = year + " " + mouth + " " + day;
             Log.i(TAG, "date:" + date);
             article.setPublishTime(date);
-            articles1.add(article);
-        }
-
-        Elements elements = doc.select("div.article");
-        for (Element ele : elements) {
+            // 获取文章信息
+            Element ele = e.select("div.article").first();
             Element element = ele.getElementsByTag("h2").first();
             Element elementImg = ele.select("div.thumbnail").get(1);
             Element img = elementImg.getElementsByTag("a").first().getElementsByTag("img").first();
@@ -132,16 +151,40 @@ public class SiftFragment extends Fragment {
             article.setShareUrl(href); // 分享链接
             article.setTitle(title); // 标题
             article.setSummary(desc); // 描述
+            article.setType("Type:" + ty);
+            article.setReadViews("PViews:" + re);
             user.setAvatar(DEFAULT_AVATAR); //用户头像
-//            user.setNickname(nickName); //用户名
-//            user.setCount(count);
+            user.setNickname("Author:" + au);
             article.setPublisher(user);
             image.setUrl(imgUrl);
-//            image.setHeight(Integer.parseInt(height));
-//            image.setWidth(Integer.parseInt(width));
             article.setCover(image);
             articles1.add(article);
         }
         return articles1;
+    }
+
+    @Override
+    public void onRefresh() {
+        pageCount++;
+        Dao.getEntity(URL + "page/" + pageCount, new Dao.EntityListener() {
+            @Override
+            public void onError() {
+                ViewUtils.showToastShort(getActivity(), getString(R.string.error));
+            }
+
+            @Override
+            public void onSuccess(String result) {
+                Document doc = Jsoup.parse(result);
+                List<Article> list = getBodyInfo(doc);
+                if (list.size() != 0 && list != null) {
+//                    articles1.addAll(list);
+                    list.addAll(list);
+                    adapter.setItems(articles1);
+                    adapter.notifyDataSetChanged();
+                    listView.setAdapter(adapter);
+                    swipeRefresh.setRefreshing(false);
+                }
+            }
+        });
     }
 }
