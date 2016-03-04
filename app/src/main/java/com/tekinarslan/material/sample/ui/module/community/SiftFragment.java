@@ -37,12 +37,16 @@ public class SiftFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private static final String TAG = SiftFragment.class.getSimpleName();
     private static final String URL = "http://www.yywz123.com/blog/";
     private static final String DEFAULT_AVATAR = "https://cms-assets.tutsplus.com/uploads/users/41/posts/25951/image/material-design-3.jpg";
+    private static final String TITLE = "title";
+    private static final String DESC = "desc";
     private List<Article> articles1 = new ArrayList<>();
     private Article article;
     private User user;
     private Image image;
     private ArticleAdapter adapter;
     private String type;
+    private String desc;
+    private String title;
     private int pageCount = 1;
     @Bind(R.id.swipe_container)
     SwipeRefreshLayout swipeRefresh;
@@ -98,9 +102,12 @@ public class SiftFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 Article article = (Article) parent.getItemAtPosition(position);
                 String shareUrl = article.getShareUrl();
                 String title = article.getTitle();
+                String desc = article.getSummary();
+                String url = article.getShareUrl();
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
-//                intent.putExtra("SHAREURL", shareUrl);
-//                intent.putExtra("TITLE", title);
+//                intent.putExtra(TITLE, title);
+//                intent.putExtra(DESC, desc);
+                intent.putExtra("URL", url);
                 startActivity(intent);
             }
         });
@@ -130,12 +137,12 @@ public class SiftFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             Element img = elementImg.getElementsByTag("a").first().getElementsByTag("img").first();
 
             String info = ele.select("div.info").text();
-            String desc = ele.select("div.entry_post").first().getElementsByTag("span").text();
+            desc = ele.select("div.entry_post").first().getElementsByTag("span").text();
             String imgUrl = img.attr("src");
             String height = img.attr("height");
             String width = img.attr("width");
             String href = element.getElementsByTag("a").attr("href");
-            String title = element.text();
+            title = element.text();
             String[] infos = info.split("\\|");
             String author = infos[0];
             String au = author.split("：")[1];
