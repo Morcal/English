@@ -90,11 +90,6 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#c9c9c9" />
-
-    <View
-        android:layout_width="match_parent"
         android:layout_height="5dp"
         android:background="#ececec" />
 

@@ -21,6 +21,7 @@ android {
 
 repositories {
     maven { url "https://jitpack.io" }
+    mavenCentral()
 }
 
 dependencies {
@@ -35,6 +36,8 @@ dependencies {
     compile 'com.zhy:okhttputils:2.2.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.jude:rollviewpager:1.2.4'
+    compile 'com.makeramen:roundedimageview:2.2.1'
     compile 'com.github.PhilJay:MPAndroidChart:v2.2.2'
     compile 'com.android.support:cardview-v7:23.1.1'
+    compile 'com.google.code.gson:gson:2.6.2'
 }
