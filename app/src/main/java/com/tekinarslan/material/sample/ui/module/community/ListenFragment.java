@@ -12,9 +12,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.tekinarslan.material.sample.R;
 import com.tekinarslan.material.sample.app.Dao;
 import com.tekinarslan.material.sample.bean.Article;
+import com.tekinarslan.material.sample.bean.Topic;
+import com.tekinarslan.material.sample.utills.UIUtil;
 import com.tekinarslan.material.sample.utills.ViewUtils;
 
 import org.jsoup.Jsoup;
@@ -36,6 +39,7 @@ public class ListenFragment extends Fragment {
     RecyclerView recyclerView;
     private List<String> mDatas;
     private HomeAdapter mAdapter;
+    private List<Topic.TopicsEntity> topicsEntityList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -48,9 +52,9 @@ public class ListenFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        initData();
+//        initData();
         initDatas(URL);
-        init();
+//        initView();
     }
 
     protected void initData() {
@@ -74,18 +78,27 @@ public class ListenFragment extends Fragment {
             public void onSuccess(String result) {
                 ViewUtils.hideDialog();
                 Log.i(TAG, "result: " + result);
-//                new Gson().fromJson(result,)
+                Topic topic = new Gson().fromJson(result, Topic.class);
+                topicsEntityList = topic.getTopics();
+                int size = topicsEntityList.size();
+                Log.i(TAG, "size: " + size);
+                initView();
             }
         });
     }
 
 
-    private void init() {
+    private void initView() {
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        recyclerView.setAdapter(mAdapter = new HomeAdapter());
+        recyclerView.setAdapter(mAdapter = new HomeAdapter(topicsEntityList));
     }
 
     class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> {
+        private List<Topic.TopicsEntity> list;
+
+        public HomeAdapter(List<Topic.TopicsEntity> list) {
+            this.list = list;
+        }
 
         @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -97,21 +110,32 @@ public class ListenFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(MyViewHolder holder, int position) {
-            holder.tv.setText(mDatas.get(position));
+            Topic.TopicsEntity entity = list.get(position);
+            Topic.TopicsEntity.CircleEntity circle = entity.getCircle();
+            holder.name.setText(circle.getName());
+            holder.title.setText(entity.getTitle());
+            holder.viewCount.setText(entity.getViewCount() + "");
+            UIUtil.setAvatar(entity.getCover(), holder.roundedImageView, 477, 477);
         }
 
         @Override
         public int getItemCount() {
-            return mDatas.size();
+            return list.size();
         }
 
         class MyViewHolder extends RecyclerView.ViewHolder {
 
-            TextView tv;
+            TextView name;
+            TextView title;
+            TextView viewCount;
+            RoundedImageView roundedImageView;
 
             public MyViewHolder(View view) {
                 super(view);
-                tv = (TextView) view.findViewById(R.id.tv_source);
+                name = (TextView) view.findViewById(R.id.tv_name);
+                title = (TextView) view.findViewById(R.id.tv_title);
+                viewCount = (TextView) view.findViewById(R.id.tv_viewCount);
+                roundedImageView = (RoundedImageView) view.findViewById(R.id.imageView);
             }
         }
     }
