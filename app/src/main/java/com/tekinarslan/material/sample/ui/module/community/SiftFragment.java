@@ -53,10 +53,14 @@ public class SiftFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     @Bind(R.id.list_articl)
     ListView listView;
 
+    private View view;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_sift, container, false);
-        ButterKnife.bind(this, view);
+        if (view == null) {
+            view = inflater.inflate(R.layout.fragment_sift, container, false);
+            ButterKnife.bind(this, view);
+        }
         return view;
     }
 
@@ -64,6 +68,7 @@ public class SiftFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     public void onStart() {
         super.onStart();
         swipeRefresh.setOnRefreshListener(this);
+        swipeRefresh.setColorSchemeColors(R.color.material_deep_teal_500, R.color.blue, R.color.red);
         adapter = new ArticleAdapter(getActivity());
         initData(URL);
         initEvent();
@@ -193,5 +198,11 @@ public class SiftFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 }
             }
         });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ((ViewGroup) view.getParent()).removeView(view);
     }
 }

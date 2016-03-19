@@ -23,7 +23,7 @@ public class SampleActivity extends AppCompatActivity {
     @Bind(R.id.sliding_tabs)
     SlidingTabLayout slidingTabLayout;
     private String titles[] = new String[]{"每日精选", "词汇", "听力"
-            , "口语", "阅读", "写作", "语法"};
+            , "说客", "阅读", "写作", "语法"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,8 @@ public class SampleActivity extends AppCompatActivity {
 
     private void initView() {
         toolbar.setNavigationIcon(R.drawable.back);
+        pager.setOffscreenPageLimit(5);
+
         setSupportActionBar(toolbar);
         setTitle(getString(R.string.app_name));
     }

@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.tekinarslan.material.sample.ui.module.community.ListenFragment;
 import com.tekinarslan.material.sample.ui.module.community.SampleFragment;
+import com.tekinarslan.material.sample.ui.module.community.ShuokeFragment;
 import com.tekinarslan.material.sample.ui.module.community.SiftFragment;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -22,19 +23,19 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             // Open FragmentTab1.java
-            case 0:
+            case 0: //每日精选
                 return new SiftFragment();
-            case 1:
+            case 1: //词汇
                 return SampleFragment.newInstance(position);
-            case 2:
+            case 2: //听力
                 return new ListenFragment();
-            case 3:
+            case 3: //说客
+                return new ShuokeFragment();
+            case 4: //阅读
                 return SampleFragment.newInstance(position);
-            case 4:
+            case 5: //写作
                 return SampleFragment.newInstance(position);
-            case 5:
-                return SampleFragment.newInstance(position);
-            case 6:
+            case 6: //语法
                 return SampleFragment.newInstance(position);
         }
         return null;

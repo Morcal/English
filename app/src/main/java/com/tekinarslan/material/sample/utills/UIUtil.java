@@ -18,9 +18,9 @@ import com.tekinarslan.material.sample.R;
 
 
 public class UIUtil {
-    static int DEFAULT_AVATAR = R.drawable.default_face_100px;
-    static int LOADING_IMAGE_ID = R.drawable.defaut_load;
-    static int FAIL_IMAGE_ID = R.drawable.defaut_load;
+    static int DEFAULT_AVATAR = R.drawable.default_photo_cube;
+    static int LOADING_IMAGE_ID = R.drawable.default_photo_wight;
+    static int FAIL_IMAGE_ID = R.drawable.default_photo_wight;
 
     private UIUtil() {
     }

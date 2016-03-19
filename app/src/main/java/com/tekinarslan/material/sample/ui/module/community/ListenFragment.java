@@ -1,5 +1,6 @@
 package com.tekinarslan.material.sample.ui.module.community;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,13 +16,10 @@ import com.google.gson.Gson;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.tekinarslan.material.sample.R;
 import com.tekinarslan.material.sample.app.Dao;
-import com.tekinarslan.material.sample.bean.Article;
 import com.tekinarslan.material.sample.bean.Topic;
+import com.tekinarslan.material.sample.ui.adapter.ListenerAdapter;
 import com.tekinarslan.material.sample.utills.UIUtil;
 import com.tekinarslan.material.sample.utills.ViewUtils;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +36,7 @@ public class ListenFragment extends Fragment {
     @Bind(R.id.recyclerview)
     RecyclerView recyclerView;
     private List<String> mDatas;
-    private HomeAdapter mAdapter;
+    private ListenerAdapter mAdapter;
     private List<Topic.TopicsEntity> topicsEntityList = new ArrayList<>();
 
     @Nullable
@@ -52,20 +50,11 @@ public class ListenFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-//        initData();
-        initDatas(URL);
-//        initView();
+        initData(URL);
+//        initEvent();
     }
 
-    protected void initData() {
-
-        mDatas = new ArrayList<String>();
-        for (int i = 'A'; i < 'z'; i++) {
-            mDatas.add("" + (char) i);
-        }
-    }
-
-    private void initDatas(String type) {
+    private void initData(String type) {
         ViewUtils.showDialog(getActivity(), "Loading");
         Dao.getEntity(type, new Dao.EntityListener() {
             @Override
@@ -90,53 +79,22 @@ public class ListenFragment extends Fragment {
 
     private void initView() {
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        recyclerView.setAdapter(mAdapter = new HomeAdapter(topicsEntityList));
+        recyclerView.setAdapter(mAdapter = new ListenerAdapter(getActivity(), topicsEntityList));
+        initEvent();
     }
 
-    class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> {
-        private List<Topic.TopicsEntity> list;
 
-        public HomeAdapter(List<Topic.TopicsEntity> list) {
-            this.list = list;
-        }
+    private void initEvent() {
+        mAdapter.setOnItemClickListener(new ListenerAdapter.OnRecycleViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, String data) {
+                Log.i(" ", "audioUrl：" + data);
+                Intent intent = new Intent(getActivity(), PlayAudioActivity.class);
+                intent.putExtra("AUDIO", data);
+                startActivity(intent);
 
-        @Override
-        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            MyViewHolder holder = new MyViewHolder(LayoutInflater.from(
-                    getActivity()).inflate(R.layout.item_listen, parent,
-                    false));
-            return holder;
-        }
-
-        @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
-            Topic.TopicsEntity entity = list.get(position);
-            Topic.TopicsEntity.CircleEntity circle = entity.getCircle();
-            holder.name.setText(circle.getName());
-            holder.title.setText(entity.getTitle());
-            holder.viewCount.setText(entity.getViewCount() + "");
-            UIUtil.setAvatar(entity.getCover(), holder.roundedImageView, 477, 477);
-        }
-
-        @Override
-        public int getItemCount() {
-            return list.size();
-        }
-
-        class MyViewHolder extends RecyclerView.ViewHolder {
-
-            TextView name;
-            TextView title;
-            TextView viewCount;
-            RoundedImageView roundedImageView;
-
-            public MyViewHolder(View view) {
-                super(view);
-                name = (TextView) view.findViewById(R.id.tv_name);
-                title = (TextView) view.findViewById(R.id.tv_title);
-                viewCount = (TextView) view.findViewById(R.id.tv_viewCount);
-                roundedImageView = (RoundedImageView) view.findViewById(R.id.imageView);
             }
-        }
+        });
     }
+
 }
