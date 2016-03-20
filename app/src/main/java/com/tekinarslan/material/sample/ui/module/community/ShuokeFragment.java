@@ -1,10 +1,11 @@
 package com.tekinarslan.material.sample.ui.module.community;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,10 +15,9 @@ import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 import com.tekinarslan.material.sample.R;
+import com.tekinarslan.material.sample.app.Contast;
 import com.tekinarslan.material.sample.app.Dao;
 import com.tekinarslan.material.sample.bean.Podcasts;
-import com.tekinarslan.material.sample.bean.Topic;
-import com.tekinarslan.material.sample.ui.adapter.ListenerAdapter;
 import com.tekinarslan.material.sample.ui.adapter.ShuoKeAdapter;
 import com.tekinarslan.material.sample.utills.ViewUtils;
 import com.tekinarslan.material.sample.weight.DividerItemDecoration;
@@ -31,14 +31,15 @@ import butterknife.ButterKnife;
 /**
  * Created by lyqdhgo on 2016/3/19.
  */
-public class ShuokeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-    private static final String URL = "http://apineo.llsapp.com/api/v1/podcasts?page=1&appId=lls&deviceId=868201026091087&sDeviceId=868201026091087&appVer=4&token=809685e0c40d013333bf0273409c204a";
+public class ShuokeFragment extends Fragment {
     private static final String TAG = ShuokeFragment.class.getSimpleName();
-//    @Bind(R.id.swipe_container)
-//    SwipeRefreshLayout refreshLayout;
+    @Bind(R.id.swiprefreshlayout)
+    SwipeRefreshLayout refreshLayout;
     @Bind(R.id.recycler_podcast)
     RecyclerView recyclerView;
+    private int pageCount = 1;
     private ShuoKeAdapter shuoKeAdapter;
+    private Handler myHandler;
     private List<Podcasts.PodcastsEntity> podcastList = new ArrayList<>();
 
     @Nullable
@@ -54,7 +55,7 @@ public class ShuokeFragment extends Fragment implements SwipeRefreshLayout.OnRef
     public void onStart() {
         super.onStart();
         Log.i(TAG, "onStart");
-        initData(URL);
+        initData(Contast.HOSTURL + "&page=" + pageCount);
     }
 
     private void initData(String url) {
@@ -82,12 +83,42 @@ public class ShuokeFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
     private void initView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL_LIST));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         recyclerView.setAdapter(shuoKeAdapter);
+        initEvent();
     }
 
-    @Override
-    public void onRefresh() {
+    private void initEvent() {
+        myHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+            }
+        };
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                pageCount++;
+                String url = Contast.HOSTURL + "&page=" + pageCount;
+                Dao.getEntity(url, new Dao.EntityListener() {
+                    @Override
+                    public void onError() {
+                        ViewUtils.showToastShort(getActivity(), "刷新失败");
+                    }
 
+                    @Override
+                    public void onSuccess(String result) {
+                        List<Podcasts.PodcastsEntity> list = new ArrayList<>();
+                        Podcasts podcasts = new Gson().fromJson(result, Podcasts.class);
+                        list = podcasts.getPodcasts();
+                        podcastList.clear();
+                        podcastList.addAll(list);
+                        shuoKeAdapter.notifyDataSetChanged();
+                        refreshLayout.setRefreshing(false);
+                    }
+                });
+            }
+        });
     }
+
 }

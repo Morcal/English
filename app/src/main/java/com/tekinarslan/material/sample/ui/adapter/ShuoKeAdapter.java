@@ -1,6 +1,7 @@
 package com.tekinarslan.material.sample.ui.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +10,10 @@ import android.widget.TextView;
 
 import com.tekinarslan.material.sample.R;
 import com.tekinarslan.material.sample.bean.Podcasts;
+import com.tekinarslan.material.sample.ui.module.community.OnLoadMoreListener;
 import com.tekinarslan.material.sample.utills.UIUtil;
 import com.tekinarslan.material.sample.weight.CircleImageView;
 import com.tekinarslan.material.sample.weight.HWRatioImageView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
  */
 public class ShuoKeAdapter extends RecyclerView.Adapter<ShuoKeAdapter.PodcastViewHolder> {
     private Context context;
-    private List<Podcasts.PodcastsEntity> list = new ArrayList<>();
+    public List<Podcasts.PodcastsEntity> list = new ArrayList<>();
 
     public ShuoKeAdapter(Context context, List<Podcasts.PodcastsEntity> list) {
         this.context = context;
@@ -35,10 +35,9 @@ public class ShuoKeAdapter extends RecyclerView.Adapter<ShuoKeAdapter.PodcastVie
 
     @Override
     public PodcastViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(context).inflate(R.layout.item_shuoke, parent, false);
-        PodcastViewHolder podcastViewHolder = new PodcastViewHolder(itemView);
-        return podcastViewHolder;
-    }
+        View view=LayoutInflater.from(context).inflate(R.layout.item_shuoke,parent,false);
+        PodcastViewHolder itemViewHolder=new PodcastViewHolder(view);
+        return itemViewHolder;    }
 
     @Override
     public void onBindViewHolder(PodcastViewHolder holder, int position) {
@@ -52,9 +51,8 @@ public class ShuoKeAdapter extends RecyclerView.Adapter<ShuoKeAdapter.PodcastVie
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return list.size()+1;
     }
-
 
     public static class PodcastViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.civ_avatar)
@@ -68,9 +66,10 @@ public class ShuoKeAdapter extends RecyclerView.Adapter<ShuoKeAdapter.PodcastVie
         @Bind(R.id.tv_subscribesCount)
         TextView subscribes;
 
+
         public PodcastViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            }
         }
-    }
 }

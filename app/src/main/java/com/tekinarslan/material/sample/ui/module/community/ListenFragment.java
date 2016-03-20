@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,7 +16,9 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.tekinarslan.material.sample.R;
+import com.tekinarslan.material.sample.app.Contast;
 import com.tekinarslan.material.sample.app.Dao;
+import com.tekinarslan.material.sample.bean.Podcasts;
 import com.tekinarslan.material.sample.bean.Topic;
 import com.tekinarslan.material.sample.ui.adapter.ListenerAdapter;
 import com.tekinarslan.material.sample.utills.UIUtil;
@@ -32,9 +35,11 @@ import butterknife.ButterKnife;
  */
 public class ListenFragment extends Fragment {
     private static final String TAG = ListenFragment.class.getSimpleName();
-    private static final String URL = "http://apineo.llsapp.com/api/v1/topics/essential?page=1&appId=lls&deviceId=868201026091087&sDeviceId=868201026091087&appVer=4&token=809685e0c40d013333bf0273409c204a";
     @Bind(R.id.recyclerview)
     RecyclerView recyclerView;
+    @Bind(R.id.swiprefreshlayout)
+    SwipeRefreshLayout refreshLayout;
+    private int pageCount = 1;
     private List<String> mDatas;
     private ListenerAdapter mAdapter;
     private List<Topic.TopicsEntity> topicsEntityList = new ArrayList<>();
@@ -50,7 +55,7 @@ public class ListenFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        initData(URL);
+        initData(Contast.LISTENURL + "&page=" + pageCount);
 //        initEvent();
     }
 
@@ -85,6 +90,32 @@ public class ListenFragment extends Fragment {
 
 
     private void initEvent() {
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                pageCount++;
+
+                String url = Contast.LISTENURL + "&page=" + pageCount;
+                Dao.getEntity(url, new Dao.EntityListener() {
+                    @Override
+                    public void onError() {
+                        ViewUtils.showToastShort(getActivity(), "刷新失败");
+                    }
+
+                    @Override
+                    public void onSuccess(String result) {
+                        List<Topic.TopicsEntity> list = new ArrayList<>();
+                        Topic topic = new Gson().fromJson(result, Topic.class);
+                        list = topic.getTopics();
+                        topicsEntityList.clear();
+                        topicsEntityList.addAll(list);
+                        mAdapter.notifyDataSetChanged();
+                        refreshLayout.setRefreshing(false);
+                    }
+                });
+            }
+        });
+
         mAdapter.setOnItemClickListener(new ListenerAdapter.OnRecycleViewItemClickListener() {
             @Override
             public void onItemClick(View view, String data) {
