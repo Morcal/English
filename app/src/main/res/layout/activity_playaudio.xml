@@ -29,4 +29,46 @@
     </android.support.design.widget.AppBarLayout>
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <FrameLayout
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="7dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            >
+
+            <View
+                android:id="@+id/playpausewrapper"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/play_wrapper" />
+
+            <com.tekinarslan.material.sample.weight.PlayPauseButton
+                android:id="@+id/playpause"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center" />
+
+        </FrameLayout>
+
+        <SeekBar
+            android:id="@+id/song_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:maxHeight="2dp"
+            android:progress="30"
+            android:tag="tint_accent_color" />
+    </LinearLayout>
+
+
 </LinearLayout>

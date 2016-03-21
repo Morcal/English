@@ -1,8 +1,6 @@
 package com.tekinarslan.material.sample.ui.module.community;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -39,7 +37,6 @@ public class ShuokeFragment extends Fragment {
     RecyclerView recyclerView;
     private int pageCount = 1;
     private ShuoKeAdapter shuoKeAdapter;
-    private Handler myHandler;
     private List<Podcasts.PodcastsEntity> podcastList = new ArrayList<>();
 
     @Nullable
@@ -89,12 +86,6 @@ public class ShuokeFragment extends Fragment {
     }
 
     private void initEvent() {
-        myHandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-            }
-        };
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
