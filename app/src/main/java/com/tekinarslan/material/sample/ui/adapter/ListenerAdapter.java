@@ -60,7 +60,7 @@ public class ListenerAdapter extends RecyclerView.Adapter<ListenerAdapter.MyView
     public void onClick(View v) {
         Log.i(" ", "adpter view " + v.toString());
         if (onItemClickListener != null) {
-            onItemClickListener.onItemClick(v, ((Topic.TopicsEntity) v.getTag()).getAudioUrl());
+            onItemClickListener.onItemClick(v, ((Topic.TopicsEntity) v.getTag()).getId());
         }
     }
 

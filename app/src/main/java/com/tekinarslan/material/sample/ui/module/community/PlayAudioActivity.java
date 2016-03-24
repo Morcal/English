@@ -1,5 +1,6 @@
 package com.tekinarslan.material.sample.ui.module.community;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.tekinarslan.material.sample.R;
+import com.tekinarslan.material.sample.utills.ViewUtils;
 import com.tekinarslan.material.sample.weight.PlayPauseButton;
 
 import butterknife.Bind;
@@ -30,8 +32,15 @@ public class PlayAudioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playaudio);
         ButterKnife.bind(this);
+        iniData();
         initView();
         initEvent();
+    }
+
+    private void iniData() {
+        Intent intent = getIntent();
+        String id = intent.getStringExtra("AUDIO");
+        ViewUtils.showToastShort(this, "ID:" + id);
     }
 
     private void initView() {
