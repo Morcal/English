@@ -8,9 +8,9 @@
     android:orientation="vertical">
 
     <FrameLayout
-        android:layout_marginTop="5dp"
         android:layout_width="159dp"
-        android:layout_height="159dp">
+        android:layout_height="159dp"
+        android:layout_marginTop="5dp">
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/imageView"
@@ -44,13 +44,15 @@
                 android:textSize="10sp" />
 
             <ImageView
+                android:id="@+id/iv_play"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="right"
                 android:layout_marginRight="7dp"
-                android:src="@drawable/btn_shareplay" />
+                android:src="@drawable/btn_shareplay"
+                android:visibility="gone" />
         </RelativeLayout>
 
     </FrameLayout>

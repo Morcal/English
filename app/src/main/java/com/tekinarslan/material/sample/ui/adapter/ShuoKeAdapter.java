@@ -51,7 +51,7 @@ public class ShuoKeAdapter extends RecyclerView.Adapter<ShuoKeAdapter.PodcastVie
 
     @Override
     public int getItemCount() {
-        return list.size()+1;
+        return list.size();
     }
 
     public static class PodcastViewHolder extends RecyclerView.ViewHolder {

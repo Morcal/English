@@ -1,5 +1,6 @@
 package com.tekinarslan.material.sample.ui.module.community;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,8 +8,12 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -41,6 +46,10 @@ public class PlayAudioActivity extends AppCompatActivity {
     PlayPauseButton pauseButton;
     @Bind(R.id.playpausewrapper)
     View playWraper;
+    @Bind(R.id.skb_progress)
+    SeekBar seekBar;
+    @Bind(R.id.layout_playaudio)
+    LinearLayout layoutPalyAudio;
     @Bind(R.id.tag_view)
     TagCloudView tagView;
     @Bind(R.id.tv_title)
@@ -60,6 +69,8 @@ public class PlayAudioActivity extends AppCompatActivity {
     @Bind(R.id.riv_image)
     HWRatioImageView conver;
     private PlayAudio.UserEntity user;
+    private Player player;
+    private String audioUrl;
 
 
     @Override
@@ -73,9 +84,14 @@ public class PlayAudioActivity extends AppCompatActivity {
     }
 
     private void iniData() {
+        seekBar.setOnSeekBarChangeListener(new SeekBarChangeEvent());
+        player = new Player(seekBar);
+        // 监听电话来时的情况
+        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        telephonyManager.listen(new PhoneListener(), PhoneStateListener.LISTEN_CALL_STATE);
+
         Intent intent = getIntent();
         String id = intent.getStringExtra("AUDIO");
-        ViewUtils.showToastShort(this, "ID:" + id);
         String url = Contast.LISTENDETIAL + id + Contast.COMMONPARAM;
 
         ViewUtils.showDialog(this, "Loading");
@@ -93,7 +109,11 @@ public class PlayAudioActivity extends AppCompatActivity {
                 PlayAudio playAudio = new Gson().fromJson(result, PlayAudio.class);
                 String title = playAudio.getTitle();
                 String body = playAudio.getBody();
-                String audioUrl = playAudio.getAudioUrl();
+                audioUrl = playAudio.getAudioUrl();
+                Log.i(TAG, "audioUrl:" + audioUrl);
+                if (audioUrl == null || audioUrl.equals("")) {
+                    layoutPalyAudio.setVisibility(View.GONE);
+                }
                 int length = playAudio.getAudioLength();
                 List<String> tags = playAudio.getTags();
 
@@ -109,7 +129,12 @@ public class PlayAudioActivity extends AppCompatActivity {
                 tvBody.setText(body);
                 tagView.setTags(tags);
                 UIUtil.setAvatar(user.getAvatar(), avatar);
-                UIUtil.setAvatar(attachedImg, conver);
+                if (attachedImg == null || attachedImg.equals("")) {
+                    conver.setVisibility(View.GONE);
+                } else {
+                    conver.setVisibility(View.VISIBLE);
+                    UIUtil.setAvatar(attachedImg, conver);
+                }
                 initView();
             }
         });
@@ -121,8 +146,6 @@ public class PlayAudioActivity extends AppCompatActivity {
 
         pauseButton.setColor(Color.WHITE);
         pauseButton.startAnimation();
-
-
     }
 
     private void initEvent() {
@@ -141,9 +164,15 @@ public class PlayAudioActivity extends AppCompatActivity {
             if (!pauseButton.isPlayed()) {
                 pauseButton.setPlayed(true);
                 pauseButton.startAnimation();
+                Log.i(TAG, "播放");
+                Log.i(TAG, "audioUrl：" + audioUrl);
+                player.playUrl(audioUrl);
             } else {
                 pauseButton.setPlayed(false);
                 pauseButton.startAnimation();
+
+                Log.i(TAG, "暂停");
+                player.pause();
             }
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
@@ -154,4 +183,50 @@ public class PlayAudioActivity extends AppCompatActivity {
 
         }
     };
+
+    // 有电话时暂停音乐
+    private final class PhoneListener extends PhoneStateListener {
+        @Override
+        public void onCallStateChanged(int state, String incomingNumber) {
+            switch (state) {
+                case TelephonyManager.CALL_STATE_RINGING:
+                    player.callIsComing();
+                    break;
+                case TelephonyManager.CALL_STATE_IDLE:
+                    player.callIsDown();
+                    break;
+            }
+        }
+    }
+
+    class SeekBarChangeEvent implements SeekBar.OnSeekBarChangeListener {
+        int progress;
+
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            this.progress = progress * player.mediaPlayer.getDuration() / seekBar.getMax();
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+            player.mediaPlayer.seekTo(progress);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        player.pause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        player.stop();
+    }
 }

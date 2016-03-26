@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -48,6 +49,11 @@ public class ListenerAdapter extends RecyclerView.Adapter<ListenerAdapter.MyView
         holder.title.setText(entity.getTitle());
         holder.viewCount.setText(entity.getViewCount() + "");
         holder.itemView.setTag(entity);
+        if (entity.getAudioUrl() == null || entity.getAudioUrl().equals("")) {
+            holder.playView.setVisibility(View.GONE);
+        } else {
+            holder.playView.setVisibility(View.VISIBLE);
+        }
         UIUtil.setAvatar(entity.getCover(), holder.roundedImageView, 477, 477);
     }
 
@@ -74,6 +80,7 @@ public class ListenerAdapter extends RecyclerView.Adapter<ListenerAdapter.MyView
         TextView name;
         TextView title;
         TextView viewCount;
+        ImageView playView;
         RoundedImageView roundedImageView;
 
         public MyViewHolder(View view) {
@@ -81,6 +88,7 @@ public class ListenerAdapter extends RecyclerView.Adapter<ListenerAdapter.MyView
             name = (TextView) view.findViewById(R.id.tv_name);
             title = (TextView) view.findViewById(R.id.tv_title);
             viewCount = (TextView) view.findViewById(R.id.tv_viewCount);
+            playView = (ImageView) view.findViewById(R.id.iv_play);
             roundedImageView = (RoundedImageView) view.findViewById(R.id.imageView);
         }
     }

@@ -81,6 +81,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
+                            android:ellipsize="end"
+                            android:singleLine="true"
                             android:text=""
                             android:textColor="#515559"
                             android:textSize="16sp" />
@@ -134,6 +136,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layout_playaudio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="7dp"
@@ -163,14 +166,14 @@
             </FrameLayout>
 
             <SeekBar
-                android:id="@+id/song_progress"
+                android:id="@+id/skb_progress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="6dp"
                 android:layout_marginRight="6dp"
                 android:maxHeight="2dp"
-                android:progress="30"
+                android:progress="0"
                 android:tag="tint_accent_color" />
         </LinearLayout>
 
@@ -204,6 +207,7 @@
                 android:background="@drawable/imagerediu_shape"
                 android:scaleType="centerCrop"
                 android:src="@drawable/default_photo_wight"
+                android:visibility="gone"
                 app:hwRadio="1" />
         </android.support.v7.widget.CardView>
 
