@@ -45,8 +45,8 @@ public class ShuoKeAdapter extends RecyclerView.Adapter<ShuoKeAdapter.PodcastVie
         holder.title.setText(podcast.getTitle());
         holder.episodes.setText(podcast.getEpisodesCount() + "节目");
         holder.subscribes.setText(podcast.getSubscribesCount() + "订阅");
-        UIUtil.setAvatar(podcast.getBackgroundImage(), holder.avatar);
-        UIUtil.setAvatar(podcast.getUser().getAvatar(), holder.cover);
+        UIUtil.setAvatar(podcast.getBackgroundImage(), holder.cover);
+        UIUtil.setAvatar(podcast.getUser().getAvatar(), holder.avatar);
     }
 
     @Override

@@ -37,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/defaut_load"
+                    android:src="@drawable/default_photo_wight"
                     app:hwRadio="0.54" />
 
                 <ImageView

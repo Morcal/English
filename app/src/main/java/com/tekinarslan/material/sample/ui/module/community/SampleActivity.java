@@ -22,8 +22,8 @@ public class SampleActivity extends AppCompatActivity {
     ViewPager pager;
     @Bind(R.id.sliding_tabs)
     SlidingTabLayout slidingTabLayout;
-    private String titles[] = new String[]{"每日精选", "词汇", "听力"
-            , "说客", "阅读", "写作", "语法"};
+    private String titles[] = new String[]{"每日精选", "词单", "英乐"
+            , "说客", "美文", "写作"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
