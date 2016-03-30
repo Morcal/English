@@ -42,6 +42,8 @@ public class PlayAudioActivity extends AppCompatActivity {
     private static final String TAG = PlayAudioActivity.class.getSimpleName();
     @Bind(R.id.toolbar)
     Toolbar toolbar;
+    @Bind(R.id.tv_share)
+    TextView tvShare;
     @Bind(R.id.playpause)
     PlayPauseButton pauseButton;
     @Bind(R.id.playpausewrapper)
@@ -156,6 +158,17 @@ public class PlayAudioActivity extends AppCompatActivity {
             }
         });
         playWraper.setOnClickListener(mPlayPauseExpandedListener);
+        tvShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG, "分享。。。");
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
+                intent.putExtra(Intent.EXTRA_TEXT, "分享内容测试。。。");
+                startActivity(Intent.createChooser(intent, "分享到"));
+            }
+        });
     }
 
     private final View.OnClickListener mPlayPauseExpandedListener = new View.OnClickListener() {

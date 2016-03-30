@@ -131,6 +131,8 @@ public class Player implements MediaPlayer.OnBufferingUpdateListener, MediaPlaye
     @Override
     public void onCompletion(MediaPlayer mp) {
         Log.i("mediaPlayer", "onCompletion");
+//        mp.reset();
+//        seekBar.setProgress(0);
     }
 
     @Override
