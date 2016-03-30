@@ -33,7 +33,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
                 return new ListenFragment();
             case 3: //说客
                 return new ShuokeFragment();
-            case 4: //阅读
+            case 4: //美文
                 return new BeautyFragment();
             case 5: //写作
                 return SampleFragment.newInstance(position);
