@@ -1,6 +1,7 @@
 package com.tekinarslan.material.sample.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -83,6 +84,7 @@ public class BeautyAdapter extends RecyclerView.Adapter<BeautyAdapter.MyViewHold
         public MyViewHolder(View itemView) {
             super(itemView);
             tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
+            tvTitle.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/FZSongKeBenXiuKaiS-R-GB.TTF"));
             tvData = (TextView) itemView.findViewById(R.id.tv_data);
             tvTheme = (TextView) itemView.findViewById(R.id.tv_theme);
             tvAuthor = (TextView) itemView.findViewById(R.id.tv_author);
