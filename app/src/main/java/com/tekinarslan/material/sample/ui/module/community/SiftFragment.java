@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.tekinarslan.material.sample.R;
+import com.tekinarslan.material.sample.app.Contast;
 import com.tekinarslan.material.sample.app.Dao;
 import com.tekinarslan.material.sample.bean.Article;
 import com.tekinarslan.material.sample.bean.Image;
@@ -26,6 +27,7 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -91,6 +93,7 @@ public class SiftFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 Log.i(TAG, "size: " + list.size());
                 if (list.size() != 0 && list != null) {
 //                    articles1.addAll(list);
+                    setListImage(list);
                     adapter.setItems(list);
                     adapter.notifyDataSetChanged();
                     listView.setAdapter(adapter);
@@ -98,6 +101,43 @@ public class SiftFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 }
             }
         });
+    }
+
+    /***
+     * 设置文章封面图
+     * @param list
+     */
+    private void setListImage(List<Article> list) {
+        int size = list.size();
+        // 随机产生10张图片数组
+        String[] images = getImages(size);
+        for (int i = 0; i < size; i++) {
+            list.get(i).getCover().setUrl(images[i]);
+        }
+    }
+
+    private String[] getImages(int size) {
+        String[] images= Contast.SIFIMAGES;
+        String[] result = new String[10];
+
+        boolean r[] = new boolean[images.length];
+        Random random = new Random();
+        int m = size; // 要随机取的元素个数
+        if (m > images.length || m < 0)
+            return images;
+        int n = 0;
+        while (true) {
+            int temp = random.nextInt(images.length);
+            if (!r[temp]) {
+                if (n == m) // 取到足量随机数后退出循环
+                    break;
+                n++;
+                System.out.println("得到的第" + n + "个随机数为：" + images[temp]);
+                result[n - 1] = images[temp];
+                r[temp] = true;
+            }
+        }
+        return result;
     }
 
     private void initEvent() {
@@ -190,6 +230,7 @@ public class SiftFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 List<Article> list = getBodyInfo(doc);
                 if (list.size() != 0 && list != null) {
 //                    articles1.addAll(list);
+                    setListImage(list);
                     list.addAll(list);
                     adapter.setItems(articles1);
                     adapter.notifyDataSetChanged();

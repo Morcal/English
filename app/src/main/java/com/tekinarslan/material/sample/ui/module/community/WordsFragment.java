@@ -1,6 +1,7 @@
 package com.tekinarslan.material.sample.ui.module.community;
 
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -242,6 +243,7 @@ public class WordsFragment extends Fragment implements SwipeFlingAdapterView.onF
             holder.portraitView = (SimpleDraweeView) convertView.findViewById(R.id.portrait);
             holder.portraitView.getLayoutParams().height = cardHeight;
             holder.tvEnglish = (TextView) convertView.findViewById(R.id.tv_english);
+            holder.tvEnglish.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "fonts/FZSongKeBenXiuKaiS-R-GB.TTF"));
             holder.tvChinese = (TextView) convertView.findViewById(R.id.tv_chinese);
             holder.tvWord = (TextView) convertView.findViewById(R.id.tv_word);
             holder.tvBiao = (TextView) convertView.findViewById(R.id.tv_biao);

@@ -1,15 +1,12 @@
 package com.tekinarslan.material.sample.ui.module.community;
 
-import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.SeekBar;
 
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 

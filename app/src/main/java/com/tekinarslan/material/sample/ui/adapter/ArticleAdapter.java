@@ -1,6 +1,7 @@
 package com.tekinarslan.material.sample.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,6 +71,8 @@ public class ArticleAdapter extends BaseAdapter {
             TextPaint tpRead = holder.articleRead.getPaint(); //设置粗体
             tpRead.setFakeBoldText(true);
             holder.content = (TextView) convertView.findViewById(R.id.tx_content);
+            holder.content.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/Roboto-Regular.ttf"));
+
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
