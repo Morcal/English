@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="15dp"
-        android:background="#f2f2f2"
+        android:background="#ffffff"
         android:orientation="vertical">
 
         <LinearLayout
@@ -20,12 +20,12 @@
             android:orientation="horizontal">
 
             <TextView
+                android:background="@drawable/biao"
                 android:id="@+id/tv_data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="5dp"
-                android:background="@drawable/biao"
                 android:gravity="right"
                 android:paddingRight="3dp"
                 android:text="14\n02/2016"

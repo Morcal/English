@@ -66,6 +66,7 @@ public class WordsFragment extends Fragment implements SwipeFlingAdapterView.onF
 
     private void queryToBmob() {
         BmobQuery<Words> query = new BmobQuery<Words>();
+        query.order("-updatedAt");
         query.findObjects(getActivity(), new FindListener<Words>() {
             @Override
             public void onSuccess(List<Words> list) {
