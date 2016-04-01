@@ -1,5 +1,6 @@
 package com.tekinarslan.material.sample.ui.module.study;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -177,6 +178,8 @@ public class StudyFragment extends Fragment implements AdapterView.OnItemClickLi
         //显示所选Item的ItemText
         String str = (String) item.get("name");
         Log.i(TAG, "模块：" + str);
+        Intent intent = new Intent(getActivity(), ExamActivity.class);
+        startActivity(intent);
     }
 
     // 轮播ViewPager适配器
