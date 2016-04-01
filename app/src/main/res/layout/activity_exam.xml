@@ -40,6 +40,13 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="5dp"
                     android:background="@drawable/actionbar_discover_selected" />
+
+                <SeekBar
+                    android:id="@+id/seekbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:visibility="gone" />
             </RelativeLayout>
 
         </android.support.v7.widget.Toolbar>

@@ -47,4 +47,7 @@ public class Contast {
             "http://7xrfxa.com1.z0.glb.clouddn.com/1045.jpg",
     };
 
+    // CET4听力测试音频
+    public static final String CET4LISTEN = "http://7xrfxa.com1.z0.glb.clouddn.com/cets20140601.mp3";
+
 }
