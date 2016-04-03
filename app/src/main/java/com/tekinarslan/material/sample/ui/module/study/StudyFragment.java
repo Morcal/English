@@ -177,9 +177,26 @@ public class StudyFragment extends Fragment implements AdapterView.OnItemClickLi
         HashMap<String, Object> item = (HashMap<String, Object>) parent.getItemAtPosition(position);
         //显示所选Item的ItemText
         String str = (String) item.get("name");
-        Log.i(TAG, "模块：" + str);
-        Intent intent = new Intent(getActivity(), ExamActivity.class);
-        startActivity(intent);
+        Log.i(TAG, "模块：" + str + position);
+        switch (position) {
+            case 0:
+            case 3:
+                Intent subject = new Intent(getActivity(), SubjectActivity.class);
+                startActivity(subject);
+                break;
+            case 1:
+            case 2:
+                Intent exam = new Intent(getActivity(), ExamActivity.class);
+                startActivity(exam);
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            default:
+                break;
+        }
+
     }
 
     // 轮播ViewPager适配器

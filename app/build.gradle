@@ -45,4 +45,5 @@ dependencies {
     compile files('libs/BmobSDK_V3.4.5_1111.jar')
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.camnter.easycountdowntextureview:library:1.1'
+    compile 'com.timqi.sectorprogressview:library:2.0.0'
 }

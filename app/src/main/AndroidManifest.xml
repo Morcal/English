@@ -27,6 +27,7 @@
         <activity android:name=".ui.module.community.DetailActivity" />
         <activity android:name=".ui.module.community.PlayAudioActivity" />
         <activity android:name=".ui.module.study.ExamActivity" />
+        <activity android:name=".ui.module.study.SubjectActivity" />
     </application>
 
 </manifest>
