@@ -18,14 +18,17 @@ import android.widget.RadioGroup;
 
 import com.tekinarslan.material.sample.R;
 import com.tekinarslan.material.sample.ui.module.community.SampleActivity;
+import com.tekinarslan.material.sample.ui.module.home.LoginActivity;
 import com.tekinarslan.material.sample.ui.module.message.MessageFragment;
 import com.tekinarslan.material.sample.ui.module.own.OwnFragment;
 import com.tekinarslan.material.sample.ui.module.study.StudyFragment;
+import com.tekinarslan.material.sample.weight.CircleImageView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = MainActivity.class.getSimpleName();
     private static final int NUM_ITEMS = 3;
     @Bind(R.id.drawer)
     DrawerLayout drawerLayout;
@@ -44,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.rabtn_own)
     RadioButton rabtnOwn;
     ActionBarDrawerToggle drawerToggle;
-
+    private CircleImageView avatar;
     private StudyFragment studyFragment;
     private MessageFragment messageFragment;
     private OwnFragment ownFragment;
@@ -77,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
     private void initView() {
         setTitle(getString(R.string.app_name));
         setDefaultFragment();
+        View headView = navigationView.getHeaderView(0);
+        avatar = (CircleImageView) headView.findViewById(R.id.avatar);
     }
 
     private void initEvent() {
@@ -129,6 +134,16 @@ public class MainActivity extends AppCompatActivity {
                 //transaction.commit();
                 transaction.commitAllowingStateLoss();
 
+            }
+        });
+
+        avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.closeDrawers();
+                Log.i(TAG, "登录/注册");
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
         });
     }

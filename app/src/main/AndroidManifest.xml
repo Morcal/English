@@ -28,6 +28,7 @@
         <activity android:name=".ui.module.community.PlayAudioActivity" />
         <activity android:name=".ui.module.study.ExamActivity" />
         <activity android:name=".ui.module.study.SubjectActivity" />
+        <activity android:name=".ui.module.home.LoginActivity" />
     </application>
 
 </manifest>
