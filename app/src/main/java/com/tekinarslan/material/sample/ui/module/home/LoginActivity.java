@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         setDefaultFragment();
     }
 
-    private void setDefaultFragment() {
+    public void setDefaultFragment() {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         loginFragment = new LoginFragment();
