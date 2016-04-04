@@ -3,6 +3,7 @@ package com.tekinarslan.material.sample.ui.module.main;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -142,8 +143,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 drawerLayout.closeDrawers();
                 Log.i(TAG, "登录/注册");
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
+                new Handler().postDelayed(new Runnable(){
+                    public void run() {
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
+                }, 250);
             }
         });
     }

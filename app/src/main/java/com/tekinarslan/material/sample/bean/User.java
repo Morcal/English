@@ -3,16 +3,22 @@ package com.tekinarslan.material.sample.bean;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.BmobUser;
+
 /**
  * Created by lyqdh on 2016/1/4.
  */
-public class User {
+public class User extends BmobUser{
     // id
     private int id;
     // nickname
     private String nickname;
     // 头像
     private String avatar;
+    // 生日
+    private String birthday;
+    // 省市
+    private String location;
     // 作品数
     private String count;
     // 收藏的清单
