@@ -37,27 +37,6 @@ public class OwnFragment extends Fragment implements View.OnClickListener {
     TextView setting;
     @Bind(R.id.profile_more)
     ImageView profileMore;
-    SelectedDate mSelectedDate;
-    String mRecurrenceOption, mRecurrenceRule;
-    SublimePickerFragment.Callback mFragmentCallback = new SublimePickerFragment.Callback() {
-
-        @Override
-        public void onCancelled() {
-
-        }
-
-        @Override
-        public void onDateTimeRecurrenceSet(SelectedDate selectedDate, int hourOfDay, int minute, SublimeRecurrencePicker.RecurrenceOption recurrenceOption, String recurrenceRule) {
-            mSelectedDate = selectedDate;
-
-            mRecurrenceOption = recurrenceOption != null ?
-                    recurrenceOption.name() : "n/a";
-            mRecurrenceRule = recurrenceRule != null ?
-                    recurrenceRule : "n/a";
-
-            updateInfoView();
-        }
-    };
 
     @Nullable
     @Override
@@ -82,87 +61,14 @@ public class OwnFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.profile_setting:
-                Intent intent = new Intent(getActivity(), SettingActivity.class);
-                startActivity(intent);
+                Intent setting = new Intent(getActivity(), SettingActivity.class);
+                startActivity(setting);
                 break;
             case R.id.profile_more:
-                // DialogFragment to host SublimePicker
-                SublimePickerFragment pickerFrag = new SublimePickerFragment();
-                pickerFrag.setCallback(mFragmentCallback);
-
-                // Options\
-                Pair<Boolean, SublimeOptions> optionsPair = getOptions();
-
-                if (!optionsPair.first) { // If options are not valid
-                    ViewUtils.showToastShort(getActivity(), "No pickers activated");
-                    return;
-                }
-
-                // Valid options
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("SUBLIME_OPTIONS", optionsPair.second);
-                pickerFrag.setArguments(bundle);
-
-                pickerFrag.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
-                pickerFrag.show(getActivity().getSupportFragmentManager(), "SUBLIME_PICKER");
+                Intent editInfo = new Intent(getActivity(), MineInfoActivity.class);
+                startActivity(editInfo);
+//                showDatePicker();
                 break;
         }
-    }
-
-    // Show date, time & recurrence options that have been selected
-    private void updateInfoView() {
-        if (mSelectedDate != null) {
-            String year = (String.valueOf(mSelectedDate.getStartDate()
-                    .get(Calendar.YEAR))) + (applyBoldStyle("年"));
-            String mouth = (String.valueOf(mSelectedDate.getStartDate()
-                    .get(Calendar.MONTH))) + (applyBoldStyle("月"));
-            String day = (String.valueOf(mSelectedDate.getStartDate()
-                    .get(Calendar.DAY_OF_MONTH))) + applyBoldStyle("日");
-            String date = year + mouth + day;
-            Log.i(TAG, "date->" + date);
-        }
-    }
-
-    // Applies a StyleSpan to the supplied text
-    private SpannableStringBuilder applyBoldStyle(String text) {
-        SpannableStringBuilder ss = new SpannableStringBuilder(text);
-        ss.setSpan(new StyleSpan(Typeface.BOLD), 0, text.length(),
-                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        return ss;
-    }
-
-    // Validates & returns SublimePicker options
-    Pair<Boolean, SublimeOptions> getOptions() {
-        SublimeOptions options = new SublimeOptions();
-        int displayOptions = 0;
-
-
-        displayOptions |= SublimeOptions.ACTIVATE_DATE_PICKER;
-//        displayOptions |= SublimeOptions.ACTIVATE_TIME_PICKER;
-//        displayOptions |= SublimeOptions.ACTIVATE_RECURRENCE_PICKER;
-        options.setPickerToShow(SublimeOptions.Picker.DATE_PICKER);
-//        options.setPickerToShow(SublimeOptions.Picker.TIME_PICKER);
-//        options.setPickerToShow(SublimeOptions.Picker.REPEAT_OPTION_PICKER);
-
-        options.setDisplayOptions(displayOptions);
-
-        // Enable/disable the date range selection feature
-//        options.setCanPickDateRange(cbAllowDateRangeSelection.isChecked());
-
-        // Example for setting date range:
-        // Note that you can pass a date range as the initial date params
-        // even if you have date-range selection disabled. In this case,
-        // the user WILL be able to change date-range using the header
-        // TextViews, but not using long-press.
-
-        /*Calendar startCal = Calendar.getInstance();
-        startCal.set(2016, 2, 4);
-        Calendar endCal = Calendar.getInstance();
-        endCal.set(2016, 2, 17);
-
-        options.setDateParams(startCal, endCal);*/
-
-        // If 'displayOptions' is zero, the chosen options are not valid
-        return new Pair<>(displayOptions != 0 ? Boolean.TRUE : Boolean.FALSE, options);
     }
 }

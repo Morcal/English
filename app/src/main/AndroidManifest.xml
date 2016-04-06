@@ -29,7 +29,8 @@
         <activity android:name=".ui.module.study.ExamActivity" />
         <activity android:name=".ui.module.study.SubjectActivity" />
         <activity android:name=".ui.module.home.LoginActivity" />
-        <activity android:name=".ui.module.study.WriteActivity"/>
+        <activity android:name=".ui.module.study.WriteActivity" />
+        <activity android:name=".ui.module.own.MineInfoActivity" />
     </application>
 
 </manifest>
