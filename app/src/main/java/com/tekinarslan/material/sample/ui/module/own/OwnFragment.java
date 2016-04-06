@@ -1,10 +1,15 @@
 package com.tekinarslan.material.sample.ui.module.own;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.StyleSpan;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +17,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
 import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
+import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 import com.tekinarslan.material.sample.R;
 import com.tekinarslan.material.sample.utills.ViewUtils;
+
+import java.util.Calendar;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -23,11 +32,32 @@ import butterknife.ButterKnife;
  * Created by lyqdhgo on 2016/2/18.
  */
 public class OwnFragment extends Fragment implements View.OnClickListener {
+    private static final String TAG = OwnFragment.class.getSimpleName();
     @Bind(R.id.profile_setting)
     TextView setting;
     @Bind(R.id.profile_more)
     ImageView profileMore;
+    SelectedDate mSelectedDate;
+    String mRecurrenceOption, mRecurrenceRule;
+    SublimePickerFragment.Callback mFragmentCallback = new SublimePickerFragment.Callback() {
 
+        @Override
+        public void onCancelled() {
+
+        }
+
+        @Override
+        public void onDateTimeRecurrenceSet(SelectedDate selectedDate, int hourOfDay, int minute, SublimeRecurrencePicker.RecurrenceOption recurrenceOption, String recurrenceRule) {
+            mSelectedDate = selectedDate;
+
+            mRecurrenceOption = recurrenceOption != null ?
+                    recurrenceOption.name() : "n/a";
+            mRecurrenceRule = recurrenceRule != null ?
+                    recurrenceRule : "n/a";
+
+            updateInfoView();
+        }
+    };
 
     @Nullable
     @Override
@@ -58,10 +88,9 @@ public class OwnFragment extends Fragment implements View.OnClickListener {
             case R.id.profile_more:
                 // DialogFragment to host SublimePicker
                 SublimePickerFragment pickerFrag = new SublimePickerFragment();
-//                pickerFrag.setCallback(mFragmentCallback);
+                pickerFrag.setCallback(mFragmentCallback);
 
                 // Options\
-
                 Pair<Boolean, SublimeOptions> optionsPair = getOptions();
 
                 if (!optionsPair.first) { // If options are not valid
@@ -80,6 +109,28 @@ public class OwnFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    // Show date, time & recurrence options that have been selected
+    private void updateInfoView() {
+        if (mSelectedDate != null) {
+            String year = (String.valueOf(mSelectedDate.getStartDate()
+                    .get(Calendar.YEAR))) + (applyBoldStyle("年"));
+            String mouth = (String.valueOf(mSelectedDate.getStartDate()
+                    .get(Calendar.MONTH))) + (applyBoldStyle("月"));
+            String day = (String.valueOf(mSelectedDate.getStartDate()
+                    .get(Calendar.DAY_OF_MONTH))) + applyBoldStyle("日");
+            String date = year + mouth + day;
+            Log.i(TAG, "date->" + date);
+        }
+    }
+
+    // Applies a StyleSpan to the supplied text
+    private SpannableStringBuilder applyBoldStyle(String text) {
+        SpannableStringBuilder ss = new SpannableStringBuilder(text);
+        ss.setSpan(new StyleSpan(Typeface.BOLD), 0, text.length(),
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return ss;
+    }
+
     // Validates & returns SublimePicker options
     Pair<Boolean, SublimeOptions> getOptions() {
         SublimeOptions options = new SublimeOptions();
@@ -87,11 +138,11 @@ public class OwnFragment extends Fragment implements View.OnClickListener {
 
 
         displayOptions |= SublimeOptions.ACTIVATE_DATE_PICKER;
-        displayOptions |= SublimeOptions.ACTIVATE_TIME_PICKER;
-        displayOptions |= SublimeOptions.ACTIVATE_RECURRENCE_PICKER;
+//        displayOptions |= SublimeOptions.ACTIVATE_TIME_PICKER;
+//        displayOptions |= SublimeOptions.ACTIVATE_RECURRENCE_PICKER;
         options.setPickerToShow(SublimeOptions.Picker.DATE_PICKER);
-        options.setPickerToShow(SublimeOptions.Picker.TIME_PICKER);
-        options.setPickerToShow(SublimeOptions.Picker.REPEAT_OPTION_PICKER);
+//        options.setPickerToShow(SublimeOptions.Picker.TIME_PICKER);
+//        options.setPickerToShow(SublimeOptions.Picker.REPEAT_OPTION_PICKER);
 
         options.setDisplayOptions(displayOptions);
 
