@@ -62,4 +62,7 @@
     <color name="action_sheet_blue">#037BFF</color>
     <color name="action_sheet_red">#FD4A2E</color>
     <color name="action_sheet_gray">#8F8F8F</color>
+
+    <color name="c8_shallow_white">#F1F1F1</color>
+    <color name="c5_dark_grey">#515151</color>
 </resources>
