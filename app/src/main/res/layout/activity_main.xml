@@ -17,7 +17,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimaryDark" />
+            android:background="?attr/colorPrimaryDark"
+            app:theme="@style/ToolbarTheme" />
 
         <RelativeLayout
             android:id="@+id/tab"

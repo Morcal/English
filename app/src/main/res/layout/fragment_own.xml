@@ -9,7 +9,8 @@
         android:background="@color/light"
         android:orientation="vertical">
 
-        <include layout="@layout/profile_head" />
+        <include
+            layout="@layout/profile_head" />
 
         <include layout="@layout/profile_center" />
 

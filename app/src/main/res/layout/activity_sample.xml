@@ -14,7 +14,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimaryDark" />
+            android:background="?attr/colorPrimaryDark"
+            app:theme="@style/ToolbarTheme" />
 
         <com.tekinarslan.material.sample.weight.SlidingTabLayout
             android:id="@+id/sliding_tabs"

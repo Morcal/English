@@ -8,12 +8,12 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:background="@drawable/bg_login2"
             android:id="@+id/iv_bg"
             android:layout_width="2000dp"
             android:layout_height="2000dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="-50dp"
-            android:background="@drawable/bg_login"
             android:scaleType="centerCrop"
             android:visibility="visible" />
 

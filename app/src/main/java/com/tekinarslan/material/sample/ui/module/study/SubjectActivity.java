@@ -2,6 +2,7 @@ package com.tekinarslan.material.sample.ui.module.study;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -144,6 +145,8 @@ public class SubjectActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.linear_write:
                 Log.i(TAG, "Write");
+                Intent write = new Intent(SubjectActivity.this, WriteActivity.class);
+                startActivity(write);
                 break;
             case R.id.linear_listen:
                 Log.i(TAG, "Listener");

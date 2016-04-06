@@ -33,9 +33,12 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:layout_marginTop="7dp"
             android:id="@+id/linear_write"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="22dp"
             android:orientation="vertical">
 
             <FrameLayout
@@ -44,18 +47,14 @@
 
                 <com.timqi.sectorprogressview.ColorfulRingProgressView
                     android:id="@+id/crp_write"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
                     app:bgColor="#e1e1e1"
                     app:fgColorEnd="@color/colorPrimary"
                     app:fgColorStart="#ffe400"
                     app:percent="75"
                     app:startAngle="0"
-                    app:strokeWidth="18dp" />
+                    app:strokeWidth="16dp" />
 
                 <TextView
                     android:id="@+id/tv_write"
@@ -64,7 +63,7 @@
                     android:layout_gravity="center"
                     android:text="75%"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="32sp" />
+                    android:textSize="20sp" />
             </FrameLayout>
 
             <TextView
@@ -81,7 +80,9 @@
             android:id="@+id/linear_listen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_below="@id/linear_write"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-30dp"
             android:orientation="vertical">
 
             <FrameLayout
@@ -90,12 +91,8 @@
 
                 <com.timqi.sectorprogressview.ColorfulRingProgressView
                     android:id="@+id/crp_listen"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_width="210dp"
+                    android:layout_height="210dp"
                     app:bgColor="#e1e1e1"
                     app:fgColorEnd="@color/colorPrimary"
                     app:fgColorStart="#ffe400"
@@ -127,7 +124,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@id/linear_write"
+            android:layout_below="@id/linear_listen"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="-30dp"
             android:orientation="vertical">
 
             <FrameLayout
@@ -136,18 +135,14 @@
 
                 <com.timqi.sectorprogressview.ColorfulRingProgressView
                     android:id="@+id/crp_read"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
                     app:bgColor="#e1e1e1"
                     app:fgColorEnd="@color/colorPrimary"
                     app:fgColorStart="#ffe400"
                     app:percent="68"
                     app:startAngle="0"
-                    app:strokeWidth="18dp" />
+                    app:strokeWidth="16dp" />
 
                 <TextView
                     android:id="@+id/tv_read"
@@ -156,7 +151,7 @@
                     android:layout_gravity="center"
                     android:text="68%"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="32sp" />
+                    android:textSize="20sp" />
             </FrameLayout>
 
             <TextView
@@ -174,6 +169,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@id/linear_listen"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="-10dp"
             android:orientation="vertical">
 
             <FrameLayout
@@ -184,16 +181,12 @@
                     android:id="@+id/crp_trans"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="20dp"
                     app:bgColor="#e1e1e1"
                     app:fgColorEnd="@color/colorPrimary"
                     app:fgColorStart="#ffe400"
                     app:percent="23"
                     app:startAngle="0"
-                    app:strokeWidth="18dp" />
+                    app:strokeWidth="17dp" />
 
                 <TextView
                     android:id="@+id/tv_trans"
@@ -202,7 +195,7 @@
                     android:layout_gravity="center"
                     android:text="23%"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="32sp" />
+                    android:textSize="28sp" />
             </FrameLayout>
 
             <TextView
