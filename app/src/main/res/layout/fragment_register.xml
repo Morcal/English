@@ -4,6 +4,7 @@
     android:layout_height="wrap_content">
 
     <EditText
+        android:textCursorDrawable="@null"
         android:id="@+id/et_username"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -17,6 +18,7 @@
         android:textSize="15sp" />
 
     <EditText
+        android:textCursorDrawable="@null"
         android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -42,7 +44,7 @@
         android:background="@drawable/but_login"
         android:gravity="center"
         android:text="注册"
-        android:textColor="#30cccccc"
+        android:textColor="@color/light"
         android:textSize="15sp"
         android:textStyle="bold" />
 </RelativeLayout>

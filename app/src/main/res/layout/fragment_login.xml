@@ -14,6 +14,7 @@
         android:hint="用户名"
         android:textColor="@color/light"
         android:textColorHint="#deead1"
+        android:textCursorDrawable="@null"
         android:textSize="15sp" />
 
     <EditText
@@ -29,6 +30,7 @@
         android:inputType="textPassword"
         android:textColor="@color/light"
         android:textColorHint="#deead1"
+        android:textCursorDrawable="@null"
         android:textSize="15sp" />
 
     <TextView
@@ -42,7 +44,7 @@
         android:background="@drawable/but_login"
         android:gravity="center"
         android:text="登录"
-        android:textColor="#30cccccc"
+        android:textColor="@color/light"
         android:textSize="15sp"
         android:textStyle="bold" />
 
@@ -54,7 +56,7 @@
         android:layout_marginTop="16dp"
         android:gravity="center_horizontal"
         android:text="忘记登陆信息？获得登录帮助。"
-        android:textColor="#dedfd7"
+        android:textColor="@color/light"
         android:textSize="13sp" />
 
     <LinearLayout
@@ -79,7 +81,7 @@
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
             android:text="或"
-            android:textColor="#dedfd7"
+            android:textColor="@color/light"
             android:textSize="16sp" />
 
         <View

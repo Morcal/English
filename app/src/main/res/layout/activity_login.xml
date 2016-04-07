@@ -8,12 +8,12 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:background="@drawable/bg_login2"
             android:id="@+id/iv_bg"
             android:layout_width="2000dp"
             android:layout_height="2000dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="-50dp"
+            android:background="@drawable/bg_login2"
             android:scaleType="centerCrop"
             android:visibility="visible" />
 
@@ -32,9 +32,9 @@
             <FrameLayout
                 android:id="@+id/layout_content"
                 android:layout_width="match_parent"
-                android:layout_below="@id/iv_logo"
-                android:layout_height="wrap_content">
-            </FrameLayout>
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_logo"></FrameLayout>
+
             <TextView
                 android:id="@+id/tv_toregister"
                 android:layout_width="match_parent"
@@ -42,7 +42,7 @@
                 android:layout_alignParentBottom="true"
                 android:gravity="center"
                 android:text="没有账户？请注册。"
-                android:textColor="#dedfd7"
+                android:textColor="@color/light"
                 android:textSize="13sp" />
 
             <View

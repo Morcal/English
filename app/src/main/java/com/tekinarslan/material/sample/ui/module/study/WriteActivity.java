@@ -32,6 +32,9 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
     @Bind(R.id.but_save_write)
     Button save;
 
+    String title;
+    String question;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +58,17 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
             public void onSuccess(List<Write> list) {
                 ViewUtils.showToastShort(WriteActivity.this, "查询成功");
                 Log.i(TAG, "write size-> " + list.size());
+                for (int i = 0; i < list.size(); i++) {
+                    Write write = list.get(i);
+                    if (write != null) {
+                        title = write.getTitle();
+                        Write.WriteEntity writeEntity = write.getWrite();
+                        if (writeEntity != null) {
+                            question = writeEntity.getWriteQuestion();
+                        }
+                    }
+                    Log.i(TAG, "title->" + title + " question->" + question);
+                }
             }
 
             @Override
