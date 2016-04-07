@@ -15,3 +15,30 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+##微信
+-keep class com.tencent.mm.sdk.** {*;}
+
+##微博
+-keep public class com.sina.weibo.** {*;}
+-keep public class com.sina.sso.** {*;}
+
+##otto
+-keepattributes *Annotation*
+-keepclassmembers class ** {
+    @com.squareup.otto.Subscribe public *;
+    @com.squareup.otto.Produce public *;
+}
+
+#Butter Knife
+-keep class butterknife.** { *; }
+-dontwarn butterknife.internal.**
+-keep class **$$ViewBinder { *; }
+
+-keepclasseswithmembernames class * {
+    @butterknife.* <fields>;
+}
+
+-keepclasseswithmembernames class * {
+    @butterknife.* <methods>;
+}

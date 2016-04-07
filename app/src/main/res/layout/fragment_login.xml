@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
     <EditText
         android:id="@+id/et_username"
         android:layout_width="match_parent"
@@ -41,6 +42,7 @@
         android:background="@drawable/but_login"
         android:gravity="center"
         android:text="登录"
+        android:textColor="#30cccccc"
         android:textSize="15sp"
         android:textStyle="bold" />
 
@@ -89,85 +91,19 @@
             android:background="#30cccccc" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_oauth"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/layout_driver"
-        android:layout_marginLeft="28dp"
-        android:layout_marginRight="28dp"
-        android:layout_marginTop="7dp"
-        android:orientation="horizontal">
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <Button
-                android:id="@+id/but_weixin"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/select_wx_login"
-                android:clickable="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/but_weixin"
-                android:layout_alignRight="@id/but_weixin"
-                android:layout_below="@id/but_weixin"
-                android:layout_marginTop="3dp"
-                android:gravity="center"
-                android:text="微信" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <Button
-                android:id="@+id/but_qq"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/select_qq_login" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/but_qq"
-                android:layout_alignRight="@id/but_qq"
-                android:layout_below="@id/but_qq"
-                android:layout_marginTop="3dp"
-                android:gravity="center"
-                android:text="QQ" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <Button
-                android:id="@+id/but_sina"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/select_sina_login" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/but_sina"
-                android:layout_alignRight="@id/but_sina"
-                android:layout_below="@id/but_sina"
-                android:layout_marginTop="3dp"
-                android:gravity="center"
-                android:text="微博" />
-        </RelativeLayout>
-
-    </LinearLayout>
-
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:drawableLeft="@drawable/fb"
+        android:drawablePadding="7dp"
+        android:gravity="center"
+        android:text="使用社交账号登陆"
+        android:textColor="@color/light"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 </RelativeLayout>

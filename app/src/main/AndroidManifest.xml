@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
     <application
         android:name=".app.EnglishApplication"
@@ -32,6 +34,28 @@
         <activity android:name=".ui.module.study.WriteActivity" />
         <activity android:name=".ui.module.own.MineInfoActivity" />
         <activity android:name=".ui.module.own.EditNameActivity" />
-    </application>
 
+        <!-- WeChat -->
+        <activity
+            android:name=".ui.module.home.home.wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <!-- QQ -->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1105240361" />
+            </intent-filter>
+        </activity>
+    </application>
 </manifest>

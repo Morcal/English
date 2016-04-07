@@ -42,6 +42,7 @@
         android:background="@drawable/but_login"
         android:gravity="center"
         android:text="注册"
+        android:textColor="#30cccccc"
         android:textSize="15sp"
         android:textStyle="bold" />
 </RelativeLayout>
