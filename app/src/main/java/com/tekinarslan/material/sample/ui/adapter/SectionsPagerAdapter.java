@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.github.saiff35.livingtabs.LivingTabsLayout;
 import com.tekinarslan.material.sample.R;
+import com.tekinarslan.material.sample.ui.module.message.ConversationFragment;
 import com.tekinarslan.material.sample.ui.module.message.PlaceholderFragment;
 
 import java.util.Locale;
@@ -24,7 +25,17 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter implements Living
 
     @Override
     public Fragment getItem(int position) {
-        return PlaceholderFragment.newInstance(position + 1);
+        switch (position) {
+            case 0:
+                return new ConversationFragment();
+            case 1:
+                return PlaceholderFragment.newInstance(position + 1);
+            case 2:
+                return PlaceholderFragment.newInstance(position + 1);
+
+            default:
+                return null;
+        }
     }
 
     @Override

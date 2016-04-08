@@ -65,4 +65,17 @@
 
     <color name="c8_shallow_white">#F1F1F1</color>
     <color name="c5_dark_grey">#515151</color>
+
+    <color name="base_color_text_black">#3e3e39</color>
+    <color name="base_color_text_gray">#9fa0a0</color>
+    <color name="base_color_text_white">#ffffff</color>
+    <color name="color_theme">#489cfa</color>
+
+    <color name="color_emote_divder">#ffa1a1a1</color>
+    <color name="color_bottom_bg">#272a2e</color>
+    <color name="color_bottom_text_normal">#9da0a4</color>
+    <color name="color_bottom_text_press">#4f9ef6</color>
+    <color name="color_99">#999999</color>
+    <color name="color_1e1e1e">#1e1e1e</color>
+    <color name="color_line">#dadada</color>
 </resources>

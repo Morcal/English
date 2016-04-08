@@ -19,11 +19,17 @@ import com.elbbbird.android.socialsdk.otto.SSOBusEvent;
 import com.squareup.otto.Subscribe;
 import com.tekinarslan.material.sample.R;
 import com.tekinarslan.material.sample.bean.User;
+import com.tekinarslan.material.sample.ui.module.main.MainActivity;
+import com.tekinarslan.material.sample.ui.module.message.message.event.FinishEvent;
 import com.tekinarslan.material.sample.utills.ViewUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.bmob.newim.BmobIM;
+import cn.bmob.newim.bean.BmobIMUserInfo;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.LogInListener;
 import cn.bmob.v3.listener.SaveListener;
 
 /**
@@ -62,32 +68,57 @@ public class LoginFragment extends Fragment {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userName = editName.getText().toString().trim();
-                String password = editPwd.getText().toString().trim();
-                if (!userName.isEmpty() && !password.isEmpty()) {
-                    user = new User();
-                    user.setUsername(userName);
-                    user.setPassword(password);
-                    user.login(getActivity(), new SaveListener() {
-                        @Override
-                        public void onSuccess() {
-                            ViewUtils.showToastShort(getActivity(), "登录成功");
-                            if (getActivity() != null) {
-                                getActivity().finish();
-                            }
-                        }
+                onLoginClick();
+//                String userName = editName.getText().toString().trim();
+//                String password = editPwd.getText().toString().trim();
+//                if (!userName.isEmpty() && !password.isEmpty()) {
+//                    user = new User();
+//                    user.setUsername(userName);
+//                    user.setPassword(password);
+//                    user.login(getActivity(), new SaveListener() {
+//                        @Override
+//                        public void onSuccess() {
+//                            ViewUtils.showToastShort(getActivity(), "登录成功");
+//                            if (getActivity() != null) {
+//                                getActivity().finish();
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onFailure(int i, String s) {
+//                            ViewUtils.showToastShort(getActivity(), "登录失败" + s);
+//                            if (getActivity() != null) {
+//                                getActivity().finish();
+//                            }
+//                        }
+//                    });
+//                }
+            }
+        });
+    }
 
-                        @Override
-                        public void onFailure(int i, String s) {
-                            ViewUtils.showToastShort(getActivity(), "登录失败" + s);
-                            if (getActivity() != null) {
-                                getActivity().finish();
-                            }
-                        }
-                    });
+    public void onLoginClick() {
+        UserModel.getInstance().login(editName.getText().toString(), editPwd.getText().toString(), new LogInListener() {
+
+            @Override
+            public void done(Object o, BmobException e) {
+                if (e == null) {
+                    User user = (User) o;
+                    //更新当前用户资料
+                    BmobIM.getInstance().updateUserInfo(new BmobIMUserInfo(user.getObjectId(), user.getUsername(), user.getAvatar()));
+                    if (getActivity() != null) {
+                        getActivity().finish();
+                    }
+                } else {
+                    ViewUtils.showToastShort(getActivity(), e.getMessage() + "(" + e.getErrorCode() + ")");
                 }
             }
         });
+    }
+
+    @org.greenrobot.eventbus.Subscribe
+    public void onEventMainThread(FinishEvent event) {
+        getActivity().finish();
     }
 
     @OnClick(R.id.tv_oauth)
