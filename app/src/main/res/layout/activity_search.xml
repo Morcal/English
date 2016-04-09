@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light"
     android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
@@ -20,24 +19,33 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
-                android:text="详情"
+                android:text="搜索"
                 android:textColor="@color/light"
                 android:textSize="18sp" />
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
-    <ProgressBar
-        android:id="@+id/index_progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="5dp"
-        android:progress="0"
-        android:secondaryProgress="0"
-        android:visibility="visible" />
-
-    <WebView
-        android:id="@+id/wv_detial"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></WebView>
+        android:layout_height="wrap_content"
+        android:background="@color/c8_shallow_white"
+        android:padding="6dp"
+        android:visibility="visible">
+
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_search"
+            android:drawableLeft="@drawable/icon_search"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
+            android:hint="输入你想找的用户的名称"
+            android:paddingLeft="10dp"
+            android:textColor="#929292"
+            android:textSize="14sp" />
+    </LinearLayout>
+    <!--模糊搜索好友列表-->
+
 </LinearLayout>

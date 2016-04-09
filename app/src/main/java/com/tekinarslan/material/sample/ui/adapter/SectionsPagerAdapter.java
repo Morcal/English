@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.github.saiff35.livingtabs.LivingTabsLayout;
 import com.tekinarslan.material.sample.R;
 import com.tekinarslan.material.sample.ui.module.message.ConversationFragment;
+import com.tekinarslan.material.sample.ui.module.message.LinkmanFragment;
 import com.tekinarslan.material.sample.ui.module.message.PlaceholderFragment;
 
 import java.util.Locale;
@@ -27,10 +28,13 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter implements Living
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
+                // 消息页
                 return new ConversationFragment();
             case 1:
-                return PlaceholderFragment.newInstance(position + 1);
+                // 联系人列表
+                return new LinkmanFragment();
             case 2:
+                // 打卡/签到
                 return PlaceholderFragment.newInstance(position + 1);
 
             default:

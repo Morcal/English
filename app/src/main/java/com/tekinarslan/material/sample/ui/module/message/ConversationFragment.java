@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
+import com.orhanobut.logger.Logger;
 import com.tekinarslan.material.sample.R;
 import com.tekinarslan.material.sample.ui.module.message.message.im.im.adapter.ConversationAdapter;
 import com.tekinarslan.material.sample.ui.module.message.message.im.im.adapter.OnRecyclerViewListener;
@@ -50,6 +51,7 @@ public class ConversationFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        Logger.i("会话列表页onStart");
         EventBus.getDefault().register(this);
         initView();
     }
