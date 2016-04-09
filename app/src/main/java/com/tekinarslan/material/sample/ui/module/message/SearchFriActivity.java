@@ -27,6 +27,7 @@ import com.tekinarslan.material.sample.ui.module.message.message.event.ChatEvent
 import com.tekinarslan.material.sample.ui.module.message.message.im.im.adapter.SearchUserAdapter;
 import com.tekinarslan.material.sample.utills.ViewUtils;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
@@ -63,6 +64,19 @@ public class SearchFriActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initView();
         initEvent();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+
+    }
+
+    @Override
+    protected void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 
     private void initView() {

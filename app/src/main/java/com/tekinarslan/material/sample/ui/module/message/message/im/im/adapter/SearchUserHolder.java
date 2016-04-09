@@ -1,12 +1,14 @@
 package com.tekinarslan.material.sample.ui.module.message.message.im.im.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.tekinarslan.material.sample.R;
 import com.tekinarslan.material.sample.bean.User;
 import com.tekinarslan.material.sample.ui.module.message.message.event.ChatEvent;
@@ -38,6 +40,7 @@ public class SearchUserHolder extends BaseViewHolder {
         btn_chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Logger.i("找她");
                 BmobIMUserInfo info = new BmobIMUserInfo(user.getObjectId(), user.getUsername(), user.getAvatar());
                 EventBus.getDefault().post(new ChatEvent(info));
             }

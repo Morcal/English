@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/c8_shallow_white"
+    android:padding="6dp">
+
+    <EditText
+        android:id="@+id/et_search"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_weight="1.0"
+        android:background="@drawable/bg_search"
+        android:gravity="center_vertical"
+        android:hint="消息"
+        android:maxLines="1"
+        android:paddingLeft="10dp"
+        android:singleLine="true"
+        android:textColor="#000000"
+        android:textColorHint="#929292"
+        android:textSize="14sp"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tv_showspeak"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_weight="1.0"
+        android:background="@drawable/bg_search"
+        android:gravity="center"
+        android:text="按住说话"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/btn_chat_voice"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="6dp"
+        android:background="@drawable/btn_chat_voice_selector"
+        android:gravity="center"
+        android:textColor="@color/base_color_text_black" />
+
+    <TextView
+        android:id="@+id/btn_chat_keyboard"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="6dp"
+        android:background="@drawable/btn_chat_keyboard_selector"
+        android:gravity="center"
+        android:textColor="@color/base_color_text_black"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/btn_chat_send"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="6dp"
+        android:background="@drawable/btn_chat_send_selector"
+        android:gravity="center"
+        android:textColor="@color/base_color_text_black"
+        android:visibility="gone" />
+</LinearLayout>
