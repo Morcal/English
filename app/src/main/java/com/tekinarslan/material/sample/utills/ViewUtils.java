@@ -37,6 +37,7 @@ public class ViewUtils {
         Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
     }
 
+
     /**设置头像（String类型）
      * @param avatar
      * @param defaultRes

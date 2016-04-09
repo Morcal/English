@@ -42,10 +42,23 @@
             android:drawablePadding="6dp"
             android:gravity="center_vertical"
             android:hint="输入你想找的用户的名称"
+            android:maxLines="1"
             android:paddingLeft="10dp"
+            android:singleLine="true"
             android:textColor="#929292"
             android:textSize="14sp" />
     </LinearLayout>
     <!--模糊搜索好友列表-->
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/sw_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_10">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rc_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>
