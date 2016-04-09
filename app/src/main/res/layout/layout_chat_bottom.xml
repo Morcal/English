@@ -6,7 +6,7 @@
     android:padding="6dp">
 
     <EditText
-        android:id="@+id/et_search"
+        android:id="@+id/et_message"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_weight="1.0"

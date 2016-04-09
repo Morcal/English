@@ -78,4 +78,8 @@
     <color name="color_99">#999999</color>
     <color name="color_1e1e1e">#1e1e1e</color>
     <color name="color_line">#dadada</color>
+
+    <color name="color_msg_system_time_bg">#20000000</color>
+    <color name="color_chat_send_status">#818181</color>
+
 </resources>

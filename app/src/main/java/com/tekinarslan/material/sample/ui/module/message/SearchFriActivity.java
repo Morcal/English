@@ -156,6 +156,7 @@ public class SearchFriActivity extends AppCompatActivity {
             @Override
             public void done(BmobIMConversation c, BmobException e) {
                 if (e == null) {
+                    Logger.i("SearchFriActivity->onEventMainThread"+c);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("c", c);
                     Intent intent = new Intent(SearchFriActivity.this, ChatActivity.class);
