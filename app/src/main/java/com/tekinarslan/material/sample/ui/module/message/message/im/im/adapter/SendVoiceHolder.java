@@ -58,7 +58,7 @@ public class SendVoiceHolder extends BaseViewHolder {
     //用户信息的获取必须在buildFromDB之前，否则会报错'Entity is detached from DAO context'
     final BmobIMUserInfo info = msg.getBmobIMUserInfo();
     ViewUtils.setAvatar(info != null ? info.getAvatar() : null, R.drawable.head, iv_avatar);
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
+      SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     String time = dateFormat.format(msg.getCreateTime());
     tv_time.setText(time);
     //使用buildFromDB方法转化成指定类型的消息

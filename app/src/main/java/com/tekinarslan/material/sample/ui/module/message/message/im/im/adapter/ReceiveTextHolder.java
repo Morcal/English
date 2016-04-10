@@ -42,7 +42,7 @@ public class ReceiveTextHolder extends BaseViewHolder {
     @Override
     public void bindData(Object o) {
         final BmobIMMessage message = (BmobIMMessage) o;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String time = dateFormat.format(message.getCreateTime());
         tv_time.setText(time);
         final BmobIMUserInfo info = message.getBmobIMUserInfo();
