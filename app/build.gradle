@@ -49,6 +49,7 @@ dependencies {
     compile 'com.timqi.sectorprogressview:library:2.0.0'
     compile 'com.appeaser.sublimepickerlibrary:sublimepickerlibrary:2.0.0'
     compile 'com.elbbbird.android:socialsdk:0.2.0@aar'
+    compile 'com.nightonke:boommenu:1.0.7'
     compile 'com.orhanobut:logger:1.4'
     compile('com.github.saiff35:livingtabs:0.1.0') {
         exclude module: 'design'

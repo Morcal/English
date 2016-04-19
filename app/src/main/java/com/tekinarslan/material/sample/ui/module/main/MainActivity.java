@@ -28,7 +28,7 @@ import com.tekinarslan.material.sample.weight.CircleImageView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int NUM_ITEMS = 3;
     @Bind(R.id.drawer)
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 drawerLayout.closeDrawers();
                 Log.i(TAG, "登录/注册");
-                new Handler().postDelayed(new Runnable(){
+                new Handler().postDelayed(new Runnable() {
                     public void run() {
                         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                         startActivity(intent);
@@ -196,4 +196,5 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
+
 }

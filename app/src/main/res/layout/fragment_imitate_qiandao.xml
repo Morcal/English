@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_third">
+
+    <!-- 收款成功页面 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_success"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dip"
+        android:background="@drawable/bg_second"
+        android:gravity="center_horizontal"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/iv_success"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/icon_serach_success"
+            android:text="搜索中" />
+
+        <TextView
+            android:id="@+id/but_qiandao"
+            android:layout_width="200dip"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_success"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dip"
+            android:background="@drawable/bg_third_hint"
+            android:gravity="center"
+            android:paddingBottom="5dip"
+            android:paddingLeft="20dip"
+            android:paddingRight="20dip"
+            android:paddingTop="5dip"
+            android:text="签到成功"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/but_qiandao"
+            android:layout_marginTop="12dip"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/bg_info_export_background" />
+
+            <ImageView
+                android:id="@+id/iv_export"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/bg_info_export" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="7dip"
+                android:gravity="top"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/rl_payInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="-260dip"
+                    android:background="@drawable/bg_paysuccess_bill"
+                    android:gravity="top"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/ll_order_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dip"
+                        android:layout_marginTop="10dip"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_order_num"
+                            style="@style/ThirdHint1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dip"
+                            android:text="学 号:" />
+
+                        <TextView
+                            android:id="@+id/tv_order_num2"
+                            style="@style/ThirdHint1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dip"
+                            android:layout_marginTop="10dip"
+                            android:text="201221121030" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_total_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/ll_order_num"
+                        android:layout_marginLeft="30dip"
+                        android:layout_marginTop="7dip"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/ThirdHint1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="姓 名：" />
+
+                        <TextView
+                            android:id="@+id/tv_name"
+                            style="@style/ThirdHint1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dip"
+                            android:text="齐德鸿"
+                            android:textColor="#6ddab7" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_payment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/ll_total_money"
+                        android:layout_marginLeft="30dip"
+                        android:layout_marginTop="5dip"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/ThirdHint1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="地 点：" />
+
+                        <TextView
+                            android:id="@+id/tv_location"
+                            style="@style/ThirdHint1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dip"
+                            android:text="集美大学禹州208" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_payment_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/ll_payment"
+                        android:layout_marginLeft="30dip"
+                        android:layout_marginTop="5dip"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/ThirdHint1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="连续签到：" />
+
+
+                        <TextView
+                            android:id="@+id/tv_qiandao"
+                            style="@style/ThirdHint1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dip"
+                            android:text="89次" />
+                    </LinearLayout>
+
+                    <TextView
+                        style="@style/ThirdHint1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/ll_payment_date"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="115dip"
+                        android:textSize="17sp" />
+                </RelativeLayout>
+            </RelativeLayout>
+        </FrameLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
