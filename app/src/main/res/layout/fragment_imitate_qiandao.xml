@@ -36,7 +36,7 @@
             android:paddingLeft="20dip"
             android:paddingRight="20dip"
             android:paddingTop="5dip"
-            android:text="签到成功"
+            android:text="签到"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
 
@@ -170,7 +170,7 @@
 
 
                         <TextView
-                            android:id="@+id/tv_qiandao"
+                            android:id="@+id/tv_qdnum"
                             style="@style/ThirdHint1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

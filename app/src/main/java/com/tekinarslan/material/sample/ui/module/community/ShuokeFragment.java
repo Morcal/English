@@ -1,5 +1,6 @@
 package com.tekinarslan.material.sample.ui.module.community;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
+import com.orhanobut.logger.Logger;
 import com.tekinarslan.material.sample.R;
 import com.tekinarslan.material.sample.app.Contast;
 import com.tekinarslan.material.sample.app.Dao;
@@ -108,6 +110,16 @@ public class ShuokeFragment extends Fragment {
                         refreshLayout.setRefreshing(false);
                     }
                 });
+            }
+        });
+
+        shuoKeAdapter.setOnItemClickListener(new ShuoKeAdapter.OnRecycleViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, Bundle data) {
+                Logger.i("ID：" + data);
+                Intent intent = new Intent(getActivity(), ShuokeDetialActivity.class);
+                intent.putExtras(data);
+                startActivity(intent);
             }
         });
     }

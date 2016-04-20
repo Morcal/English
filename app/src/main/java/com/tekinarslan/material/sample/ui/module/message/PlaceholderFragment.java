@@ -17,18 +17,23 @@ import com.tekinarslan.material.sample.R;
 
 /**
  * Created by lyqdhgo on 2016/4/8.
+ * 签到页
  */
 public class PlaceholderFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
     private RelativeLayout payInfo;
     private TextView butQiDao;
+    private TextView qdnum;
     private Animation anim;
-
+    private boolean isQianDao = false;
     private Handler handler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case 1:
-                    startAnimation();
+                    if (isQianDao) {
+                        startAnimation();
+                        butQiDao.setText("签到成功");
+                    }
                     break;
                 default:
                     break;
@@ -59,6 +64,7 @@ public class PlaceholderFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         int sectionNumber = getArguments().getInt(ARG_SECTION_NUMBER);
         payInfo = (RelativeLayout) view.findViewById(R.id.rl_payInfo);
+        qdnum = (TextView) view.findViewById(R.id.tv_qdnum);
         butQiDao = (TextView) view.findViewById(R.id.but_qiandao);
         Logger.i("sectionNumber->" + sectionNumber);
 
@@ -74,6 +80,7 @@ public class PlaceholderFragment extends Fragment {
         butQiDao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isQianDao = true;
                 newThread();
             }
         });

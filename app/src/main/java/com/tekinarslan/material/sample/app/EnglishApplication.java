@@ -2,6 +2,7 @@ package com.tekinarslan.material.sample.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
 import com.facebook.cache.disk.DiskCacheConfig;
@@ -87,5 +88,9 @@ public class EnglishApplication extends Application {
 //        config.writeDebugLogs(); // Remove for release app
         // Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(config.build());
+    }
+
+    public static void share(){
+
     }
 }
