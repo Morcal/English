@@ -1,19 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dip"
-    android:paddingLeft="10dip"
-    >
+    android:layout_height="70dip"
+    android:paddingLeft="10dip">
+
     <View
-        android:layout_width="60dip"
-        android:layout_height="60dip"
-        android:background="#999999"
-        android:layout_gravity="center"
-        />
+        android:id="@+id/view_shkd_play"
+        android:layout_width="45dip"
+        android:layout_height="45dip"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/btn_play_shkd" />
+
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/text_item_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@id/view_shkd_play"
+        android:layout_gravity="center"
         android:layout_marginLeft="10dip"
-        android:layout_gravity="center"/>
-</LinearLayout>
+        android:layout_toRightOf="@id/view_shkd_play"
+        android:gravity="top"
+        android:text="Text Item Title"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/view_shkd_play"
+        android:layout_alignLeft="@id/text_item_title"
+        android:layout_below="@id/text_item_title"
+        android:layout_toRightOf="@id/view_shkd_play"
+        android:gravity="bottom"
+        android:text="00:58 88播放"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentBottom="true"
+        android:background="#c9c9c9" />
+</RelativeLayout>

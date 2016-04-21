@@ -46,7 +46,7 @@ public class ShuoKeDetialAdapter extends RecyclerView.Adapter<ShuoKeDetialAdapte
 
         public ViewHolder(View view) {
             super(view);
-            mTextView = (TextView) view.findViewById(R.id.text);
+            mTextView = (TextView) view.findViewById(R.id.text_item_title);
         }
     }
 }
