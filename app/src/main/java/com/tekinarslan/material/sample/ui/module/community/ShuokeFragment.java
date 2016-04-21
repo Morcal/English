@@ -117,8 +117,23 @@ public class ShuokeFragment extends Fragment {
             @Override
             public void onItemClick(View view, Bundle data) {
                 Logger.i("ID：" + data);
+                String id = data.getString("ID");
+                String avatar = data.getString("AVATAR");
+                String name = data.getString("NAME");
+                String background = data.getString("BACKGROUND");
+                String subscribecount = data.getString("SUBSCRIBESCOUNT");
+                String title = data.getString("TITLE");
+                String body = data.getString("BODY");
+                Bundle bundle = new Bundle();
+                bundle.putString("ID", id);
+                bundle.putString("AVATAR", avatar);
+                bundle.putString("NAME", name);
+                bundle.putString("BACKGROUND", background);
+                bundle.putString("TITLE", title);
+                bundle.putString("BODY", body);
+                bundle.putString("SUBSCRIBESCOUNT", subscribecount);
                 Intent intent = new Intent(getActivity(), ShuokeDetialActivity.class);
-                intent.putExtras(data);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

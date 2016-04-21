@@ -51,6 +51,7 @@
         <activity android:name=".ui.module.message.ChatActivity" />
         <activity android:name=".ui.module.message.SearchFriActivity" />
         <activity android:name=".ui.module.community.ShuokeDetialActivity" />
+        <activity android:name=".ui.module.community.ShKAudioActivity"/>
 
         <!-- WeChat -->
         <activity
@@ -74,6 +75,7 @@
                 <data android:scheme="tencent1105240361" />
             </intent-filter>
         </activity>
+
 
         <!-- bmobim start -->
         <receiver android:name="cn.bmob.newim.core.ConnectChangeReceiver">

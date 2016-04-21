@@ -56,6 +56,7 @@ public class ShuokeDetialActivity extends AppCompatActivity {
     private int pageCount = 1;
     private String background;
     private String id;
+    private String avatar;
     private String title;
     private String body;
     private String name;
@@ -73,10 +74,12 @@ public class ShuokeDetialActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        Bundle bundle = new Bundle();
-        bundle = getIntent().getExtras();
+        mAdapter = new ShuoKeDetialAdapter(this);
+        Bundle bundle = getIntent().getExtras();
         Logger.i("bundle:" + bundle);
         id = bundle.getString("ID");
+        name = bundle.getString("NAME");
+        avatar = bundle.getString("AVATAR");
         title = bundle.getString("TITLE");
         background = bundle.getString("BACKGROUND");
         body = bundle.getString("BODY");
@@ -85,7 +88,7 @@ public class ShuokeDetialActivity extends AppCompatActivity {
         String avatar = bundle.getString("AVATAR");
         String episodesCount = bundle.getString("EPISODESCOUNT");
         subscribesCount = bundle.getString("SUBSCRIBESCOUNT");
-        Logger.i("id:" + id + " title:" + title + " subscribesCount:" + subscribesCount);
+        Logger.i("ShuokeDetialActivity->" + "id:" + id + " title:" + title + " subscribesCount:" + subscribesCount + " background:" + background + " body:" + body);
         String url = Contast.SHUOKE + id + Contast.SHKPARAMS + "&page=" + pageCount;
         Logger.i("说客详情页请求地址->" + url);
         initListData(url);
@@ -111,7 +114,8 @@ public class ShuokeDetialActivity extends AppCompatActivity {
                 Log.i(TAG, "result: " + result);
                 ShKeDetial shKeDetial = new Gson().fromJson(result, ShKeDetial.class);
                 episodes = shKeDetial.getEpisodes();
-                mAdapter = new ShuoKeDetialAdapter((ArrayList<ShKeDetial.EpisodesEntity>) episodes);
+
+                mAdapter.setDatas((ArrayList<ShKeDetial.EpisodesEntity>) episodes);
                 int size = episodes.size();
                 Logger.i("episodes zize: " + size);
 
@@ -217,11 +221,11 @@ public class ShuokeDetialActivity extends AppCompatActivity {
                                     ShKeDetial shKeDetial = new Gson().fromJson(result, ShKeDetial.class);
                                     List<ShKeDetial.EpisodesEntity> addepisodes = shKeDetial.getEpisodes();
                                     episodes.addAll(addepisodes);
-                                    mAdapter = new ShuoKeDetialAdapter((ArrayList<ShKeDetial.EpisodesEntity>) episodes);
+                                    mAdapter.setDatas((ArrayList<ShKeDetial.EpisodesEntity>) episodes);
                                     int size = episodes.size();
                                     Logger.i("episodes zize: " + size);
 
-                                    xRecyclerView.setAdapter(mAdapter);
+//                                    xRecyclerView.setAdapter(mAdapter);
 //                                    xRecyclerView.setRefreshing(true);
                                 }
                             });
@@ -240,6 +244,26 @@ public class ShuokeDetialActivity extends AppCompatActivity {
                     }, 1000);
                 }
                 times++;
+            }
+        });
+
+        mAdapter.setOnItemClickListener(new ShuoKeDetialAdapter.OnRecycleViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, Bundle data) {
+                Logger.i("说客详情页list点击->" + data);
+                String title = data.getString("TITLE");
+                String avatar = data.getString("AVATAR");
+                String audio = data.getString("AUDIOURL");
+                String desc = data.getString("DESC");
+                Intent intent = new Intent(ShuokeDetialActivity.this, ShKAudioActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("TITLE", title);
+                bundle.putString("DESC", desc);
+                bundle.putString("AUDIOURL", audio);
+                bundle.putString("AVATAR", avatar);
+                bundle.putString("NAME", name);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
     }
