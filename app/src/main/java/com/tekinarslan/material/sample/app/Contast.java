@@ -11,6 +11,12 @@ public class Contast {
     public static String COMMONPARAM = "?appId=lls&deviceId=868201026091087&sDeviceId=868201026091087&appVer=4&token=809685e0c40d013333bf0273409c204a";
     // 流利说说客
     public static String HOSTURL = "http://apineo.llsapp.com/api/v1/podcasts?appId=lls&deviceId=868201026091087&sDeviceId=868201026091087&appVer=4&token=809685e0c40d013333bf0273409c204a";
+    // 说客详情页头
+    public static String SHUOKE = "http://apineo.llsapp.com/api/v1/podcasts/";
+    // 说客详情页公参
+    public static String SHKPARAMS = "/episodes?appId=lls&deviceId=868201026091087&sDeviceId=868201026091087&appVer=4&token=809685e0c40d013333bf0273409c204a";
+
+    public static String SHKDETIALID = "YmM0MWYwMDAwMDAwMDAxMg%3D%3D";
     // 流利说听力
     public static String LISTENURL = "http://apineo.llsapp.com/api/v1/topics/essential?appId=lls&deviceId=868201026091087&sDeviceId=868201026091087&appVer=4&token=809685e0c40d013333bf0273409c204a";
     // 听力详情页

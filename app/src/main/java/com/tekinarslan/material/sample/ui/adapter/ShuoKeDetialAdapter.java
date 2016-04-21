@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.tekinarslan.material.sample.R;
+import com.tekinarslan.material.sample.bean.ShKeDetial;
 
 import java.util.ArrayList;
 
@@ -14,9 +15,9 @@ import java.util.ArrayList;
  * Created by lyqdhgo on 2016/4/20.
  */
 public class ShuoKeDetialAdapter extends RecyclerView.Adapter<ShuoKeDetialAdapter.ViewHolder> {
-    public ArrayList<String> datas = null;
+    public ArrayList<ShKeDetial.EpisodesEntity> datas = null;
 
-    public ShuoKeDetialAdapter(ArrayList<String> datas) {
+    public ShuoKeDetialAdapter(ArrayList<ShKeDetial.EpisodesEntity> datas) {
         this.datas = datas;
     }
 
@@ -31,7 +32,8 @@ public class ShuoKeDetialAdapter extends RecyclerView.Adapter<ShuoKeDetialAdapte
     //将数据与界面进行绑定的操作
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        viewHolder.mTextView.setText(datas.get(position));
+        ShKeDetial.EpisodesEntity entity = datas.get(position);
+        viewHolder.mTextView.setText(entity.getTitle());
     }
 
     //获取数据的数量

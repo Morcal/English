@@ -21,7 +21,9 @@
         android:layout_gravity="center"
         android:layout_marginLeft="10dip"
         android:layout_toRightOf="@id/view_shkd_play"
+        android:ellipsize="end"
         android:gravity="top"
+        android:singleLine="true"
         android:text="Text Item Title"
         android:textSize="16sp" />
 
@@ -37,10 +39,10 @@
         android:textSize="14sp" />
 
     <View
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:background="#c9c9c9" />
 </RelativeLayout>
