@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.tekinarslan.material.sample.R;
 import com.tekinarslan.material.sample.bean.Write;
 import com.tekinarslan.material.sample.utills.UIUtil;
@@ -28,6 +29,7 @@ import butterknife.ButterKnife;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * Created by lyqdhgo on 2016/4/5.
@@ -36,20 +38,20 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
     private static final String TAG = WriteActivity.class.getSimpleName();
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.but_find_write)
-    Button find;
     @Bind(R.id.but_save_write)
     Button save;
     @Bind(R.id.tv_writedir)
     TextView writeDire;
     @Bind(R.id.tv_writeque)
     TextView writeQues;
+    @Bind(R.id.tv_submit)
+    TextView submit;
     @Bind(R.id.et_write)
     EditText write;
     @Bind(R.id.iv_image)
     ImageView image;
 
-    String title;
+    String id;
     String direction;
     String question;
     String imageUrl;
@@ -59,54 +61,35 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
         ButterKnife.bind(this);
+        initData();
         initView();
-//        initData();
         initEvent();
+    }
+
+    private void initData() {
+        Bundle bundle = getIntent().getExtras();
+        id = bundle.getString("ID");
+        direction = bundle.getString("DIRECTION");
+        question = bundle.getString("QUESTION");
+        imageUrl = bundle.getString("IMAGEURL");
+        Logger.i("id:" + id + " dir:" + direction + " que:" + question + " img:" + imageUrl);
     }
 
     private void initView() {
         toolbar.setNavigationIcon(R.drawable.back);
-        find.setOnClickListener(this);
         save.setOnClickListener(this);
-    }
-
-    private void findData() {
-        final BmobQuery<Write> query = new BmobQuery<Write>();
-        query.findObjects(this, new FindListener<Write>() {
-            @Override
-            public void onSuccess(List<Write> list) {
-                ViewUtils.hideDialog();
-                ViewUtils.showToastShort(WriteActivity.this, "查询成功");
-                Log.i(TAG, "write size-> " + list.size());
-//                for (int i = 0; i < list.size(); i++) {
-                Write write = list.get(1);
-                if (write != null) {
-                    title = write.getTitle();
-                    Write.WriteEntity writeEntity = write.getWrite();
-                    if (writeEntity != null) {
-                        question = writeEntity.getWriteQuestion();
-                        direction = writeEntity.getWriteDirection();
-                        imageUrl = writeEntity.getWriteImageUrl();
-                        if (imageUrl != null) {
-                            image.setVisibility(View.VISIBLE);
-                            UIUtil.setAvatar(imageUrl, image, 360, 155);
-                        }
-                        writeDire.setTypeface(Typeface.createFromAsset(WriteActivity.this.getAssets(), "fonts/FZSongKeBenXiuKaiS-R-GB.TTF"));
-                        writeDire.setTypeface(Typeface.createFromAsset(WriteActivity.this.getAssets(), "fonts/inconsolata.otf"));
-                        writeDire.setText(direction);
-                        writeQues.setText(question);
-                    }
-                }
-                Log.i(TAG, "title->" + title + " question->" + question);
-            }
-//            }
-
-            @Override
-            public void onError(int i, String s) {
-                ViewUtils.hideDialog();
-                ViewUtils.showToastShort(WriteActivity.this, "查询失败");
-            }
-        });
+        if (!direction.isEmpty()) {
+            writeDire.setText(direction);
+            writeDire.setVisibility(View.VISIBLE);
+        }
+        if (!question.isEmpty()) {
+            writeQues.setText(question);
+            writeQues.setVisibility(View.VISIBLE);
+        }
+        if (!imageUrl.isEmpty()) {
+            image.setVisibility(View.VISIBLE);
+            UIUtil.setAvatar(imageUrl, image, 360, 155);
+        }
     }
 
     private void saveData() {
@@ -144,6 +127,15 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
         });
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewUtils.showDialog(WriteActivity.this, "Saving");
+//                submiToBmob();
+                getObjectId();
+            }
+        });
     }
 
     @Override
@@ -153,12 +145,50 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
                 Log.i(TAG, "save");
                 saveData();
                 break;
-            case R.id.but_find_write:
-                Log.i(TAG, "find");
-                ViewUtils.showDialog(this, "加载中...");
-                findData();
+            default:
                 break;
         }
     }
 
+    private void submiToBmob(String objectId) {
+        String userAnswer = write.getText().toString().trim();
+        Write write = new Write();
+        Write.WriteEntity entity = new Write.WriteEntity();
+        entity.setUserAnswer(userAnswer);
+        write.setWrite(entity);
+//        String objectId = getObjectId();
+        write.update(this, objectId, new UpdateListener() {
+            @Override
+            public void onSuccess() {
+                ViewUtils.hideDialog();
+                ViewUtils.showToastShort(WriteActivity.this, "提交成功");
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                ViewUtils.hideDialog();
+                ViewUtils.showToastShort(WriteActivity.this, "提交失败" + s);
+            }
+        });
+    }
+
+    public void getObjectId() {
+        BmobQuery<Write> query = new BmobQuery<Write>();
+        final String[] objectId = new String[1];
+        query.addWhereEqualTo("id", id);
+        query.findObjects(this, new FindListener<Write>() {
+            @Override
+            public void onSuccess(List<Write> list) {
+                Write write = list.get(0);
+                objectId[0] = write.getObjectId();
+                Logger.i("ObjectID-->" + objectId[0]);
+                submiToBmob(objectId[0]);
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                ViewUtils.showToastShort(WriteActivity.this, "查询objId失败" + s);
+            }
+        });
+    }
 }

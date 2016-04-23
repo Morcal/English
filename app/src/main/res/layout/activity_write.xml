@@ -23,6 +23,17 @@
                 android:text="写作"
                 android:textColor="@color/light"
                 android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="right"
+                android:layout_marginRight="15dp"
+                android:text="保存"
+                android:textColor="@color/light"
+                android:textSize="18sp" />
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
@@ -33,13 +44,6 @@
         android:layout_height="wrap_content"
         android:text="SaveButton"
         android:visibility="gone" />
-
-    <Button
-        android:id="@+id/but_find_write"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="FindButton"
-        android:visibility="visible" />
 
     <ScrollView
         android:layout_width="match_parent"

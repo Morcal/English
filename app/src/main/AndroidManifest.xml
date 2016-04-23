@@ -51,7 +51,8 @@
         <activity android:name=".ui.module.message.ChatActivity" />
         <activity android:name=".ui.module.message.SearchFriActivity" />
         <activity android:name=".ui.module.community.ShuokeDetialActivity" />
-        <activity android:name=".ui.module.community.ShKAudioActivity"/>
+        <activity android:name=".ui.module.community.ShKAudioActivity" />
+        <activity android:name=".ui.module.study.WriteListActivity" />
 
         <!-- WeChat -->
         <activity

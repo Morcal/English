@@ -145,7 +145,7 @@ public class SubjectActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.linear_write:
                 Log.i(TAG, "Write");
-                Intent write = new Intent(SubjectActivity.this, WriteActivity.class);
+                Intent write = new Intent(SubjectActivity.this, WriteListActivity.class);
                 startActivity(write);
                 break;
             case R.id.linear_listen:
