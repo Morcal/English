@@ -124,8 +124,10 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
             public void onClick(View v) {
                 if (this != null) {
                     // 返回上级是也提交数据
-                    ViewUtils.showDialog(WriteActivity.this, "Saving");
-                    getObjectId();
+                    if(!(write.getText().toString().isEmpty())){
+                        ViewUtils.showDialog(WriteActivity.this, "Saving");
+                        getObjectId();
+                    }
                     finish();
                 }
             }
