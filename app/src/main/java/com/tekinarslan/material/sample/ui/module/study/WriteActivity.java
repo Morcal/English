@@ -123,6 +123,9 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onClick(View v) {
                 if (this != null) {
+                    // 返回上级是也提交数据
+                    ViewUtils.showDialog(WriteActivity.this, "Saving");
+                    getObjectId();
                     finish();
                 }
             }
@@ -132,7 +135,6 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onClick(View v) {
                 ViewUtils.showDialog(WriteActivity.this, "Saving");
-//                submiToBmob();
                 getObjectId();
             }
         });
@@ -150,14 +152,16 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void submiToBmob(String objectId) {
+    private void submiToBmob(String objectId, Write writ, Write.WriteEntity entity) {
         String userAnswer = write.getText().toString().trim();
-        Write write = new Write();
-        Write.WriteEntity entity = new Write.WriteEntity();
+//        Write write = new Write();
+//        Write.WriteEntity entity = write.getWrite();
+//        Logger.i("submiToBmob:"+" Write->" + write + " entity->" + entity);
         entity.setUserAnswer(userAnswer);
-        write.setWrite(entity);
+        writ.setWrite(entity);
 //        String objectId = getObjectId();
-        write.update(this, objectId, new UpdateListener() {
+        Logger.i("submiToBmob-->" + " objectId:" + objectId + " userAnswer:" + userAnswer);
+        writ.update(this, objectId, new UpdateListener() {
             @Override
             public void onSuccess() {
                 ViewUtils.hideDialog();
@@ -179,14 +183,18 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
         query.findObjects(this, new FindListener<Write>() {
             @Override
             public void onSuccess(List<Write> list) {
+                ViewUtils.showToastShort(WriteActivity.this, "查询objId成功");
                 Write write = list.get(0);
                 objectId[0] = write.getObjectId();
-                Logger.i("ObjectID-->" + objectId[0]);
-                submiToBmob(objectId[0]);
+                Write.WriteEntity entity = write.getWrite();
+                Logger.i("getObjectId:" + " Write->" + write + " entity->" + entity);
+                Logger.i("FindId成功 " + "ObjectID-->" + objectId[0] + " ques-->" + entity.getWriteQuestion() + " dir-->" + entity.getWriteDirection());
+                submiToBmob(objectId[0], write, entity);
             }
 
             @Override
             public void onError(int i, String s) {
+                Logger.i("FindId失败");
                 ViewUtils.showToastShort(WriteActivity.this, "查询objId失败" + s);
             }
         });
