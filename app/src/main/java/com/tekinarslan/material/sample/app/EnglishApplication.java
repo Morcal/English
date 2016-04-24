@@ -1,10 +1,13 @@
 package com.tekinarslan.material.sample.app;
 
 import android.app.Application;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
@@ -13,6 +16,7 @@ import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.tekinarslan.material.sample.ui.module.message.LocationService;
 import com.tekinarslan.material.sample.ui.module.message.message.im.DemoMessageHandler;
 
 import cn.bmob.newim.BmobIM;
@@ -24,6 +28,10 @@ import cn.bmob.v3.Bmob;
 public class EnglishApplication extends Application {
 
     private static EnglishApplication INSTANCE;
+
+    // 百度地图相关
+    public LocationService locationService;
+    public Vibrator mVibrator;
 
     public static EnglishApplication INSTANCE() {
         return INSTANCE;
@@ -49,6 +57,10 @@ public class EnglishApplication extends Application {
         //UIL初始化
         initImageLoader(this);
         Fresco.initialize(this, createFrescoConfig());
+        // 初始化定位sdk，建议在Application中创建
+        locationService = new LocationService(getApplicationContext());
+        mVibrator = (Vibrator) getApplicationContext().getSystemService(Service.VIBRATOR_SERVICE);
+        SDKInitializer.initialize(getApplicationContext());
     }
 
     private ImagePipelineConfig createFrescoConfig() {
@@ -90,7 +102,7 @@ public class EnglishApplication extends Application {
         ImageLoader.getInstance().init(config.build());
     }
 
-    public static void share(){
+    public static void share() {
 
     }
 }

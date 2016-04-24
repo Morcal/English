@@ -4,8 +4,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_third">
 
-    <!-- 收款成功页面 -->
-
     <RelativeLayout
         android:id="@+id/rl_success"
         android:layout_width="match_parent"
@@ -150,6 +148,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dip"
+                            android:ellipsize="end"
+                            android:singleLine="true"
                             android:text="集美大学禹州208" />
                     </LinearLayout>
 
@@ -175,7 +175,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dip"
-                            android:text="89次" />
+                            android:text="89" />
+
+                        <TextView
+                            style="@style/ThirdHint1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="次" />
                     </LinearLayout>
 
                     <TextView
