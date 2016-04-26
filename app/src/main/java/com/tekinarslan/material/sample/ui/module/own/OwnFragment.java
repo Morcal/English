@@ -37,6 +37,8 @@ public class OwnFragment extends Fragment implements View.OnClickListener {
     TextView setting;
     @Bind(R.id.profile_more)
     ImageView profileMore;
+    @Bind(R.id.tv_collect)
+    TextView tvCollect;
 
     @Nullable
     @Override
@@ -55,6 +57,7 @@ public class OwnFragment extends Fragment implements View.OnClickListener {
     private void init() {
         setting.setOnClickListener(this);
         profileMore.setOnClickListener(this);
+        tvCollect.setOnClickListener(this);
     }
 
     @Override
@@ -68,6 +71,10 @@ public class OwnFragment extends Fragment implements View.OnClickListener {
                 Intent editInfo = new Intent(getActivity(), MineInfoActivity.class);
                 startActivity(editInfo);
 //                showDatePicker();
+                break;
+            case R.id.tv_collect:
+                Intent collect = new Intent(getActivity(), CollectActivity.class);
+                startActivity(collect);
                 break;
         }
     }

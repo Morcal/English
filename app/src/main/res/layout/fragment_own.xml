@@ -105,6 +105,7 @@
             android:background="#ffffff">
 
             <TextView
+                android:id="@+id/tv_collect"
                 style="@style/ItemProfileText"
                 android:drawableLeft="@drawable/icon_profile_followed_post"
                 android:text="收藏题目" />

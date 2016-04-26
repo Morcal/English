@@ -76,6 +76,7 @@
         <activity android:name=".ui.module.community.ShuokeDetialActivity" />
         <activity android:name=".ui.module.community.ShKAudioActivity" />
         <activity android:name=".ui.module.study.WriteListActivity" />
+        <activity android:name=".ui.module.own.CollectActivity" />
 
         <!-- WeChat -->
         <activity
