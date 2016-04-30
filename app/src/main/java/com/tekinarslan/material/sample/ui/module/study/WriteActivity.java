@@ -88,7 +88,7 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
         }
         if (!imageUrl.isEmpty()) {
             image.setVisibility(View.VISIBLE);
-            UIUtil.setAvatar(imageUrl, image, 360, 155);
+            UIUtil.setAvatar(imageUrl, image,1000,360);
         }
     }
 

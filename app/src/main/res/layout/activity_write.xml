@@ -64,6 +64,7 @@
 
             <TextView
                 android:id="@+id/tv_writeque"
+                android:visibility="invisible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="7dp"
@@ -72,6 +73,7 @@
 
             <ImageView
                 android:id="@+id/iv_image"
+                android:layout_gravity="center_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone" />
