@@ -192,6 +192,8 @@ public class StudyFragment extends Fragment implements AdapterView.OnItemClickLi
             case 4:
                 break;
             case 5:
+                Intent course = new Intent(getActivity(), CourseSpokenActivity.class);
+                startActivity(course);
                 break;
             default:
                 break;
