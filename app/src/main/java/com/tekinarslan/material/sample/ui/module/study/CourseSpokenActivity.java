@@ -35,17 +35,18 @@ import cn.bmob.v3.listener.SaveListener;
 /**
  * Created by lyqdhgo on 2016/2/29.
  */
-public class CourseSpokenActivity extends AppCompatActivity implements UniversalVideoView.VideoViewCallback, TabFragment.CallBack {
+public class CourseSpokenActivity extends AppCompatActivity implements UniversalVideoView.VideoViewCallback, TabFragment.OnHeadlineSelectedListener {
 
     private static final String TAG = CourseSpokenActivity.class.getSimpleName();
     private static final String SEEK_POSITION_KEY = "SEEK_POSITION_KEY";
-    private static final String VIDEO_URL = "http://7xrfxa.com1.z0.glb.clouddn.com/sayenglish01.mp4";
+    private static final String DEFAULT_VIDEO_URL = "http://7xrfxa.com1.z0.glb.clouddn.com/sayenglish01.mp4";
+
+    private String title;
+    private String audioUrl;
 
     private int mSeekPosition;
     private int cachedHeight;
     private boolean isFullscreen;
-    // 装载title集合
-    List<String> titles = new ArrayList<>();
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
@@ -60,9 +61,6 @@ public class CourseSpokenActivity extends AppCompatActivity implements Universal
     @Bind(R.id.viewpager)
     ViewPager viewPager;
 
-    @Bind(R.id.but_play)
-    Button play;
-
     private SpokenPagerAdapter adapter;
 
     @Override
@@ -76,26 +74,6 @@ public class CourseSpokenActivity extends AppCompatActivity implements Universal
     }
 
     private void initData() {
-
-//        BmobQuery<SpokenEntity> query = new BmobQuery<SpokenEntity>();
-//        query.findObjects(CourseSpokenActivity.this, new FindListener<SpokenEntity>() {
-//            @Override
-//            public void onSuccess(List<SpokenEntity> list) {
-//                Logger.i("Spoken list size->" + list.size());
-//                ViewUtils.showToastShort(CourseSpokenActivity.this, "查询成功");
-//                for (SpokenEntity entity : list) {
-//                    String title = entity.getTitle();
-//                    Logger.i("title->" + title);
-//                    titles.add(title);
-//                }
-//            }
-//
-//            @Override
-//            public void onError(int i, String s) {
-//                Logger.i("Error:" + s);
-//                ViewUtils.showToastShort(CourseSpokenActivity.this, "查询失败");
-//            }
-//        });
     }
 
     private void initView() {
@@ -120,16 +98,6 @@ public class CourseSpokenActivity extends AppCompatActivity implements Universal
             }
         });
 
-        play.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mSeekPosition > 0) {
-                    videoView.seekTo(mSeekPosition);
-                }
-                videoView.start();
-                mediaController.setTitle("英语口语入门");
-            }
-        });
 
         videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
@@ -167,7 +135,7 @@ public class CourseSpokenActivity extends AppCompatActivity implements Universal
                 videoLayoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
                 videoLayoutParams.height = cachedHeight;
                 videoLayout.setLayoutParams(videoLayoutParams);
-                videoView.setVideoPath(VIDEO_URL);
+//                videoView.setVideoPath(audioUrl);
                 videoView.requestFocus();
             }
         });
@@ -196,14 +164,12 @@ public class CourseSpokenActivity extends AppCompatActivity implements Universal
             layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
             layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
             videoLayout.setLayoutParams(layoutParams);
-//            mBottomLayout.setVisibility(View.GONE);
 
         } else {
             ViewGroup.LayoutParams layoutParams = videoLayout.getLayoutParams();
             layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
             layoutParams.height = this.cachedHeight;
             videoLayout.setLayoutParams(layoutParams);
-//            mBottomLayout.setVisibility(View.VISIBLE);
         }
 
         switchTitleBar(!isFullscreen);
@@ -271,7 +237,16 @@ public class CourseSpokenActivity extends AppCompatActivity implements Universal
     }
 
     @Override
-    public void getData(String title, String audioUrl) {
-        Logger.i("title:" + title + " audioUrl->" + audioUrl);
+    public void onSpokenSelected(String title, String audioUrl) {
+        this.title = title;
+        this.audioUrl = audioUrl;
+        videoView.setVideoPath(audioUrl);
+        Logger.i("title->" + title + " audioUrl->" + audioUrl);
+
+        if (mSeekPosition > 0) {
+            videoView.seekTo(mSeekPosition);
+        }
+        videoView.start();
+        mediaController.setTitle("英语口语入门");
     }
 }

@@ -1,5 +1,6 @@
 package com.tekinarslan.material.sample.ui.module.study;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -31,10 +32,9 @@ import cn.bmob.v3.listener.FindListener;
 public class TabFragment extends Fragment {
 
     public static final String ARG_PAGE = "ARG_PAGE";
+    public int flag = -1;
     private int mPage;
     private SpokenAdapter adapter;
-
-    CallBack callback;
 
     @Bind(R.id.listview)
     ListView listView;
@@ -69,13 +69,6 @@ public class TabFragment extends Fragment {
     }
 
     private void initData() {
-//        titles = new ArrayList<String>();
-//        list.add("英语口语提升1");
-//        list.add("英语口语提升2");
-//        list.add("英语口语提升3");
-//        list.add("英语口语提升4");
-//        list.add("英语口语提升5");
-//        list.add("英语口语提升6");
         BmobQuery<SpokenEntity> query = new BmobQuery<SpokenEntity>();
         query.findObjects(getActivity(), new FindListener<SpokenEntity>() {
             @Override
@@ -102,18 +95,46 @@ public class TabFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+                Long itemID = parent.getItemIdAtPosition(position);
+                Logger.i("ItemID->" + itemID);
+                // 点击之前把上次的焦点清掉
+                TextView textView = (TextView) view.findViewById(R.id.tv_spokename);
+                ImageView playspoken = (ImageView) view.findViewById(R.id.iv_playspokenm);
+                if (flag >= 0) {
+                    View oldView = listView.getChildAt(flag);
+                    TextView oldText = (TextView) oldView.findViewById(R.id.tv_spokename);
+                    ImageView oldPlay = (ImageView) oldView.findViewById(R.id.iv_playspokenm);
+                    oldText.setTextColor(getResources().getColor(R.color.text_black));
+                    oldPlay.setBackground(getResources().getDrawable(R.drawable.play_normal));
+                }
                 Logger.i("Select view->" + parent.getSelectedView());
                 SpokenEntity entity = (SpokenEntity) parent.getItemAtPosition(position);
                 Logger.i("select item：" + entity.getId());
                 String title = entity.getTitle();
                 String audioUrl = entity.getAudioUrl();
                 Logger.i("title:" + title + " audioUrl->" + audioUrl);
+
+                textView.setTextColor(getResources().getColor(R.color.material_teal));
+                playspoken.setBackground(getResources().getDrawable(R.drawable.play_press));
+                flag = position;
+                mCallback.onSpokenSelected(title, audioUrl);
             }
         });
     }
 
-    interface CallBack {
-        void getData(String title, String audioUrl);
+    OnHeadlineSelectedListener mCallback;
+
+    // Container Activity must implement this interface
+    public interface OnHeadlineSelectedListener {
+        public void onSpokenSelected(String title, String audioUrl);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mCallback = (OnHeadlineSelectedListener) context;
     }
 
     class SpokenAdapter extends BaseAdapter {

@@ -50,12 +50,6 @@
 
     </FrameLayout>
 
-    <Button
-        android:id="@+id/but_play"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Play" />
-
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
