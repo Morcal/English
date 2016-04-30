@@ -3,6 +3,8 @@ package com.tekinarslan.material.sample.ui.module.study;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -15,11 +17,13 @@ import com.orhanobut.logger.Logger;
 import com.tekinarslan.material.sample.R;
 import com.tekinarslan.material.sample.bean.SpokenEntity;
 import com.tekinarslan.material.sample.bean.Write;
+import com.tekinarslan.material.sample.ui.adapter.SpokenPagerAdapter;
 import com.tekinarslan.material.sample.utills.ViewUtils;
 import com.tekinarslan.material.sample.weight.ProgressBarCircular;
 import com.universalvideoview.UniversalMediaController;
 import com.universalvideoview.UniversalVideoView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -31,7 +35,7 @@ import cn.bmob.v3.listener.SaveListener;
 /**
  * Created by lyqdhgo on 2016/2/29.
  */
-public class CourseSpokenActivity extends AppCompatActivity implements UniversalVideoView.VideoViewCallback {
+public class CourseSpokenActivity extends AppCompatActivity implements UniversalVideoView.VideoViewCallback, TabFragment.CallBack {
 
     private static final String TAG = CourseSpokenActivity.class.getSimpleName();
     private static final String SEEK_POSITION_KEY = "SEEK_POSITION_KEY";
@@ -40,6 +44,8 @@ public class CourseSpokenActivity extends AppCompatActivity implements Universal
     private int mSeekPosition;
     private int cachedHeight;
     private boolean isFullscreen;
+    // 装载title集合
+    List<String> titles = new ArrayList<>();
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
@@ -49,8 +55,15 @@ public class CourseSpokenActivity extends AppCompatActivity implements Universal
     UniversalVideoView videoView;
     @Bind(R.id.media_controller)
     UniversalMediaController mediaController;
+    @Bind(R.id.tab_layout)
+    TabLayout tabLayout;
+    @Bind(R.id.viewpager)
+    ViewPager viewPager;
+
     @Bind(R.id.but_play)
     Button play;
+
+    private SpokenPagerAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,28 +76,39 @@ public class CourseSpokenActivity extends AppCompatActivity implements Universal
     }
 
     private void initData() {
-        BmobQuery<SpokenEntity> query = new BmobQuery<SpokenEntity>();
-        query.findObjects(CourseSpokenActivity.this, new FindListener<SpokenEntity>() {
-            @Override
-            public void onSuccess(List<SpokenEntity> list) {
-                Logger.i("Spoken list size->" + list.size());
-                ViewUtils.showToastShort(CourseSpokenActivity.this, "查询成功");
-            }
 
-            @Override
-            public void onError(int i, String s) {
-                Logger.i("Error:" + s);
-                ViewUtils.showToastShort(CourseSpokenActivity.this, "查询失败");
-            }
-        });
+//        BmobQuery<SpokenEntity> query = new BmobQuery<SpokenEntity>();
+//        query.findObjects(CourseSpokenActivity.this, new FindListener<SpokenEntity>() {
+//            @Override
+//            public void onSuccess(List<SpokenEntity> list) {
+//                Logger.i("Spoken list size->" + list.size());
+//                ViewUtils.showToastShort(CourseSpokenActivity.this, "查询成功");
+//                for (SpokenEntity entity : list) {
+//                    String title = entity.getTitle();
+//                    Logger.i("title->" + title);
+//                    titles.add(title);
+//                }
+//            }
+//
+//            @Override
+//            public void onError(int i, String s) {
+//                Logger.i("Error:" + s);
+//                ViewUtils.showToastShort(CourseSpokenActivity.this, "查询失败");
+//            }
+//        });
     }
 
     private void initView() {
+        adapter = new SpokenPagerAdapter(getSupportFragmentManager(), this);
         View loadView = LayoutInflater.from(this).inflate(R.layout.layout_loading, null);
         toolbar.setNavigationIcon(R.drawable.back);
         mediaController.setOnLoadingView(loadView);
         videoView.setMediaController(mediaController);
         setVideoAreaSize();
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+
         videoView.setVideoViewCallback(this);
     }
 
@@ -244,5 +268,10 @@ public class CourseSpokenActivity extends AppCompatActivity implements Universal
                 Logger.i("插入失败" + "Error:" + s);
             }
         });
+    }
+
+    @Override
+    public void getData(String title, String audioUrl) {
+        Logger.i("title:" + title + " audioUrl->" + audioUrl);
     }
 }
