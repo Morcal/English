@@ -77,7 +77,8 @@
         <activity android:name=".ui.module.community.ShKAudioActivity" />
         <activity android:name=".ui.module.study.WriteListActivity" />
         <activity android:name=".ui.module.own.CollectActivity" />
-        <activity android:name=".ui.module.study.CourseSpokenActivity"/>
+        <activity android:name=".ui.module.study.CourseSpokenActivity" />
+        <activity android:name=".ui.module.study.TranslateActivity" />
 
         <!-- WeChat -->
         <activity

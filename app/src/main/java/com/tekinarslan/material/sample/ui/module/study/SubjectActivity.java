@@ -156,6 +156,8 @@ public class SubjectActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.linear_trans:
                 Log.i(TAG, "Translation");
+                Intent translate = new Intent(SubjectActivity.this, TranslateActivity.class);
+                startActivity(translate);
                 break;
         }
     }

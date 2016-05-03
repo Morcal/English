@@ -18,4 +18,11 @@
         <attr name="hwRadio" format="float" />
         <attr name="widthStandard" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="MessageButton">
+        <attr name="selectType">
+            <enum name="message" value="1" />
+            <enum name="notice" value="2" />
+        </attr>
+    </declare-styleable>
 </resources>
