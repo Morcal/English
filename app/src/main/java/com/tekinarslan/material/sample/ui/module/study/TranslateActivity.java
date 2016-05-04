@@ -35,6 +35,11 @@ public class TranslateActivity extends AppCompatActivity {
     @Bind(R.id.but_save)
     Button save;
 
+    private String id;
+    private String direction;
+    private String chinese;
+    private String english;
+
     SlidePagerAdapter mPagerAdapter;
 
     @Override
@@ -42,8 +47,17 @@ public class TranslateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_translate);
         ButterKnife.bind(this);
+        initData();
         initView();
         initEvent();
+    }
+
+    private void initData() {
+        Bundle bundle = getIntent().getExtras();
+        id = bundle.getString("ID");
+        direction = bundle.getString("DIRECTION");
+        chinese = bundle.getString("CHINESE");
+        english = bundle.getString("ENGLISH");
     }
 
     private void initView() {
@@ -104,10 +118,12 @@ public class TranslateActivity extends AppCompatActivity {
             Fragment fragment = new Fragment();
             if (position == 0) {
                 messageButton.select(0);
-                fragment = new SubjectFragment();
+//                fragment = new SubjectFragment();
+                fragment = SubjectFragment.newInstance(direction, chinese);
             } else if (position == 1) {
                 messageButton.select(1);
-                fragment = new AnalysisFragment();
+//                fragment = new AnalysisFragment();
+                fragment = AnalysisFragment.newInstance(english);
             }
             return fragment;
         }

@@ -79,6 +79,7 @@
         <activity android:name=".ui.module.own.CollectActivity" />
         <activity android:name=".ui.module.study.CourseSpokenActivity" />
         <activity android:name=".ui.module.study.TranslateActivity" />
+        <activity android:name=".ui.module.study.TranslateListActivity" />
 
         <!-- WeChat -->
         <activity
