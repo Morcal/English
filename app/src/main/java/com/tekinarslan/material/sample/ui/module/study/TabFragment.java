@@ -128,7 +128,7 @@ public class TabFragment extends Fragment {
 
     // Container Activity must implement this interface
     public interface OnHeadlineSelectedListener {
-        public void onSpokenSelected(String title, String audioUrl);
+        void onSpokenSelected(String title, String audioUrl);
     }
 
     @Override

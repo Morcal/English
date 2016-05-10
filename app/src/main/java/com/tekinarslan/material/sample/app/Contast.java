@@ -4,6 +4,7 @@ package com.tekinarslan.material.sample.app;
  * Created by lyqdhgo on 2016/2/28.
  */
 public class Contast {
+    public static boolean isLogin;
     public static final String[] mMonths = new String[]{
             "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"
     };
@@ -56,4 +57,7 @@ public class Contast {
     // CET4听力测试音频
     public static final String CET4LISTEN = "http://7xrfxa.com1.z0.glb.clouddn.com/cets20140601.mp3";
 
+    public static void init() {
+        isLogin = false;
+    }
 }

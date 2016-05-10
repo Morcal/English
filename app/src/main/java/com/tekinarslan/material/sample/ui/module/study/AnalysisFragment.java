@@ -11,9 +11,6 @@ import android.widget.TextView;
 import com.orhanobut.logger.Logger;
 import com.tekinarslan.material.sample.R;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 /**
  * Created by lyqdhgo on 2016/5/4.
  */

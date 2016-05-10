@@ -49,6 +49,7 @@ public class EnglishApplication extends Application {
     public void onCreate() {
         super.onCreate();
         setInstance(this);
+        Contast.init();
         //im初始化
         BmobIM.init(this);
         //注册消息接收器

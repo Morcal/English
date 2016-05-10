@@ -185,7 +185,7 @@
         android:background="#ececec" />
 
     <TextView
-        android:id="@+id/profile_setting"
+        android:id="@+id/tv_islogin"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#ffffff"

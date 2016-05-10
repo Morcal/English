@@ -3,7 +3,9 @@ package com.tekinarslan.material.sample.ui.module.home;
 import android.text.TextUtils;
 
 import com.orhanobut.logger.Logger;
+import com.tekinarslan.material.sample.app.Contast;
 import com.tekinarslan.material.sample.bean.User;
+import com.tekinarslan.material.sample.ui.module.own.isLoginSuccessListener;
 
 import java.util.List;
 
@@ -25,6 +27,7 @@ import cn.bmob.v3.listener.SaveListener;
  */
 public class UserModel extends BaseModel {
 
+    isLoginSuccessListener successListener;
     private static UserModel ourInstance = new UserModel();
 
     public static UserModel getInstance() {
@@ -56,7 +59,9 @@ public class UserModel extends BaseModel {
         user.login(getContext(), new SaveListener() {
             @Override
             public void onSuccess() {
-                Logger.i("登录成功");
+                Contast.isLogin = true;
+                Logger.i("登录成功" + "isLogin->" + Contast.isLogin);
+//                successListener.isLogin(Contast.isLogin);
                 listener.done(getCurrentUser(), null);
             }
 
@@ -67,6 +72,7 @@ public class UserModel extends BaseModel {
             }
         });
     }
+
 
     /**
      * 退出登录
@@ -226,4 +232,6 @@ public class UserModel extends BaseModel {
             listener.internalDone(null);
         }
     }
+
 }
+
