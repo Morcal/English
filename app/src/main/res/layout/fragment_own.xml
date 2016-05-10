@@ -126,6 +126,7 @@
             android:background="#ffffff">
 
             <TextView
+                android:id="@+id/tv_tiezi"
                 style="@style/ItemProfileText"
                 android:drawableLeft="@drawable/icon_profile_followed_question"
                 android:text="收藏帖子" />

@@ -80,6 +80,7 @@
         <activity android:name=".ui.module.study.CourseSpokenActivity" />
         <activity android:name=".ui.module.study.TranslateActivity" />
         <activity android:name=".ui.module.study.TranslateListActivity" />
+        <activity android:name=".ui.module.community.BeautyDetialActivity" />
 
         <!-- WeChat -->
         <activity

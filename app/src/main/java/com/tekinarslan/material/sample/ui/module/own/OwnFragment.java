@@ -21,6 +21,7 @@ import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
 import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 import com.tekinarslan.material.sample.R;
+import com.tekinarslan.material.sample.ui.module.community.BeautyDetialActivity;
 import com.tekinarslan.material.sample.utills.ViewUtils;
 
 import java.util.Calendar;
@@ -39,6 +40,8 @@ public class OwnFragment extends Fragment implements View.OnClickListener {
     ImageView profileMore;
     @Bind(R.id.tv_collect)
     TextView tvCollect;
+    @Bind(R.id.tv_tiezi)
+    TextView tvTiezi;
 
     @Nullable
     @Override
@@ -58,6 +61,7 @@ public class OwnFragment extends Fragment implements View.OnClickListener {
         setting.setOnClickListener(this);
         profileMore.setOnClickListener(this);
         tvCollect.setOnClickListener(this);
+        tvTiezi.setOnClickListener(this);
     }
 
     @Override
@@ -76,6 +80,9 @@ public class OwnFragment extends Fragment implements View.OnClickListener {
                 Intent collect = new Intent(getActivity(), CollectActivity.class);
                 startActivity(collect);
                 break;
+            case R.id.tv_tiezi:
+                Intent intent = new Intent(getActivity(), BeautyDetialActivity.class);
+                startActivity(intent);
         }
     }
 }

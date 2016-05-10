@@ -25,4 +25,11 @@
             <enum name="notice" value="2" />
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="RefreshView">
+        <attr name="type" format="enum">
+            <enum name="sun" value="0"/>
+        </attr>
+    </declare-styleable>
+
 </resources>
