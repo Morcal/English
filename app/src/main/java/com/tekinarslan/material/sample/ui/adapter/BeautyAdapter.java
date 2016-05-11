@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.tekinarslan.material.sample.R;
 import com.tekinarslan.material.sample.bean.Beauty;
 import com.tekinarslan.material.sample.bean.Topic;
@@ -43,6 +44,7 @@ public class BeautyAdapter extends RecyclerView.Adapter<BeautyAdapter.MyViewHold
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Beauty beauty = list.get(position);
+        Logger.i("Article->" + beauty.getArticle());
         holder.tvTitle.setText(beauty.getTitle());
         holder.tvData.setText(beauty.getData());
         holder.tvTheme.setText(beauty.getTheme());
@@ -62,7 +64,8 @@ public class BeautyAdapter extends RecyclerView.Adapter<BeautyAdapter.MyViewHold
     public void onClick(View v) {
         Log.i(" ", "adpter view " + v.toString());
         if (onItemClickListener != null) {
-            onItemClickListener.onItemClick(v, ((Beauty) v.getTag()).getTheme());
+            Beauty beauty = ((Beauty) v.getTag());
+            onItemClickListener.onItemClick(v, beauty);
         }
     }
 
@@ -84,7 +87,7 @@ public class BeautyAdapter extends RecyclerView.Adapter<BeautyAdapter.MyViewHold
         public MyViewHolder(View itemView) {
             super(itemView);
             tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
-            tvTitle.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/FZSongKeBenXiuKaiS-R-GB.TTF"));
+            tvTitle.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/FZSongKeBenXiuKaiS-R-GB.TTF"));
             tvData = (TextView) itemView.findViewById(R.id.tv_data);
             tvTheme = (TextView) itemView.findViewById(R.id.tv_theme);
             tvAuthor = (TextView) itemView.findViewById(R.id.tv_author);
@@ -95,7 +98,7 @@ public class BeautyAdapter extends RecyclerView.Adapter<BeautyAdapter.MyViewHold
     }
 
     public static interface OnRecycleViewItemClickListener {
-        void onItemClick(View view, String data);
+        void onItemClick(View view, Beauty data);
     }
 
 }

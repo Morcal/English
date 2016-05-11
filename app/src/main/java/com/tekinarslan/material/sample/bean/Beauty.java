@@ -27,6 +27,7 @@ public class Beauty extends BmobObject {
     private String theme;
     private String author;
     private String desc;
+    private String article;
     private String comment;
 
     public void setId(String id) {
@@ -59,6 +60,14 @@ public class Beauty extends BmobObject {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getArticle() {
+        return article;
+    }
+
+    public void setArticle(String article) {
+        this.article = article;
     }
 
     public String getId() {

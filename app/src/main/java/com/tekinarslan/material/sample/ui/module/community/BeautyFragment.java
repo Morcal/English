@@ -81,8 +81,15 @@ public class BeautyFragment extends Fragment {
     private void initEvent() {
         adapter.setOnItemClickListener(new BeautyAdapter.OnRecycleViewItemClickListener() {
             @Override
-            public void onItemClick(View view, String data) {
-                Log.i(TAG, "点击的ID为->" + data);
+            public void onItemClick(View view, Beauty data) {
+                Log.i(TAG, "点击的ID为->" + data.getTheme() + " image:" + data.getImgUrl());
+                Bundle bundle=new Bundle();
+                bundle.putString("THEME",data.getTheme());
+                bundle.putString("IMAGEURL",data.getImgUrl());
+                bundle.putString("ARTICLE",data.getArticle());
+                Intent intent=new Intent(getActivity(),BeautyDetialActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 

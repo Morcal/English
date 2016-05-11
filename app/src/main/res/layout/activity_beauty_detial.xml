@@ -73,12 +73,13 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <TextView
+            android:id="@+id/tv_article"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="16dp"
             android:scrollbars="vertical"
-            android:text="测试文本\n测试文本\n测试文本"
-            android:textSize="23dp" />
+            android:text=""
+            android:textSize="16sp" />
     </ScrollView>
 
     <!--<android.support.v4.widget.SwipeRefreshLayout-->
