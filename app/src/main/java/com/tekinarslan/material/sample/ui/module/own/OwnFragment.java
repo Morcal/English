@@ -20,7 +20,9 @@ import android.widget.TextView;
 import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
 import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
+import com.orhanobut.logger.Logger;
 import com.tekinarslan.material.sample.R;
+import com.tekinarslan.material.sample.app.Dao;
 import com.tekinarslan.material.sample.ui.module.community.BeautyDetialActivity;
 import com.tekinarslan.material.sample.utills.ViewUtils;
 
@@ -42,6 +44,8 @@ public class OwnFragment extends Fragment implements View.OnClickListener {
     TextView tvCollect;
     @Bind(R.id.tv_tiezi)
     TextView tvTiezi;
+    @Bind(R.id.tv_question)
+    TextView tvQuestion;
 
     @Nullable
     @Override
@@ -62,6 +66,7 @@ public class OwnFragment extends Fragment implements View.OnClickListener {
         profileMore.setOnClickListener(this);
         tvCollect.setOnClickListener(this);
         tvTiezi.setOnClickListener(this);
+        tvQuestion.setOnClickListener(this);
     }
 
     @Override
@@ -83,6 +88,12 @@ public class OwnFragment extends Fragment implements View.OnClickListener {
             case R.id.tv_tiezi:
                 Intent intent = new Intent(getActivity(), BeautyDetialActivity.class);
                 startActivity(intent);
+
+            case R.id.tv_question:
+                Logger.i("提交提问请求");
+                String URL="www.a.com";
+                Dao.postString(URL,"毕业设计 提交提问");
+                break;
         }
     }
 }

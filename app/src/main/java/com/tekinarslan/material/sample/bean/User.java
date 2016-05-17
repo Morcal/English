@@ -8,7 +8,7 @@ import cn.bmob.v3.BmobUser;
 /**
  * Created by lyqdh on 2016/1/4.
  */
-public class User extends BmobUser{
+public class User extends BmobUser {
     // id
     private int id;
     // nickname
@@ -25,7 +25,8 @@ public class User extends BmobUser{
     private Article collect;
     // 喜欢的清单
     private Article like;
-
+    // 新增提问
+    private String submitQus;
     // 收藏集
     private List<Article> clollects = new ArrayList<>();
     private List<Article> likes = new ArrayList<>();
@@ -60,6 +61,14 @@ public class User extends BmobUser{
 
     public void setCount(String count) {
         this.count = count;
+    }
+
+    public String getSubmitQus() {
+        return submitQus;
+    }
+
+    public void setSubmitQus(String submitQus) {
+        this.submitQus = submitQus;
     }
 
     public Article getCollect() {

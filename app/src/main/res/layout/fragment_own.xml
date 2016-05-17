@@ -147,9 +147,10 @@
             android:background="#ffffff">
 
             <TextView
+                android:id="@+id/tv_question"
                 style="@style/ItemProfileText"
                 android:drawableLeft="@drawable/icon_profile_download"
-                android:text="我的下载" />
+                android:text="我的提问" />
 
             <ImageView
                 style="@style/ItemProfileBtn"

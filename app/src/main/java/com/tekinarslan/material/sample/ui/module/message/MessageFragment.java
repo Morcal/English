@@ -1,5 +1,6 @@
 package com.tekinarslan.material.sample.ui.module.message;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import com.orhanobut.logger.Logger;
 import com.tekinarslan.material.sample.R;
 import com.tekinarslan.material.sample.bean.User;
 import com.tekinarslan.material.sample.ui.adapter.SectionsPagerAdapter;
+import com.tekinarslan.material.sample.ui.module.home.LoginActivity;
 import com.tekinarslan.material.sample.ui.module.home.UserModel;
 import com.tekinarslan.material.sample.utills.ViewUtils;
 
@@ -103,25 +105,32 @@ public class MessageFragment extends Fragment implements ObseverListener {
     private void setConnect() {
         //连接服务器
         User user = UserModel.getInstance().getCurrentUser();
-        Logger.i("user->" + user.getObjectId());
-        BmobIM.connect(user.getObjectId(), new ConnectListener() {
-            @Override
-            public void done(String uid, BmobException e) {
-                if (e == null) {
-                    Logger.i("connect success");
-                } else {
-                    Logger.e(e.getErrorCode() + "/" + e.getMessage());
+        Logger.i("Current User-->" + user);
+        // 当User为空时，说明用户未登录
+        if (user == null) {
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+        } else {
+            Logger.i("user->" + user.getObjectId());
+            BmobIM.connect(user.getObjectId(), new ConnectListener() {
+                @Override
+                public void done(String uid, BmobException e) {
+                    if (e == null) {
+                        Logger.i("connect success");
+                    } else {
+                        Logger.e(e.getErrorCode() + "/" + e.getMessage());
+                    }
                 }
-            }
-        });
-        //监听连接状态，也可通过BmobIM.getInstance().getCurrentStatus()来获取当前的长连接状态
-        BmobIM.getInstance().setOnConnectStatusChangeListener(new ConnectStatusChangeListener() {
-            @Override
-            public void onChange(ConnectionStatus status) {
-                ViewUtils.showToastShort(getActivity(), "" + status.getMsg());
-            }
-        });
-        //解决leancanary提示InputMethodManager内存泄露的问题
+            });
+            //监听连接状态，也可通过BmobIM.getInstance().getCurrentStatus()来获取当前的长连接状态
+            BmobIM.getInstance().setOnConnectStatusChangeListener(new ConnectStatusChangeListener() {
+                @Override
+                public void onChange(ConnectionStatus status) {
+                    ViewUtils.showToastShort(getActivity(), "" + status.getMsg());
+                }
+            });
+            //解决leancanary提示InputMethodManager内存泄露的问题
 //        IMMLeaks.fixFocusedViewLeak(getApplication());
+        }
     }
 }
