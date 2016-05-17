@@ -44,9 +44,9 @@
                 android:id="@+id/main_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="16dp"
                 android:gravity="center"
-                android:text="Main Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\n"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
         </ScrollView>
 
         <!--Sliding pinal-->
