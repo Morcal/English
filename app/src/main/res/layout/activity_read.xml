@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="阅读"
+                android:textColor="@color/light"
+                android:textSize="18sp" />
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <com.sothree.slidinguppanel.SlidingUpPanelLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        sothree:umanoPanelHeight="48dp"
+        sothree:umanoParallaxOffset="68dp"
+        sothree:umanoShadowHeight="4dp">
+
+        <!--Main content-->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/main_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Main Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\nMain Content ~\n"
+                android:textSize="20sp" />
+        </ScrollView>
+
+        <!--Sliding pinal-->
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.sothree.slidinguppanel.SlidingUpPanelLayout>
+</LinearLayout>

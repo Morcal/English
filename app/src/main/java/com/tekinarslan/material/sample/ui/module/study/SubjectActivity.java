@@ -152,7 +152,8 @@ public class SubjectActivity extends AppCompatActivity implements View.OnClickLi
                 Log.i(TAG, "Listener");
                 break;
             case R.id.linear_read:
-                Intent read = new Intent(SubjectActivity.this, ReadListActivity.class);
+//                Intent read = new Intent(SubjectActivity.this, ReadListActivity.class);
+                Intent read = new Intent(SubjectActivity.this, ReadActivity.class);
                 startActivity(read);
                 Log.i(TAG, "Read");
                 break;
