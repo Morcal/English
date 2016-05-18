@@ -6,9 +6,11 @@
 
     <TextView
         android:id="@+id/text"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="50dp"
         android:text="hello_world"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 

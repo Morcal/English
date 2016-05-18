@@ -44,8 +44,8 @@ public class ReadActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read);
         ButterKnife.bind(this);
-        initData();
         initView();
+        initData();
         initEvent();
     }
 
@@ -57,9 +57,30 @@ public class ReadActivity extends AppCompatActivity {
             public void onSuccess(List<Read> list) {
                 ViewUtils.hideDialog();
                 ViewUtils.showToastShort(ReadActivity.this, "查询成功");
-                Logger.i("Read size-> " + list.size() + "\n" + list.get(0).toString());
+
                 String passage = list.get(0).getPassage();
                 content.setText(passage);
+
+                FragmentManager fm = getSupportFragmentManager();
+                adapter = new ParalFragmentAdapter(fm);
+                adapter.setList(list.get(0).getShortChoice());
+                viewPager.setAdapter(adapter);
+
+//                Read read = list.get(0);
+//                Logger.i("Read size-> " + list.size() + "\n" + read.toString());
+//                List<Read.ShortChoiceEntity> shortEntities = read.getShortChoice();
+//                for (Read.ShortChoiceEntity entity : shortEntities) {
+//                    int pos = entity.getPos();
+//                    String question = entity.getQuestion();
+//                    Logger.i("pos->" + pos + " question->" + question);
+//                    List<Read.ShortChoiceEntity.ChoiceEntity> choses = entity.getChoice();
+//                    for (Read.ShortChoiceEntity.ChoiceEntity choice : choses) {
+//                        Logger.i(choice.getChose() + " " + choice.getContent());
+//                    }
+//
+//                }
+//                String passage = read.getPassage();
+//                content.setText(passage);
             }
 
             @Override
@@ -73,9 +94,9 @@ public class ReadActivity extends AppCompatActivity {
 
     private void initView() {
         toolbar.setNavigationIcon(R.drawable.back);
-        FragmentManager fm = getSupportFragmentManager();
-        adapter = new ParalFragmentAdapter(fm);
-        viewPager.setAdapter(adapter);
+//        FragmentManager fm = getSupportFragmentManager();
+//        adapter = new ParalFragmentAdapter(fm);
+//        viewPager.setAdapter(adapter);
     }
 
     private void initEvent() {
