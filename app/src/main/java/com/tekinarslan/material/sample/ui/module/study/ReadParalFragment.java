@@ -21,18 +21,19 @@ public class ReadParalFragment extends Fragment {
     private int num; //页号
     private int pos;
     private String question;
-    private static String[] entitys = new String[4];
+    private String[] entitys = new String[4];
 
     private AppCompatRadioButton radioA;
     private AppCompatRadioButton radioB;
     private AppCompatRadioButton radioC;
     private AppCompatRadioButton radioD;
+    private TextView tv;
 
-    public static ReadParalFragment newInstance(int num, int pos, String question, String entity) {
+    public ReadParalFragment newInstance(int num, int pos, String question, String entity) {
         ReadParalFragment fragment = new ReadParalFragment();
         Bundle args = new Bundle();
         entitys = entity.split(",");
-        Logger.i("entitys->" + entity.toString());
+        Logger.i(pos + ":entitys->" + entity.toString());
         args.putInt("num", num);
         args.putInt("pos", pos);
         args.putString("question", question);
@@ -44,6 +45,7 @@ public class ReadParalFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Logger.i("onCreate");
         num = getArguments() != null ? getArguments().getInt("num") : 1;
         pos = getArguments() != null ? getArguments().getInt("pos") : 1;
         question = getArguments() != null ? getArguments().getString("question") : "Not Question";
@@ -54,9 +56,9 @@ public class ReadParalFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        Logger.i("onCreateView");
         View view = inflater.inflate(R.layout.fragment_paral, null);
-        TextView tv = (TextView) view.findViewById(R.id.text);
+        tv = (TextView) view.findViewById(R.id.text);
         radioA = (AppCompatRadioButton) view.findViewById(R.id.radioA);
         radioB = (AppCompatRadioButton) view.findViewById(R.id.radioB);
         radioC = (AppCompatRadioButton) view.findViewById(R.id.radioC);
@@ -67,5 +69,17 @@ public class ReadParalFragment extends Fragment {
         radioC.setText(entitys[2]);
         radioD.setText(entitys[3]);
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Logger.i("onStart");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Logger.i("onDestroy");
     }
 }
