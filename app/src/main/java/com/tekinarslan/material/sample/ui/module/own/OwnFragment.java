@@ -22,8 +22,10 @@ import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 import com.orhanobut.logger.Logger;
 import com.tekinarslan.material.sample.R;
+import com.tekinarslan.material.sample.app.Contast;
 import com.tekinarslan.material.sample.app.Dao;
 import com.tekinarslan.material.sample.ui.module.community.BeautyDetialActivity;
+import com.tekinarslan.material.sample.utills.Util;
 import com.tekinarslan.material.sample.utills.ViewUtils;
 
 import java.util.Calendar;
@@ -86,13 +88,38 @@ public class OwnFragment extends Fragment implements View.OnClickListener {
                 startActivity(collect);
                 break;
             case R.id.tv_tiezi:
-                Intent intent = new Intent(getActivity(), BeautyDetialActivity.class);
-                startActivity(intent);
+                // 获取提问列表
+                // http://gaojinzhu.duapp.com/interface/user/AskListByUser?source=1&user_id=1
+                String askList = Contast.SERVERHOST + "/AskListByUser?source=3&user_id=1";
+                Dao.getEntity(askList, new Dao.EntityListener() {
+                    @Override
+                    public void onError() {
+                        Logger.i("获取失败");
+                    }
+
+                    @Override
+                    public void onSuccess(String result) {
+                        Logger.i("获取成功" + " Result->" + result);
+                    }
+                });
 
             case R.id.tv_question:
-                Logger.i("提交提问请求");
-                String URL="www.a.com";
-                Dao.postString(URL,"毕业设计 提交提问");
+                String question = "想服务端提交的数据乱七八糟，的护肤回复本节课被人看见";
+                Logger.i("提交提问->" + question);
+                String md5Str = Util.strToMd5(question);
+                Logger.i("MD5加密后->" + md5Str);
+                String ask = Contast.SERVERHOST + "/ask?source=3&user_id=1&ask=" + md5Str;
+                Dao.getEntity(ask, new Dao.EntityListener() {
+                    @Override
+                    public void onError() {
+                        Logger.i("提交失败");
+                    }
+
+                    @Override
+                    public void onSuccess(String result) {
+                        Logger.i("提交成功" + " Result->" + result);
+                    }
+                });
                 break;
         }
     }
