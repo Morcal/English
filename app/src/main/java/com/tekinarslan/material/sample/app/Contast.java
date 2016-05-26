@@ -5,6 +5,7 @@ package com.tekinarslan.material.sample.app;
  */
 public class Contast {
     public static boolean isLogin;
+    public static String objectId;
     public static final String[] mMonths = new String[]{
             "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"
     };

@@ -1,6 +1,8 @@
 package com.tekinarslan.material.sample.ui.module.own;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,10 +22,14 @@ import android.widget.TextView;
 import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
 import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
+import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
 import com.tekinarslan.material.sample.R;
 import com.tekinarslan.material.sample.app.Contast;
 import com.tekinarslan.material.sample.app.Dao;
+import com.tekinarslan.material.sample.bean.PlayAudio;
+import com.tekinarslan.material.sample.bean.Result;
+import com.tekinarslan.material.sample.bean.User;
 import com.tekinarslan.material.sample.ui.module.community.BeautyDetialActivity;
 import com.tekinarslan.material.sample.utills.Util;
 import com.tekinarslan.material.sample.utills.ViewUtils;
@@ -38,6 +44,7 @@ import butterknife.ButterKnife;
  */
 public class OwnFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = OwnFragment.class.getSimpleName();
+    private static String DEFAULT_USER_ID = "1";
     @Bind(R.id.profile_setting)
     TextView setting;
     @Bind(R.id.profile_more)
@@ -90,7 +97,9 @@ public class OwnFragment extends Fragment implements View.OnClickListener {
             case R.id.tv_tiezi:
                 // 获取提问列表
                 // http://gaojinzhu.duapp.com/interface/user/AskListByUser?source=1&user_id=1
-                String askList = Contast.SERVERHOST + "/AskListByUser?source=3&user_id=1";
+                SharedPreferences preference = getActivity().getSharedPreferences("userinfo", Activity.MODE_PRIVATE);
+                String userId = preference.getString("objectId", DEFAULT_USER_ID);
+                String askList = Contast.SERVERHOST + "/AskListByUser?source=3&user_id=" + userId;
                 Dao.getEntity(askList, new Dao.EntityListener() {
                     @Override
                     public void onError() {
@@ -100,15 +109,35 @@ public class OwnFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onSuccess(String result) {
                         Logger.i("获取成功" + " Result->" + result);
+                        Result askList = new Gson().fromJson(result, Result.class);
+                        if ("9999".equals(askList.getE())) {
+                            Logger.i("获取提问列表成功");
+                            ViewUtils.showToastShort(getActivity(), "获取成功");
+                        } else {
+                            Logger.i("其他原因导致获取提问列表失败");
+                            ViewUtils.showToastShort(getActivity(), "获取失败 " + askList.getM());
+                        }
+
                     }
                 });
+                break;
 
             case R.id.tv_question:
                 String question = "想服务端提交的数据乱七八糟，的护肤回复本节课被人看见";
                 Logger.i("提交提问->" + question);
                 String md5Str = Util.strToMd5(question);
-                Logger.i("MD5加密后->" + md5Str);
-                String ask = Contast.SERVERHOST + "/ask?source=3&user_id=1&ask=" + md5Str;
+                // Logger.i("MD5加密后->" + md5Str);
+
+                // 从Sp取出objectId
+                SharedPreferences preferences = getActivity().getSharedPreferences("userinfo", Activity.MODE_PRIVATE);
+                String objectId = preferences.getString("objectId", DEFAULT_USER_ID);
+                // String objectId = Contast.objectId;
+                // String objectId = user.getObjectId();
+                Logger.i("UserID->" + objectId);
+                if (objectId.equals("") && objectId == null) {
+                    ViewUtils.showToastShort(getActivity(), "objectId is null");
+                }
+                String ask = Contast.SERVERHOST + "/ask?source=3&user_id=" + objectId + "&ask=" + question;
                 Dao.getEntity(ask, new Dao.EntityListener() {
                     @Override
                     public void onError() {
@@ -118,6 +147,14 @@ public class OwnFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onSuccess(String result) {
                         Logger.i("提交成功" + " Result->" + result);
+                        Result askList = new Gson().fromJson(result, Result.class);
+                        if ("9999".equals(askList.getE())) {
+                            Logger.i("提交问题成功");
+                            ViewUtils.showToastShort(getActivity(), "提交成功");
+                        } else {
+                            Logger.i("其他原因导致提交失败");
+                            ViewUtils.showToastShort(getActivity(), "提交失败 " + askList.getM());
+                        }
                     }
                 });
                 break;

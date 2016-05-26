@@ -9,8 +9,7 @@
         android:background="@color/light"
         android:orientation="vertical">
 
-        <include
-            layout="@layout/profile_head" />
+        <include layout="@layout/profile_head" />
 
         <include layout="@layout/profile_center" />
 
@@ -129,7 +128,7 @@
                 android:id="@+id/tv_tiezi"
                 style="@style/ItemProfileText"
                 android:drawableLeft="@drawable/icon_profile_followed_question"
-                android:text="我的提问" />
+                android:text="历史提问" />
 
             <ImageView
                 style="@style/ItemProfileBtn"

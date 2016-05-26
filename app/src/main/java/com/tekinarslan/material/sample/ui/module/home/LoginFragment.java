@@ -1,5 +1,7 @@
 package com.tekinarslan.material.sample.ui.module.home;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +18,7 @@ import com.elbbbird.android.socialsdk.model.SocialToken;
 import com.elbbbird.android.socialsdk.model.SocialUser;
 import com.elbbbird.android.socialsdk.otto.BusProvider;
 import com.elbbbird.android.socialsdk.otto.SSOBusEvent;
+import com.orhanobut.logger.Logger;
 import com.squareup.otto.Subscribe;
 import com.tekinarslan.material.sample.R;
 import com.tekinarslan.material.sample.bean.User;
@@ -105,6 +108,16 @@ public class LoginFragment extends Fragment {
                 if (e == null) {
                     User user = (User) o;
                     //更新当前用户资料
+                    String objectId = user.getObjectId();
+                    Logger.i("Login->" + objectId);
+                    // 登录成功后将数据写到sp
+                    SharedPreferences preferences = getActivity().getSharedPreferences("userinfo", Activity.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("name", user.getUsername());
+                    editor.putString("objectId", user.getObjectId());
+                    editor.commit();
+                    Logger.i("Sp存储成功");
+
                     BmobIM.getInstance().updateUserInfo(new BmobIMUserInfo(user.getObjectId(), user.getUsername(), user.getAvatar()));
                     if (getActivity() != null) {
                         getActivity().finish();

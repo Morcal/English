@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
 import com.tekinarslan.material.sample.R;
+import com.tekinarslan.material.sample.app.Contast;
 import com.tekinarslan.material.sample.bean.Write;
 import com.tekinarslan.material.sample.utills.UIUtil;
 import com.tekinarslan.material.sample.utills.ViewUtils;
@@ -88,7 +89,7 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
         }
         if (!imageUrl.isEmpty()) {
             image.setVisibility(View.VISIBLE);
-            UIUtil.setAvatar(imageUrl, image,1000,360);
+            UIUtil.setAvatar(imageUrl, image, 1000, 360);
         }
     }
 
@@ -124,7 +125,7 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
             public void onClick(View v) {
                 if (this != null) {
                     // 返回上级是也提交数据
-                    if(!(write.getText().toString().isEmpty())){
+                    if (!(write.getText().toString().isEmpty())) {
                         ViewUtils.showDialog(WriteActivity.this, "Saving");
                         getObjectId();
                     }
@@ -188,6 +189,7 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
                 ViewUtils.showToastShort(WriteActivity.this, "查询objId成功");
                 Write write = list.get(0);
                 objectId[0] = write.getObjectId();
+                Contast.objectId = objectId[0];
                 Write.WriteEntity entity = write.getWrite();
                 Logger.i("getObjectId:" + " Write->" + write + " entity->" + entity);
                 Logger.i("FindId成功 " + "ObjectID-->" + objectId[0] + " ques-->" + entity.getWriteQuestion() + " dir-->" + entity.getWriteDirection());

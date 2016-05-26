@@ -16,7 +16,7 @@ import okhttp3.Call;
 public class Dao {
 
     public static void getEntity(String url, final EntityListener listener) {
-        Log.i("url", url);
+        Log.i("url->", url);
         OkHttpUtils.get().url(url).build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
