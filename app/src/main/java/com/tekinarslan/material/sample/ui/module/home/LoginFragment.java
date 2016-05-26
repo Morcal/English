@@ -114,6 +114,7 @@ public class LoginFragment extends Fragment {
                     SharedPreferences preferences = getActivity().getSharedPreferences("userinfo", Activity.MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("name", user.getUsername());
+                    editor.putString("password", editPwd.getText().toString());
                     editor.putString("objectId", user.getObjectId());
                     editor.commit();
                     Logger.i("Sp存储成功");

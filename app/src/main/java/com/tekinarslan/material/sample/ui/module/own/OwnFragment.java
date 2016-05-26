@@ -29,12 +29,14 @@ import com.tekinarslan.material.sample.app.Contast;
 import com.tekinarslan.material.sample.app.Dao;
 import com.tekinarslan.material.sample.bean.PlayAudio;
 import com.tekinarslan.material.sample.bean.Result;
+import com.tekinarslan.material.sample.bean.ResultAskList;
 import com.tekinarslan.material.sample.bean.User;
 import com.tekinarslan.material.sample.ui.module.community.BeautyDetialActivity;
 import com.tekinarslan.material.sample.utills.Util;
 import com.tekinarslan.material.sample.utills.ViewUtils;
 
 import java.util.Calendar;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -109,10 +111,12 @@ public class OwnFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onSuccess(String result) {
                         Logger.i("获取成功" + " Result->" + result);
-                        Result askList = new Gson().fromJson(result, Result.class);
+                        ResultAskList askList = new Gson().fromJson(result, ResultAskList.class);
                         if ("9999".equals(askList.getE())) {
                             Logger.i("获取提问列表成功");
                             ViewUtils.showToastShort(getActivity(), "获取成功");
+                            List<ResultAskList.DataEntity> entity = askList.getData();
+                            Logger.i("提问列表数->" + entity.size());
                         } else {
                             Logger.i("其他原因导致获取提问列表失败");
                             ViewUtils.showToastShort(getActivity(), "获取失败 " + askList.getM());
@@ -157,6 +161,8 @@ public class OwnFragment extends Fragment implements View.OnClickListener {
                         }
                     }
                 });
+                Intent intent=new Intent(getActivity(),EditAnswerActivity.class);
+                startActivity(intent);
                 break;
         }
     }

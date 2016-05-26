@@ -82,6 +82,7 @@
         <activity android:name=".ui.module.study.TranslateListActivity" />
         <activity android:name=".ui.module.community.BeautyDetialActivity" />
         <activity android:name=".ui.module.study.ReadListActivity" />
+        <activity android:name=".ui.module.own.EditAnswerActivity"/>
         <activity
             android:name=".ui.module.study.ReadActivity"
             android:theme="@style/ReadActivityTheme" />
