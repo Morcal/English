@@ -1,10 +1,13 @@
 package com.tekinarslan.material.sample.ui.module.main;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -23,13 +26,15 @@ import com.tekinarslan.material.sample.ui.module.home.LoginActivity;
 import com.tekinarslan.material.sample.ui.module.message.MessageFragment;
 import com.tekinarslan.material.sample.ui.module.own.OwnFragment;
 import com.tekinarslan.material.sample.ui.module.study.StudyFragment;
+import com.tekinarslan.material.sample.utills.PicassoImageLoader;
 import com.tekinarslan.material.sample.weight.CircleImageView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String DEFAULTPATH = "/data/data/com.tekinarslan.material.sample/cache/ImagePicker/cropTemp/IMG_20160527_203815.jpg";
     private static final int NUM_ITEMS = 3;
     @Bind(R.id.drawer)
     DrawerLayout drawerLayout;
@@ -83,6 +88,10 @@ public class MainActivity extends AppCompatActivity{
         setDefaultFragment();
         View headView = navigationView.getHeaderView(0);
         avatar = (CircleImageView) headView.findViewById(R.id.avatar);
+//        SharedPreferences preference = getSharedPreferences("avatorpath", Activity.MODE_PRIVATE);
+//        String path = preference.getString("path", DEFAULTPATH);
+//        PicassoImageLoader imageLoader = new PicassoImageLoader();
+//        imageLoader.displayImage(MainActivity.this, path, avatar, 50, 50);
     }
 
     private void initEvent() {
@@ -190,6 +199,7 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case 1:
                 rabtnStudy.setChecked(true);

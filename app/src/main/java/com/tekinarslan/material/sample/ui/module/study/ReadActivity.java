@@ -1,5 +1,6 @@
 package com.tekinarslan.material.sample.ui.module.study;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -12,8 +13,10 @@ import android.widget.TextView;
 import com.orhanobut.logger.Logger;
 import com.tekinarslan.material.sample.R;
 import com.tekinarslan.material.sample.bean.Read;
+import com.tekinarslan.material.sample.bean.ResultAskList;
 import com.tekinarslan.material.sample.bean.Write;
 import com.tekinarslan.material.sample.ui.adapter.ParalFragmentAdapter;
+import com.tekinarslan.material.sample.utills.Util;
 import com.tekinarslan.material.sample.utills.ViewUtils;
 import com.tekinarslan.material.sample.weight.Button;
 
@@ -59,7 +62,9 @@ public class ReadActivity extends AppCompatActivity {
                 ViewUtils.showToastShort(ReadActivity.this, "查询成功");
 
                 String passage = list.get(0).getPassage();
-                content.setText(passage);
+                String pass = Util.ToDBC(passage);
+                content.setTypeface(Typeface.createFromAsset(ReadActivity.this.getAssets(), "fonts/Roboto-Regular.ttf"));
+                content.setText(pass);
 
                 FragmentManager fm = getSupportFragmentManager();
                 adapter = new ParalFragmentAdapter(fm);

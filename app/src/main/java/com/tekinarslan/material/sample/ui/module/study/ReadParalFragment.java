@@ -1,5 +1,6 @@
 package com.tekinarslan.material.sample.ui.module.study;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatRadioButton;
@@ -63,6 +64,7 @@ public class ReadParalFragment extends Fragment {
         radioB = (AppCompatRadioButton) view.findViewById(R.id.radioB);
         radioC = (AppCompatRadioButton) view.findViewById(R.id.radioC);
         radioD = (AppCompatRadioButton) view.findViewById(R.id.radioD);
+        tv.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"fonts/Roboto-Regular.ttf"));
         tv.setText(pos + "." + question);
         radioA.setText(entitys[0]);
         radioB.setText(entitys[1]);
