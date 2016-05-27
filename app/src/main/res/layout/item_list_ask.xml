@@ -55,6 +55,7 @@
             android:layout_marginRight="15dp"
             android:drawableLeft="@drawable/ic_list_comment"
             android:drawablePadding="7dp"
+            android:gravity="center_vertical"
             android:text="23"
             android:textColor="#767676"
             android:textSize="15sp" />

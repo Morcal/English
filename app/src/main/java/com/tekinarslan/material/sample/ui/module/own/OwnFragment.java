@@ -46,7 +46,6 @@ import butterknife.ButterKnife;
  */
 public class OwnFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = OwnFragment.class.getSimpleName();
-    private static String DEFAULT_USER_ID = "1";
     @Bind(R.id.profile_setting)
     TextView setting;
     @Bind(R.id.profile_more)
@@ -97,38 +96,13 @@ public class OwnFragment extends Fragment implements View.OnClickListener {
                 startActivity(collect);
                 break;
             case R.id.tv_tiezi:
-                // 获取提问列表
-                // http://gaojinzhu.duapp.com/interface/user/AskListByUser?source=1&user_id=1
-                SharedPreferences preference = getActivity().getSharedPreferences("userinfo", Activity.MODE_PRIVATE);
-                String userId = preference.getString("objectId", DEFAULT_USER_ID);
-                String askList = Contast.SERVERHOST + "/AskListByUser?source=3&user_id=" + userId;
-                Dao.getEntity(askList, new Dao.EntityListener() {
-                    @Override
-                    public void onError() {
-                        Logger.i("获取失败");
-                    }
-
-                    @Override
-                    public void onSuccess(String result) {
-                        Logger.i("获取成功" + " Result->" + result);
-                        ResultAskList askList = new Gson().fromJson(result, ResultAskList.class);
-                        if ("9999".equals(askList.getE())) {
-                            Logger.i("获取提问列表成功");
-                            ViewUtils.showToastShort(getActivity(), "获取成功");
-                            List<ResultAskList.DataEntity> entity = askList.getData();
-                            Logger.i("提问列表数->" + entity.size());
-                        } else {
-                            Logger.i("其他原因导致获取提问列表失败");
-                            ViewUtils.showToastShort(getActivity(), "获取失败 " + askList.getM());
-                        }
-
-                    }
-                });
+                Intent asklist=new Intent(getActivity(),AskListActivity.class);
+                startActivity(asklist);
                 break;
 
             case R.id.tv_question:
-                Intent intent = new Intent(getActivity(), EditAnswerActivity.class);
-                startActivity(intent);
+                Intent question = new Intent(getActivity(), EditAnswerActivity.class);
+                startActivity(question);
                 break;
         }
     }

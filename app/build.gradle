@@ -55,6 +55,7 @@ dependencies {
     compile 'com.sothree.slidinguppanel:library:3.3.0'
     compile 'com.appeaser.sublimepickerlibrary:sublimepickerlibrary:2.0.0'
     compile 'com.elbbbird.android:socialsdk:0.2.0@aar'
+    compile 'com.lzy.widget:imagepicker:+'  //图片选择
     compile 'com.jcodecraeer:xrecyclerview:1.2.7'
     compile 'com.nightonke:boommenu:1.0.7'
     compile 'com.orhanobut:logger:1.4'
