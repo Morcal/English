@@ -127,41 +127,7 @@ public class OwnFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.tv_question:
-                String question = "想服务端提交的数据乱七八糟，的护肤回复本节课被人看见";
-                Logger.i("提交提问->" + question);
-                String md5Str = Util.strToMd5(question);
-                // Logger.i("MD5加密后->" + md5Str);
-
-                // 从Sp取出objectId
-                SharedPreferences preferences = getActivity().getSharedPreferences("userinfo", Activity.MODE_PRIVATE);
-                String objectId = preferences.getString("objectId", DEFAULT_USER_ID);
-                // String objectId = Contast.objectId;
-                // String objectId = user.getObjectId();
-                Logger.i("UserID->" + objectId);
-                if (objectId.equals("") && objectId == null) {
-                    ViewUtils.showToastShort(getActivity(), "objectId is null");
-                }
-                String ask = Contast.SERVERHOST + "/ask?source=3&user_id=" + objectId + "&ask=" + question;
-                Dao.getEntity(ask, new Dao.EntityListener() {
-                    @Override
-                    public void onError() {
-                        Logger.i("提交失败");
-                    }
-
-                    @Override
-                    public void onSuccess(String result) {
-                        Logger.i("提交成功" + " Result->" + result);
-                        Result askList = new Gson().fromJson(result, Result.class);
-                        if ("9999".equals(askList.getE())) {
-                            Logger.i("提交问题成功");
-                            ViewUtils.showToastShort(getActivity(), "提交成功");
-                        } else {
-                            Logger.i("其他原因导致提交失败");
-                            ViewUtils.showToastShort(getActivity(), "提交失败 " + askList.getM());
-                        }
-                    }
-                });
-                Intent intent=new Intent(getActivity(),EditAnswerActivity.class);
+                Intent intent = new Intent(getActivity(), EditAnswerActivity.class);
                 startActivity(intent);
                 break;
         }
