@@ -97,7 +97,19 @@ public class StudyFragment extends Fragment implements AdapterView.OnItemClickLi
         flashView.setOnPageClickListener(new FlashViewListener() {
             @Override
             public void onClick(int position) {
-                Logger.i("flshView position->" + position);
+                Logger.i("fishView position->" + position);
+                switch (position) {
+                    case 0:
+                        Intent cet4Intent = new Intent(getActivity(), CourseCETActivity.class);
+                        startActivity(cet4Intent);
+                        break;
+                    case 1:
+                        Intent cet6Intent = new Intent(getActivity(), CourseCETActivity.class);
+                        startActivity(cet6Intent);
+                        break;
+                    default:
+                        break;
+                }
             }
         });
 
