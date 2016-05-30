@@ -6,11 +6,10 @@
     android:background="@color/light"
     android:orientation="vertical">
 
-    <com.jude.rollviewpager.RollPagerView
-        android:id="@+id/roll_view_pager"
+    <com.tekinarslan.material.sample.weight.FlashView
+        android:id="@+id/flash_view"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        app:rollviewpager_play_delay="8000" />
+        android:layout_height="120dp" />
 
     <View
         android:layout_width="match_parent"

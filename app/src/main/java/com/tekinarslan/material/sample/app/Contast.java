@@ -65,4 +65,27 @@ public class Contast {
     public static void init() {
         isLogin = false;
     }
+
+    // 轮播页动画
+    /**
+     * ACCORDTION_EFFECT：左右折叠效果
+     */
+    public static final int DEFAULT_EFFECT = 0;
+    /**
+     * DEFAULT_EFFECT：默认效果
+     */
+    public static final int ACCORDTION_EFFECT = 1;
+    /**
+     * DEPTH_PAGE_EFFECT：深入浅出效果
+     */
+    public static final int DEPTH_PAGE_EFFECT = 2;
+    /**
+     * DEFAULT_EFFECT：右下角进入效果
+     */
+    public static final int IN_RIGHT_DOWN_EFFECT = 3;
+    /**
+     * DEFAULT_EFFECT：右上角进入效果
+     */
+    public static final int IN_RIGHT_UP_EFFECT = 4;
+
 }

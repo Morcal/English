@@ -28,7 +28,17 @@
 
     <declare-styleable name="RefreshView">
         <attr name="type" format="enum">
-            <enum name="sun" value="0"/>
+            <enum name="sun" value="0" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="FlashView">
+        <attr name="effect">
+            <enum name="def" value="0" />
+            <enum name="accordion" value="1" />
+            <enum name="depthPage" value="2" />
+            <enum name="inRightDown" value="3" />
+            <enum name="inRightUp" value="4" />
         </attr>
     </declare-styleable>
 

@@ -29,8 +29,10 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.adapter.LoopPagerAdapter;
 import com.jude.rollviewpager.hintview.IconHintView;
+import com.orhanobut.logger.Logger;
 import com.tekinarslan.material.sample.R;
 import com.tekinarslan.material.sample.app.Contast;
+import com.tekinarslan.material.sample.weight.FlashView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,8 +47,8 @@ import butterknife.ButterKnife;
  */
 public class StudyFragment extends Fragment implements AdapterView.OnItemClickListener {
     private static final String TAG = StudyFragment.class.getSimpleName();
-    @Bind(R.id.roll_view_pager)
-    RollPagerView rollPagerView;
+    @Bind(R.id.flash_view)
+    FlashView flashView;
     @Bind(R.id.gridView)
     GridView gridView;
     @Bind(R.id.grow_chart)
@@ -63,35 +65,42 @@ public class StudyFragment extends Fragment implements AdapterView.OnItemClickLi
         View view = inflater.inflate(R.layout.fragment_study, container, false);
         ButterKnife.bind(this, view);
         initView();
+        initEvent();
         return view;
     }
+
 
     @Override
     public void onStart() {
         Log.i(TAG, "onStart");
         super.onStart();
-        // 点击无效
-        rollPagerView.getViewPager().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "viewPager点击了");
-            }
-        });
         gridView.setOnItemClickListener(this);
     }
 
     private void initView() {
-        rollPagerView.setPlayDelay(1000);
-        rollPagerView.setAnimationDurtion(500);
-        rollPagerView.setAdapter(new TestLoopAdapter(rollPagerView));
-        //mRollViewPager.setAdapter(new TestNomalAdapter());
-        rollPagerView.setHintView(new IconHintView(getActivity(), R.drawable.point_focus, R.drawable.point_normal));
+
+        // 初始化轮播
+        List<String> imageUrls = new ArrayList<String>();
+        imageUrls.add("drawable://" + R.drawable.header_cet4);
+        imageUrls.add("drawable://" + R.drawable.header_cet6);
+        flashView.setImageUris(imageUrls);
+        flashView.setEffect(Contast.DEFAULT_EFFECT);//更改图片切换的动画效果
 
         dataList = new ArrayList<Map<String, Object>>();
         simpleAdapter = new SimpleAdapter(getActivity(), getData(), R.layout.item_gridview, new String[]{"pic", "name"}, new int[]{R.id.item_image, R.id.item_text});
         gridView.setAdapter(simpleAdapter);
 
         setChart();
+    }
+
+    private void initEvent() {
+        flashView.setOnPageClickListener(new FlashViewListener() {
+            @Override
+            public void onClick(int position) {
+                Logger.i("flshView position->" + position);
+            }
+        });
+
     }
 
     private void setChart() {
@@ -201,30 +210,4 @@ public class StudyFragment extends Fragment implements AdapterView.OnItemClickLi
 
     }
 
-    // 轮播ViewPager适配器
-    private class TestLoopAdapter extends LoopPagerAdapter {
-        private int[] imgs = {
-                R.drawable.header_cet4,
-                R.drawable.header_cet6
-        };
-
-        public TestLoopAdapter(RollPagerView viewPager) {
-            super(viewPager);
-        }
-
-        @Override
-        public View getView(ViewGroup container, int position) {
-            ImageView view = new ImageView(container.getContext());
-            view.setImageResource(imgs[position]);
-            view.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            return view;
-        }
-
-        @Override
-        public int getRealCount() {
-            return imgs.length;
-        }
-
-    }
 }
