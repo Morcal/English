@@ -16,14 +16,10 @@ import butterknife.ButterKnife;
  */
 public class ListenerAnalyFragment extends Fragment {
 
-    private String title;
-    private int page;
 
-    public static ListenerAnalyFragment newInstance(int page, String title) {
+    public static ListenerAnalyFragment newInstance() {
         ListenerAnalyFragment fragmentFirst = new ListenerAnalyFragment();
         Bundle args = new Bundle();
-//        args.putInt("someInt", page);
-//        args.putString("someTitle", title);
         fragmentFirst.setArguments(args);
         return fragmentFirst;
     }
@@ -31,8 +27,6 @@ public class ListenerAnalyFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        page = getArguments().getInt("someInt", 0);
-//        title = getArguments().getString("someTitle");
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.tekinarslan.material.sample.ui.module.study;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -13,7 +12,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.tekinarslan.material.sample.R;
-import com.tekinarslan.material.sample.ui.module.community.SampleActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -77,19 +75,19 @@ public class ListenerActivity extends AppCompatActivity {
                 switch (checkedId) {
                     case R.id.rabtn_article:
                         if (artFragment == null) {
-                            artFragment = new ListenerArtFragment();
+                            artFragment = ListenerArtFragment.newInstance();
                         }
                         transaction.replace(R.id.content, artFragment);
                         break;
                     case R.id.rabtn_question:
                         if (quseFragment == null) {
-                            quseFragment = new ListenerQuseFragment();
+                            quseFragment = ListenerQuseFragment.newInstance();
                         }
                         transaction.replace(R.id.content, quseFragment);
                         break;
                     case R.id.rabtn_analyze:
                         if (analyFragment == null) {
-                            analyFragment = new ListenerAnalyFragment();
+                            analyFragment = ListenerAnalyFragment.newInstance();
                         }
                         transaction.replace(R.id.content, analyFragment);
                         break;
