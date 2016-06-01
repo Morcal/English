@@ -7,6 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/c8_shallow_white"
+        android:orientation="vertical"
         android:padding="6dp"
         android:visibility="visible">
 
@@ -23,6 +24,12 @@
             android:text="搜索"
             android:textColor="#929292"
             android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/but_getman"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="获取联系人" />
     </LinearLayout>
 
 </LinearLayout>

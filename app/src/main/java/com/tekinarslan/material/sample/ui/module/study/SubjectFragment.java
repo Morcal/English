@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by lyqdhgo on 2016/5/4.
+ * Translate Direction
  */
 public class SubjectFragment extends Fragment {
     //    @Bind(R.id.tv_dir)

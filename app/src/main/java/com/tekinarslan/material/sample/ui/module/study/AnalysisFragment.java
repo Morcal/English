@@ -13,6 +13,7 @@ import com.tekinarslan.material.sample.R;
 
 /**
  * Created by lyqdhgo on 2016/5/4.
+ * Translate Analysis
  */
 public class AnalysisFragment extends Fragment {
     TextView analysis;

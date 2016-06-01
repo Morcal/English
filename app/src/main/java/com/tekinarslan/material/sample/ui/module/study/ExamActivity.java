@@ -5,6 +5,10 @@ import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -22,6 +26,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by lyqdhgo on 2016/4/1.
+ * Exam onLine
  */
 public class ExamActivity extends AppCompatActivity {
     @Bind(R.id.toolbar)
@@ -30,6 +35,8 @@ public class ExamActivity extends AppCompatActivity {
     ImageView ivPlay;
     @Bind(R.id.seekbar)
     SeekBar seekbar;
+    @Bind(R.id.viewpager)
+    ViewPager viewPager;
     @Bind(R.id.view_down)
     EasyCountDownTextureView downTextureView;
 
@@ -38,6 +45,8 @@ public class ExamActivity extends AppCompatActivity {
     private Player player;
 
     private boolean isPlay = true;
+
+    private ExamPagerAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +63,10 @@ public class ExamActivity extends AppCompatActivity {
         downTextureView.setTimeMinute(10);
         downTextureView.setTimeSecond(0);
         toolbar.setNavigationIcon(R.drawable.back);
+
+        viewPager.setOffscreenPageLimit(4); //keep 4 page instances in System
+        adapter = new ExamPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
     }
 
     private void initData() {
@@ -65,7 +78,7 @@ public class ExamActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (this != null) {
-                    if(player!=null){
+                    if (player != null) {
                         player.stop();
                     }
                     finish();
@@ -95,6 +108,43 @@ public class ExamActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public static class ExamPagerAdapter extends FragmentPagerAdapter {
+        private static int NUM_ITEMS = 4;
+
+        public ExamPagerAdapter(FragmentManager fragmentManager) {
+            super(fragmentManager);
+        }
+
+        @Override
+        public int getCount() {
+            return NUM_ITEMS;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return ExamWriteFragment.newInstance(0, "写作");
+                case 1:
+                    return ExamListenFragment.newInstance(1, "听力");
+                case 2:
+                    return ExamReadFragment.newInstance(2, "阅读");
+                case 3:
+                    return ExamTranslateFragment.newInstance(2, "翻译");
+
+                default:
+                    return null;
+            }
+        }
+
+        // Returns the page title for the top indicator
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return "Page " + position;
+        }
+
     }
 
 }

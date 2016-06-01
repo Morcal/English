@@ -150,7 +150,7 @@ public class SearchFriActivity extends AppCompatActivity {
     @Subscribe
     public void onEventMainThread(ChatEvent event) {
         BmobIMUserInfo info = event.info;
-        //如果需要更新用户资料，开发者只需要传新的info进去就可以了
+        //如果需要更新用户资料，只需要传新的info进去就可以了
         Logger.i("" + info.getName() + "," + info.getAvatar() + "," + info.getUserId());
         BmobIM.getInstance().startPrivateConversation(info, new ConversationListener() {
             @Override

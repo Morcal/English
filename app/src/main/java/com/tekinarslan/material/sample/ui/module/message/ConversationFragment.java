@@ -29,6 +29,7 @@ import cn.bmob.newim.event.OfflineMessageEvent;
 
 /**
  * Created by lyqdhgo on 2016/4/9.
+ * 聊天界面
  */
 public class ConversationFragment extends Fragment {
     @Bind(R.id.sw_refresh)
