@@ -81,11 +81,10 @@ public class ExamReadFragment extends Fragment {
                 String pass = Util.ToDBC(passage);
                 content.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Regular.ttf"));
                 content.setText(pass);
-                
+
                 adapter = new ParalFragmentAdapter(getChildFragmentManager());
                 adapter.setList(list.get(0).getShortChoice());
                 viewPager.setAdapter(adapter);
-
             }
 
             @Override

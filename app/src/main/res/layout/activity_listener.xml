@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="听力"
+                android:textColor="@color/light"
+                android:textSize="18sp" />
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <!--上方三个tab-->
+
+    <RadioGroup
+        android:id="@+id/top_group"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="68dp"
+        android:layout_marginRight="68dp"
+        android:background="@color/tab_bg"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rabtn_article"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@color/tab_bg"
+            android:button="@null"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:text="原文"
+            android:textColor="@drawable/selector_tab_top_color"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/rabtn_question"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@color/tab_bg"
+            android:button="@null"
+            android:checked="true"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:text="问题"
+            android:textColor="@drawable/selector_tab_top_color"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/rabtn_analyze"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@color/tab_bg"
+            android:button="@null"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:text="解析"
+            android:textColor="@drawable/selector_tab_top_color"
+            android:textSize="16sp" />
+    </RadioGroup>
+
+    <!--fragment展示区-->
+
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
+        android:background="@color/light"></FrameLayout>
+
+</LinearLayout>
