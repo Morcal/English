@@ -84,7 +84,8 @@
         <activity android:name=".ui.module.study.ReadListActivity" />
         <activity android:name=".ui.module.own.EditAnswerActivity" />
         <activity android:name=".ui.module.own.AskListActivity" />
-        <activity android:name=".ui.module.study.CourseCETActivity"/>
+        <activity android:name=".ui.module.study.CourseCETActivity" />
+        <activity android:name=".ui.module.study.ListenerActivity" />
         <activity
             android:name=".ui.module.study.ReadActivity"
             android:theme="@style/ReadActivityTheme" />

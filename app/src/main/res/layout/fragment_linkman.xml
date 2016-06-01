@@ -29,7 +29,8 @@
             android:id="@+id/but_getman"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="获取联系人" />
+            android:text="获取联系人"
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>
