@@ -146,7 +146,6 @@ public class ListenerActivity extends AppCompatActivity {
                             quseFragment = ListenerQuseFragment.newInstance();
                             Bundle quesBundle = new Bundle();
                             quesBundle.putSerializable("LISTENER", listener);
-//                            quesBundle.putString("KEY", "毕业答辩");
                             quseFragment.setArguments(quesBundle);
                         }
                         transaction.replace(R.id.content, quseFragment);
