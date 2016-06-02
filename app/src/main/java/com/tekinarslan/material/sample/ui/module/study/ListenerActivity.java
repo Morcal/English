@@ -90,16 +90,7 @@ public class ListenerActivity extends AppCompatActivity {
                 audioUrl = listenEntity.getListenAudioUrl();
                 analyze = listenEntity.getListenAnalyze();
                 Logger.i("article" + article + " audioUrl" + audioUrl + " analyze" + analyze);
-
-
-//                content.setTypeface(Typeface.createFromAsset(ListenerActivity.this.getAssets(), "fonts/Roboto-Regular.ttf"));
-//                content.setText(pass);
-//
-//                FragmentManager fm = getSupportFragmentManager();
-//                adapter = new ParalFragmentAdapter(fm);
-//                adapter.setList(list.get(0).getShortChoice());
-//                viewPager.setAdapter(adapter);
-
+                
             }
 
             @Override

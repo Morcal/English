@@ -110,5 +110,29 @@
         android:visibility="gone" />
     <!--播放进度条-->
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
 
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_pause_circle_outline_black_24dp" />
+
+        <SeekBar
+            android:id="@+id/skb_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:maxHeight="2dp"
+            android:progress="0"
+            android:tag="tint_accent_color" />
+    </LinearLayout>
 </LinearLayout>

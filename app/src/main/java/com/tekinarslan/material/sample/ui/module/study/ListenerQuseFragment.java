@@ -42,6 +42,7 @@ public class ListenerQuseFragment extends Fragment {
     static ArrayList<String> list10 = new ArrayList<>();
 
 
+
     private List<Listener.ListenEntity.ListenQuestionEntity> list;
 
     private QuesPagerAdapter adapter;
