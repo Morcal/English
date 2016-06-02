@@ -132,7 +132,7 @@ public class ExamActivity extends AppCompatActivity {
                 case 2:
                     return ExamReadFragment.newInstance(2, "阅读");
                 case 3:
-                    return ExamTranslateFragment.newInstance(2, "翻译");
+                    return ExamTranslateFragment.newInstance(3, "翻译");
 
                 default:
                     return null;
