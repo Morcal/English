@@ -1,7 +1,7 @@
 package com.tekinarslan.material.sample.ui.module.study;
 
-import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -10,15 +10,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.SeekBar;
 
 import com.orhanobut.logger.Logger;
 import com.tekinarslan.material.sample.R;
 import com.tekinarslan.material.sample.bean.Listener;
-import com.tekinarslan.material.sample.bean.Read;
-import com.tekinarslan.material.sample.ui.adapter.ParalFragmentAdapter;
-import com.tekinarslan.material.sample.utills.Util;
+import com.tekinarslan.material.sample.ui.module.community.Player;
 import com.tekinarslan.material.sample.utills.ViewUtils;
 
 import java.util.ArrayList;
@@ -46,6 +46,10 @@ public class ListenerActivity extends AppCompatActivity {
     RadioButton rabutAnalyze;
     @Bind(R.id.content)
     FrameLayout frameLayout;
+    @Bind(R.id.iv_play)
+    ImageView play;
+    @Bind(R.id.skb_progress)
+    SeekBar seekBar;
     @Bind(R.id.but_save)
     Button save;
 
@@ -58,6 +62,9 @@ public class ListenerActivity extends AppCompatActivity {
     private ListenerQuseFragment quseFragment;
     private ListenerAnalyFragment analyFragment;
 
+    public Player player;
+    private boolean isPlay = false;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +76,6 @@ public class ListenerActivity extends AppCompatActivity {
     }
 
     private void initData() {
-
         ViewUtils.showDialog(this, "加载中...");
         final BmobQuery<Listener> query = new BmobQuery<Listener>();
         query.findObjects(this, new FindListener<Listener>() {
@@ -90,7 +96,7 @@ public class ListenerActivity extends AppCompatActivity {
                 audioUrl = listenEntity.getListenAudioUrl();
                 analyze = listenEntity.getListenAnalyze();
                 Logger.i("article" + article + " audioUrl" + audioUrl + " analyze" + analyze);
-                
+
             }
 
             @Override
@@ -103,6 +109,8 @@ public class ListenerActivity extends AppCompatActivity {
 
     private void initView() {
         toolbar.setNavigationIcon(R.drawable.back);
+        seekBar.setOnSeekBarChangeListener(new SeekBarChangeEvent());
+        player = new Player(seekBar);
         // 设置默认界面
         setDefaultFragment();
     }
@@ -112,6 +120,9 @@ public class ListenerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (null != this) {
+                    if (player != null) {
+                        player.stop();
+                    }
                     finish();
                 }
             }
@@ -157,6 +168,29 @@ public class ListenerActivity extends AppCompatActivity {
             }
         });
 
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isPlay) {
+                    // 播放
+                    play.setBackgroundResource(R.drawable.ic_play_circle_outline_black_24dp);
+                    player.playUrl(audioUrl);
+                    isPlay = true;
+                } else {
+                    // 暂停
+                    play.setBackgroundResource(R.drawable.ic_pause_circle_outline_black_24dp);
+                    player.pause();
+                    isPlay = false;
+                }
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                    }
+                }, 200);
+            }
+        });
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -170,11 +204,41 @@ public class ListenerActivity extends AppCompatActivity {
         FragmentTransaction transaction = fm.beginTransaction();
         analyFragment = new ListenerAnalyFragment();
         Bundle analyBundle = new Bundle();
-//                            quesBundle.putSerializable("LISTENER", listener);
         analyBundle.putString("ANALYZE", "暂无解析");
         analyFragment.setArguments(analyBundle);
         transaction.replace(R.id.content, analyFragment);
         transaction.commit();
+    }
+
+    class SeekBarChangeEvent implements SeekBar.OnSeekBarChangeListener {
+        int progress;
+
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            this.progress = progress * player.mediaPlayer.getDuration() / seekBar.getMax();
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+            player.mediaPlayer.seekTo(progress);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        player.pause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        player.stop();
     }
 
     // 测试将数据提交到Bmob
