@@ -59,7 +59,6 @@
             android:layout_weight="1"
             android:background="@color/tab_bg"
             android:button="@null"
-            android:checked="true"
             android:drawablePadding="5dp"
             android:gravity="center"
             android:text="问题"
@@ -74,6 +73,7 @@
             android:layout_weight="1"
             android:background="@color/tab_bg"
             android:button="@null"
+            android:checked="true"
             android:drawablePadding="5dp"
             android:gravity="center"
             android:text="解析"
@@ -102,5 +102,13 @@
             android:background="@color/light"></FrameLayout>
     </android.support.v7.widget.CardView>
 
+    <Button
+        android:id="@+id/but_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SAVE TO BMOB"
+        android:visibility="gone" />
     <!--播放进度条-->
+
+
 </LinearLayout>

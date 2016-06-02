@@ -5,9 +5,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.tekinarslan.material.sample.R;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
@@ -15,6 +18,10 @@ import butterknife.ButterKnife;
  * 听力原文界面
  */
 public class ListenerArtFragment extends Fragment {
+    @Bind(R.id.tv_articel)
+    TextView tvArt;
+
+    private String article;
 
     public static ListenerArtFragment newInstance() {
         ListenerArtFragment fragmentFirst = new ListenerArtFragment();
@@ -26,6 +33,8 @@ public class ListenerArtFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        article = getArguments().getString("ARTICLE");
+        Logger.i("ARTICLE" + article);
     }
 
     @Override
@@ -34,5 +43,11 @@ public class ListenerArtFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_listen_article, container, false);
         ButterKnife.bind(this, view);
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        tvArt.setText(article);
     }
 }
