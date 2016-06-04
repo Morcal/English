@@ -13,12 +13,9 @@ import android.widget.TextView;
 import com.orhanobut.logger.Logger;
 import com.tekinarslan.material.sample.R;
 import com.tekinarslan.material.sample.bean.Read;
-import com.tekinarslan.material.sample.bean.ResultAskList;
-import com.tekinarslan.material.sample.bean.Write;
 import com.tekinarslan.material.sample.ui.adapter.ParalFragmentAdapter;
 import com.tekinarslan.material.sample.utills.Util;
 import com.tekinarslan.material.sample.utills.ViewUtils;
-import com.tekinarslan.material.sample.weight.Button;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +28,7 @@ import cn.bmob.v3.listener.SaveListener;
 
 /**
  * Created by lyqdhgo on 2016/5/17.
+ * Reading SlidingUpPanelLayout to up
  */
 public class ReadActivity extends AppCompatActivity {
     @Bind(R.id.toolbar)

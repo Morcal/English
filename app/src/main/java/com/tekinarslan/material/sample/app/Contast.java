@@ -59,7 +59,7 @@ public class Contast {
     public static final String CET4LISTEN = "http://7xrfxa.com1.z0.glb.clouddn.com/cets20140601.mp3";
 
     // PHP Server Host
-    // http://gaojinzhu.duapp.com/interface/user/ask?source=1&user_id=1&ask=1111
+    // http://gaojinzhu.duapp.com/interface/user/ask?source=3&user_id=1&ask=1111
     public static final String SERVERHOST = "http://gaojinzhu.duapp.com/interface/user";
 
     public static void init() {

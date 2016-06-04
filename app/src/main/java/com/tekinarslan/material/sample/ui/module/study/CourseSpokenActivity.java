@@ -11,25 +11,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.orhanobut.logger.Logger;
 import com.tekinarslan.material.sample.R;
 import com.tekinarslan.material.sample.bean.SpokenEntity;
-import com.tekinarslan.material.sample.bean.Write;
 import com.tekinarslan.material.sample.ui.adapter.SpokenPagerAdapter;
 import com.tekinarslan.material.sample.utills.ViewUtils;
-import com.tekinarslan.material.sample.weight.ProgressBarCircular;
 import com.universalvideoview.UniversalMediaController;
 import com.universalvideoview.UniversalVideoView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 
 /**

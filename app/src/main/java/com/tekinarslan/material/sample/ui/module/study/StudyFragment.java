@@ -171,7 +171,7 @@ public class StudyFragment extends Fragment implements AdapterView.OnItemClickLi
         return d;
     }
 
-
+    // startsfrom is min,range is max
     private float getRandom(float range, float startsfrom) {
         return (float) (Math.random() * range) + startsfrom;
     }
