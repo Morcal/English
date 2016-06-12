@@ -44,12 +44,18 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        Animation animation = AnimationUtils.loadAnimation(this,
-                R.anim.set_login);
-        LinearInterpolator lin = new LinearInterpolator();
-        animation.setInterpolator(lin);
-        imageView.startAnimation(animation);
         setDefaultFragment();
+        // 子线程中执行旋转动画
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Animation animation = AnimationUtils.loadAnimation(LoginActivity.this,
+                        R.anim.set_login);
+                LinearInterpolator lin = new LinearInterpolator();
+                animation.setInterpolator(lin);
+                imageView.startAnimation(animation);
+            }
+        }).start();
     }
 
     public void setDefaultFragment() {
@@ -86,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -96,9 +103,9 @@ public class LoginActivity extends AppCompatActivity {
                             | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);}
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
     }
-
 
 
 }
